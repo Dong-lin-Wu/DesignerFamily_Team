@@ -205,6 +205,13 @@ public class RaiseController {
 	//------------------------------------------------------------------------------------------------------------------------
 	//使用者端:
 	
+	// Front_Raise首頁:front_raiseindex.controller
+		@GetMapping("/front_raiseindex.controller")
+		public String processAction00(Model model) {
+			return "front_raise";
+		}
+	
+	
 	//查詢全部
 	@GetMapping("/raise")
 	@ResponseBody
