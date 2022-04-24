@@ -10,7 +10,7 @@
     <body>
 <!--         <div class="pre-loader"> -->
 <!--             <div class="pre-loader-box"> -->
-<!--                 <div class="loader-logo"><img src="vendors/images/deskapp-logo.svg" alt=""></div> -->
+<!--                 <div class="loader-logo"><img src="/vendors/images/deskapp-logo.svg" alt=""></div> -->
 <!--                 <div class='loader-progress' id="progress_div"> -->
 <!--                     <div class='bar' id='bar1'></div> -->
 <!--                 </div> -->
@@ -59,42 +59,42 @@
                                 <ul>
                                     <li>
                                         <a href="#">
-                                            <img src="vendors/images/img.jpg" alt="">
+                                            <img src="/vendors/images/img.jpg" alt="">
                                             <h3>John Doe</h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#">
-                                            <img src="vendors/images/photo1.jpg" alt="">
+                                            <img src="/vendors/images/photo1.jpg" alt="">
                                             <h3>Lea R. Frith</h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#">
-                                            <img src="vendors/images/photo2.jpg" alt="">
+                                            <img src="/vendors/images/photo2.jpg" alt="">
                                             <h3>Erik L. Richards</h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#">
-                                            <img src="vendors/images/photo3.jpg" alt="">
+                                            <img src="/vendors/images/photo3.jpg" alt="">
                                             <h3>John Doe</h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#">
-                                            <img src="vendors/images/photo4.jpg" alt="">
+                                            <img src="/vendors/images/photo4.jpg" alt="">
                                             <h3>Renee I. Hansen</h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
                                         </a>
                                     </li>
                                     <li>
                                         <a href="#">
-                                            <img src="vendors/images/img.jpg" alt="">
+                                            <img src="/vendors/images/img.jpg" alt="">
                                             <h3>Vicki M. Coleman</h3>
                                             <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed...</p>
                                         </a>
@@ -108,12 +108,13 @@
                     <div class="dropdown">
                         <a class="dropdown-toggle" href="#" role="button" data-toggle="dropdown">
                             <span class="user-icon">
-                                <img src="vendors/images/photo1.jpg" alt="">
+                                <img src="/vendors/images/photo1.jpg" alt="">
                             </span>
                             <span class="user-name">${sessionScope.login.account}</span>
                         </a>
                         <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                            <a href="logout" class="dropdown-item">
+                            <a href="/user" class="dropdown-item"><i class="dw dw-user1"></i> 會員中心</a>
+                            <a href="/logout" class="dropdown-item">
                                 <i class="dw dw-logout"></i> 登出
                             </a>
                         </div>
@@ -217,9 +218,9 @@
 
         <div class="left-side-bar">
             <div class="brand-logo">
-                <a href="admin">
-                    <img src="vendors/images/deskapp-logo.svg" alt="" class="dark-logo">
-                    <img src="vendors/images/deskapp-logo-white.svg" alt="" class="light-logo">
+                <a href="/admin">
+                    <img src="/vendors/images/deskapp-logo.svg" alt="" class="dark-logo">
+                    <img src="/vendors/images/deskapp-logo-white.svg" alt="" class="light-logo">
                 </a>
                 <div class="close-sidebar" data-toggle="left-sidebar-close">
                     <i class="ion-close-round"></i>
@@ -229,42 +230,42 @@
                 <div class="sidebar-menu">
                     <ul id="accordion-menu">
                         <li>
-                            <a href="admin" class="dropdown-toggle no-arrow">
+                            <a href="/admin" class="dropdown-toggle no-arrow">
                                 <span class="micon dw dw-house-1"></span><span class="mtext">Home</span>
                             </a>
                         </li>
                         <li>
-                            <a href="members" class="dropdown-toggle no-arrow">
+                            <a href="/member/members" class="dropdown-toggle no-arrow">
                                 <span class="micon icon-copy fa fa-user-o" aria-hidden="true"></span><span
                                     class="mtext">成員</span>
                             </a>
                         </li>
                         <li>
-                            <a href="product" class="dropdown-toggle no-arrow">
+                            <a href="/product" class="dropdown-toggle no-arrow">
                                 <span class="micon icon-copy dw dw-shop" aria-hidden="true"></span><span
                                     class="mtext">商品</span>
                             </a>
                         </li>
                         <li>
-                            <a href="showorder" class="dropdown-toggle no-arrow">
+                            <a href="/order" class="dropdown-toggle no-arrow">
                                 <span class="micon icon-copy dw dw-shopping-cart" aria-hidden="true"></span><span
                                     class="mtext">訂單</span>
                             </a>
                         </li>
                         <li>
-                            <a href="newsIndex" class="dropdown-toggle no-arrow">
+                            <a href="/news" class="dropdown-toggle no-arrow">
                                 <span class="micon icon-copy fa fa-newspaper-o" aria-hidden="true"></span><span
                                     class="mtext">活動</span>
                             </a>
                         </li>
                         <li>
-                            <a href="forum_backend.controller" class="dropdown-toggle no-arrow">
+                            <a href="/forum/forum_backend.controller" class="dropdown-toggle no-arrow">
                                 <span class="micon icon-copy dw dw-chat-2" aria-hidden="true"></span><span
                                     class="mtext">討論區</span>
                             </a>
                         </li>
                         <li>
-                            <a href="raiseindex.controller" class="dropdown-toggle no-arrow">
+                            <a href="/raiseindex.controller" class="dropdown-toggle no-arrow">
                                 <span class="micon icon-copy dw dw-sprout-1" aria-hidden="true"></span><span
                                     class="mtext">募資</span>
                             </a>

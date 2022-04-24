@@ -22,6 +22,10 @@ public class RaiseService {
 		return rRepo.searchAll();
 	}
 	
+	public List<RaiseBean> selectByStatus(String status){
+		return rRepo.searchByStatus(status);
+	}
+	
 	public RaiseBean selectById(int id) {
 		Optional<RaiseBean> rOp = rRepo.findById(id);
 		if(rOp.isPresent()) {

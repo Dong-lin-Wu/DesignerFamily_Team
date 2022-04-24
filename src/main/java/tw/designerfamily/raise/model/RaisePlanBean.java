@@ -44,7 +44,7 @@ public class RaisePlanBean implements Serializable {
 	@Column(name = "RAISEPLANDESCRIBE")
 	private String raisePlanDescribe;
 	
-	@JsonIgnoreProperties(value = "raisePlanBeanSet")
+	@JsonIgnore
 	@ManyToOne(fetch = FetchType.LAZY,cascade = {CascadeType.MERGE, CascadeType.PERSIST})
 	@JoinColumn(name = "RAISENO")
 	private RaiseBean raiseBean;

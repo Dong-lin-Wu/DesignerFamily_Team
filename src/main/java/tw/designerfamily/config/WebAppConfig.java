@@ -12,9 +12,10 @@ public class WebAppConfig implements WebMvcConfigurer{
 
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
-//		registry.addRedirectViewController("/", "/login");
-		registry.addRedirectViewController("/", "/raiseindex.controller");
-
+		registry.addRedirectViewController("/", "/index");
+		registry.addViewController("/login").setViewName("login");
+		registry.addViewController("/index").setViewName("index");
+		registry.addViewController("/logout").setViewName("login");
 	}
 
 	@Override
@@ -23,6 +24,7 @@ public class WebAppConfig implements WebMvcConfigurer{
 		registry.addResourceHandler("/js/**").addResourceLocations("/WEB-INF/resources/js/");
 		registry.addResourceHandler("/src/**").addResourceLocations("/WEB-INF/resources/src/");
 		registry.addResourceHandler("/vendors/**").addResourceLocations("/WEB-INF/resources/vendors/");
+		registry.addResourceHandler("/assets/**").addResourceLocations("/WEB-INF/resources/assets/");		
 	}
 	
 	//上傳檔案 若要將整個form送出，則需要此段

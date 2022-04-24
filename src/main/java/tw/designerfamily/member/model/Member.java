@@ -1,6 +1,5 @@
 package tw.designerfamily.member.model;
 
-import java.io.Serializable;
 import java.sql.Timestamp;
 
 import javax.persistence.Column;
@@ -19,9 +18,7 @@ import org.springframework.stereotype.Component;
 @Entity
 @Table(name = "member")
 @Component
-public class Member implements Serializable {
-
-	private static final long serialVersionUID = 1L;
+public class Member {
 
 	@Id
 	@Column(name = "ID")
@@ -58,9 +55,9 @@ public class Member implements Serializable {
 	@Transient
 	private int statusId;
 
-//	@ManyToOne(fetch = FetchType.EAGER)
-//	@JoinColumn(name = "STATUSID")
-//	private Status status;
+	@ManyToOne(fetch = FetchType.EAGER)
+	@JoinColumn(name = "STATUSID")
+	private Status status;
 
 	@Column(name = "GOOGLEID")
 	private String googleId;
@@ -100,16 +97,16 @@ public class Member implements Serializable {
 		this.statusId = statusId;
 	}
 
-//	public Member(String account, String email, String phone, String gender, Timestamp birthday, Timestamp registerTime,
-//			Status status) {
-//		this.account = account;
-//		this.email = email;
-//		this.phone = phone;
-//		this.gender = gender;
-//		this.birthday = birthday;
-//		this.registerTime = registerTime;
-//		this.status = status;
-//	}
+	public Member(String account, String email, String phone, String gender, Timestamp birthday, Timestamp registerTime,
+			Status status) {
+		this.account = account;
+		this.email = email;
+		this.phone = phone;
+		this.gender = gender;
+		this.birthday = birthday;
+		this.registerTime = registerTime;
+		this.status = status;
+	}
 
 	public int getId() {
 		return id;
@@ -199,13 +196,13 @@ public class Member implements Serializable {
 		this.statusId = statusId;
 	}
 
-//	public Status getStatus() {
-//		return status;
-//	}
-//
-//	public void setStatus(Status status) {
-//		this.status = status;
-//	}
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
+	}
 
 	public String getGoogleId() {
 		return googleId;
