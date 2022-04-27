@@ -17,5 +17,6 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 	
 	//查詢訂單詳細使用
 	public List<Order> findByOrderNo(int orderNo);
+	
 		
 }

@@ -34,6 +34,10 @@ public class RaiseService {
 		return null;
 	}
 	
+	public List<RaiseBean> selectByName(String name){
+		return rRepo.searchByName(name);
+	}
+	
 	public RaiseBean update(RaiseBean rBean) {
 		return rRepo.save(rBean);
 	}

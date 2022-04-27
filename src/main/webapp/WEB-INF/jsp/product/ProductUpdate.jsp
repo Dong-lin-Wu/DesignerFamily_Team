@@ -103,7 +103,8 @@
 				</div>
 				
 				<br/>
-			<button type="submit" class="btn btn-primary send">Submit</button>
+			<button type="submit" class="btn btn-primary send">送出</button>
+
 		</form>
 		
 	</div>

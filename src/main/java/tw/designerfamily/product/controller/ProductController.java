@@ -30,7 +30,7 @@ public class ProductController {
 	public String processAction(Model m) {
 		List<ProductBean> list = pService.selectAll();
 		m.addAttribute("list", list);
-		return "product/Product2";
+		return "product/Product";
 	}
 	
 	@DeleteMapping("/productlist/{id}")
@@ -90,31 +90,12 @@ public class ProductController {
 	return "redirect:/product";
 	}
 	
-	@GetMapping("/commodity")
-	public String processShow(Model m,HttpServletRequest request) {
-		List<ProductBean> list = pService.selectAll();
-		List<ProductBean> cate1 = pService.findcate1();//配件飾品
-		List<ProductBean> cate2 = pService.findcate2();//包包提袋
-		List<ProductBean> cate3 = pService.findcate3();//居家生活
-		List<ProductBean> cate4 = pService.findcate4();//創意科技
-		List<ProductBean> cate5 = pService.findcate5();//文具
-		List<ProductBean> cate6 = pService.findcate6();//衣著
-		m.addAttribute("list", list);
-		m.addAttribute("cate1", cate1);
-		m.addAttribute("cate2", cate2);
-		m.addAttribute("cate3", cate3);
-		m.addAttribute("cate4", cate4);
-		m.addAttribute("cate5", cate5);
-		m.addAttribute("cate6", cate6);
-		return "product/allproduct";
+	//商品detail
+		@GetMapping("/{id}")
+		public String processCommDetail(@PathVariable("id")int id,Model m) {
+			ProductBean comm = pService.selectById(id);
+			m.addAttribute("comm", comm);
+			return "/product/Comminfo";
+		}
 		
-	}
-	
-	@GetMapping("/commodity/{id}")
-	public String processCommDetail(@PathVariable("id")int id,Model m) {
-		ProductBean comm = pService.selectById(id);
-		m.addAttribute("comm", comm);
-		return "product/detail";
-	}
-	
 }

@@ -29,4 +29,7 @@ public interface ProductRepository extends JpaRepository<ProductBean, Integer> {
 	
 	@Query(value="select * from commodity where category = '衣著'", nativeQuery = true)
 	public List<ProductBean> findcate6();
+	
+	@Query(value="select * from commodity where category = '其他'", nativeQuery = true)
+	public List<ProductBean> findcate7();
 }

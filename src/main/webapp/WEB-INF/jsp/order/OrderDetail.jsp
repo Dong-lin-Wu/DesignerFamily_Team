@@ -81,21 +81,16 @@ vertical-align: middle;
 					<td>${va.orderDate.substring(0, 19)}</td>
 					<td>${va.orderOwner}</td>
 					<td>${va.orderStatus}</td>
-				</tr>
+				</tr>             
 					</c:forEach>
 		   </c:forEach>
 		</tbody>
-		</table>
-	</div>
-	</div>
-<!-- 
-<script>
-	var myModal = new bootstrap.Modal(document.getElementById('myModal'), {
-		  keyboard: false
-		})
-	myModal.show()
-</script>
- -->
-
+		</table> 
+		<c:forEach var="va" items="${list}"  begin="0" end="1">
+		<div><p style="font-size:14px" id="name">收件人姓名: ${va.orderReceive}</p>                                                         
+             <p style="font-size:14px" id="phone"> 收件人手機: ${va.orderPhone }</p>  
+             <p style="font-size:14px" id="address"> 收件人地址: ${va.orderAddress }</p>
+        </div>  
+        </c:forEach>                
 </body>
 </html>

@@ -8,7 +8,7 @@
 <title></title>
 </head>
 <body>
-	<div align="center"><img src="${p.commImg}" width="70%" ></div>
+	<div align="center"><img src="${p.commImg}" width="60%" ></div>
 	<hr>
 	<b style="width:365px;align:center">${p.commTitle}</b>	
 	<div style="width:365px;align:center">${p.commDES}</div>	

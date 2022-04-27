@@ -16,5 +16,6 @@ public interface RaiseRepository extends JpaRepository<RaiseBean, Integer> {
 	@Query(value = "from RaiseBean where RaiseStatus=?1 Order By RaiseNo DESC")
 	public List<RaiseBean> searchByStatus(String status);
 	
-
+	@Query(value = "from RaiseBean where RaiseName=?1 Order By RaiseNo DESC")
+	public List<RaiseBean> searchByName(String name);
 }

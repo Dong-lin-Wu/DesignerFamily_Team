@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface NewsRepository extends JpaRepository<NewsBean, Integer> {
 	
-	@Query(value ="from NewsBean where NewsTitle like concat('%',?1,'%') or NewsSubtitle like concat('%',?1,'%') or NewsContent like concat('%',?1,'%') Order By NewsID DESC")
+	@Query(value ="from NewsBean where NewsTitle like concat('%',?1,'%') or NewsSubtitle like concat('%',?1,'%') or NewsDate like concat('%',?1,'%') or NewsContent like concat('%',?1,'%') Order By NewsID DESC")
 	public List<NewsBean> searchByKey(String key);
 	
 	

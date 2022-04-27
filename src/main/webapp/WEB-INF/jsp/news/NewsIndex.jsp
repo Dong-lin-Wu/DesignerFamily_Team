@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%
 request.setCharacterEncoding("UTF-8");
 response.setContentType("text/html;charset=UTF-8");
@@ -117,7 +118,7 @@ width:"100px"
 						<tr>
 							<td>${n1.newsId}</td>
 							<td>${n1.newsTitle}</td>
-							<td>${n1.newsDate}</td>
+							<td><fmt:formatDate value="${n1.newsDate}" pattern="yyyy-MM-dd  HH:mm:ss" /></td>
 							<td><img style="width:100px" src="${n1.getNewsPicBase64()}"></td>
 							<td>
 							<button style="display: inline" class="btn btn-outline-danger btn-sm del" id="${n1.newsId}">刪除</button>

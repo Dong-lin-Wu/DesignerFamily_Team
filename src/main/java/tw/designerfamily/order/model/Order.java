@@ -34,9 +34,6 @@ public class Order implements Serializable {
 	@Column(name="ORDEROWNER")
 	private String orderOwner;
 	
-	@Column(name="ORDERQTY")
-	private int orderQty;
-	
 	@Column(name="ORDERDATE")
 	private String orderDate;
 	
@@ -63,30 +60,41 @@ public class Order implements Serializable {
 	public Order() {
 		
 	}
+	
 
-	//產生訂單用
-	public Order(String orderNumber, String orderOwner, int orderQty, String orderDate, int orderPrice,
-			String orderStatus, String orderAddress, String orderPhone, String orderReceive) {
+	//購買者資訊
+	public Order(String orderAddress, String orderPhone, String orderReceive) {
+		super();
+		this.orderAddress = orderAddress;
+		this.orderPhone = orderPhone;
+		this.orderReceive = orderReceive;
+	}
+
+
+
+
+	//新增訂單用
+	public Order(String orderNumber, String orderOwner, String orderDate, int orderPrice, String orderStatus,
+			String orderAddress, String orderPhone, String orderReceive, Set<CartItem> item) {
 		super();
 		this.orderNumber = orderNumber;
 		this.orderOwner = orderOwner;
-		this.orderQty = orderQty;
 		this.orderDate = orderDate;
 		this.orderPrice = orderPrice;
 		this.orderStatus = orderStatus;
 		this.orderAddress = orderAddress;
 		this.orderPhone = orderPhone;
 		this.orderReceive = orderReceive;
+		this.item = item;
 	}
-	
+
 	//修改用
-	public Order(int orderNo, String orderNumber, String orderOwner, int orderQty, String orderDate, int orderPrice,
+	public Order(int orderNo, String orderNumber, String orderOwner, String orderDate, int orderPrice,
 			String orderStatus) {
 		super();
 		this.orderNo = orderNo;
 		this.orderNumber = orderNumber;
 		this.orderOwner = orderOwner;
-		this.orderQty = orderQty;
 		this.orderDate = orderDate;
 		this.orderPrice = orderPrice;
 		this.orderStatus = orderStatus;
@@ -119,16 +127,6 @@ public class Order implements Serializable {
 
 	public void setOrderOwner(String orderOwner) {
 		this.orderOwner = orderOwner;
-	}
-
-
-	public int getOrderQty() {
-		return orderQty;
-	}
-
-
-	public void setOrderQty(int orderQty) {
-		this.orderQty = orderQty;
 	}
 
 

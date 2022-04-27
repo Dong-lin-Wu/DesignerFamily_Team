@@ -42,7 +42,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 		</form>
 
 		<h3 style="margin-top: 20px">新增商品</h3>
-		<form action="addProduct" method="POST" enctype="multipart/form-data" >
+		<form name="form1" action="addProduct" method="POST" enctype="multipart/form-data" >
 			<div class="mb-3">
 				<label for="commTitle" class="form-label">商品標題</label> <input
 					type="text" class="form-control" id="commTitle" name="commTitle"
@@ -100,7 +100,8 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			</div>
 			<div class="mb-3" id="previewPicDiv"></div>
 				<br/>
-			<button type="submit" class="btn btn-primary send" name="upload">Submit</button>
+			<button type="submit" class="btn btn-primary send" name="upload">送出</button>
+			<button type="button" class="btn btn-primary send" onclick="sendvalue()">一鍵輸入</button>
 		</form>
 	</div>
 	
@@ -111,6 +112,17 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 	</script>
 	
 	<script>
+	//一鍵輸入
+	function sendvalue(){
+			document.form1.commTitle.value = "14k包金 橄欖綠 包鑲小圓鑽 法式耳勾耳環";
+			document.form1.commDES.value = "細緻的鑲邊橄欖綠鋯石，搭配弧形的法式耳勾，輕盈且典雅，簡約卻充滿細節。";
+			document.form1.commSPE.value = "14k包金 法式耳勾";
+			document.form1.designer.value = "Zuzu Jewelry";
+			document.form1.commPrice.value = "590";
+			document.form1.commQuantity.value = "19";
+		}
+
+	
 	// 預覽圖片，將取得的files一個個取出丟到convertFile()
 	function previewFiles(theImgs) {
 		if (theImgs[0].files && theImgs[0].files.length >= 1) {

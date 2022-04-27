@@ -76,4 +76,8 @@ public class ProductService {
 		return pRepo.findcate6();
 	}
 	
+	public List<ProductBean> findcate7(){
+		return pRepo.findcate7();
+	}
+	
 }

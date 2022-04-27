@@ -115,7 +115,19 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
-
+		
+<!-- 		綠界 -->
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-api</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.logging.log4j</groupId>
+			<artifactId>log4j-core</artifactId>
+		</dependency>
+	
+		
+		
 	</dependencies>
 
 	<!-- 表示將專案包裝成可執行的jar檔，提供使用java -jar的指令執行方式 -->

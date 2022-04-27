@@ -73,7 +73,7 @@
                                                     <li class="nav-item" style="margin-bottom: 15px;">
                                                         <a class="nav-link" data-toggle="tab" href="#raise" role="tab"
                                                             aria-selected="false">我的募資</a>
-                                                    </li>
+													</li>
                                                     <c:if
                                                         test="${sessionScope.login.status.statusId == '9' || sessionScope.login.status.statusId == '8'}">
                                                         <li class="nav-item" style="margin-top: 50px;">
@@ -207,7 +207,7 @@
                                                     </div>
                                                     <div class="tab-pane fade" id="product" role="tabpanel">
                                                         <div class="pd-20">
-
+															
                                                         </div>
                                                     </div>
                                                     <div class="tab-pane fade" id="order" role="tabpanel">
@@ -222,7 +222,7 @@
                                                     </div>
                                                     <div class="tab-pane fade" id="raise" role="tabpanel">
                                                         <div class="pd-20">
-
+															<%@ include file="../raise/front_myRaise.jsp"%>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -313,6 +313,7 @@
                         $(this).parent("div").next("div").append(image);
                         $(this).next(".photoBase64").attr("value", `\${src}`);
                     }
+                    
                 </script>
         </body>
 

@@ -72,7 +72,6 @@ text-align:center;
 		    <tr>
 		    	<th>編號</th>
 		    	<th>訂單編號</th>
-		    	<th>數量</th>
 		    	<th>下單日期</th>
 		    	<th>訂單價格</th>
 		    	<th>訂購者</th>	    	
@@ -85,7 +84,6 @@ text-align:center;
 			<tr>
 				<td>${ol.orderNo}</td>
 				<td>${ol.orderNumber}</td>
-				<td>${ol.orderQty}</td>
 				<td>${ol.orderDate}</td>
 				<td>${ol.orderPrice}</td>
 				<td>${ol.orderOwner}</td>
@@ -118,8 +116,7 @@ $(document).ready(function() {
              $("#insert").empty("");
             	 $("<tr>").attr("id","tr"+data.orderNo).appendTo("#insert");
                  $("<td>").append(data.orderNo).appendTo("#tr"+data.orderNo);//建立一個tr表頭,把後續的內容都append上去
-                 $("<td>").append('<input type="hidden" id="o1" name="orderNumber" value='+data.orderNumber+'>'+data.orderNumber+'').appendTo("#tr"+data.orderNo);
-                 $("<td>").append('<input type="hidden" id="o2"  name="orderQty" value='+data.orderQty+'>'+data.orderQty+'').appendTo("#tr"+data.orderNo);
+                 $("<td>").append('<input type="hidden" id="o1" name="orderNumber" value='+data.orderNumber+'>'+data.orderNumber+'').appendTo("#tr"+data.orderNo);               
                  $("<td>").append('<input type="hidden" id="o3" name="orderDate" value="'+data.orderDate+'" >'+data.orderDate+'').appendTo("#tr"+data.orderNo);
                  $("<td>").append('<input type="hidden" id="o4" name="orderPrice" value='+data.orderPrice+'>'+data.orderPrice+'').appendTo("#tr"+data.orderNo);
                  $("<td>").append('<input type="hidden" id="o5" name="orderOwner" value='+data.orderOwner+'>'+data.orderOwner+'').appendTo("#tr"+data.orderNo);
@@ -134,7 +131,6 @@ $(document).ready(function() {
          				url:'/order/orderlist/'+id,
          	            dataType:"json",
          	            data:{"orderNumber":$("#o1").val(),
-         	            	"orderQty":$("#o2").val(),
          	            	"orderDate":$("#o3").val(),
          	            	"orderPrice":$("#o4").val(),
          	            	"orderOwner":$("#o5").val(),
@@ -208,15 +204,15 @@ swalWithBootstrapButtons.fire({
 		 e.preventDefault();
 		 console.log(id);
 		 Swal.fire({
-		      html:'<iframe src = /order/detail/'+id+' width="1000px" height="400px">',
-		      width:"1080px"
+		      html:'<iframe src = /order/detail/'+id+' width="1050px" height="430px">',
+		      width:"1150px"
 			})
 	 })
 	 
 	  $('#example').DataTable({
 
 		 "ordering": false,
-		 "lengthMenu":[5,10,15,20],
+		 "lengthMenu":[10,15,20],
 		 "language":{
 	    	    "processing": "處理中...",
 	    	    "loadingRecords": "載入中...",

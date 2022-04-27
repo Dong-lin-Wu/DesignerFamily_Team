@@ -8,22 +8,26 @@
 <meta charset="UTF-8">
 <title>活動修改</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
 <style>
 	.red{
 	color:red;
 	margin-left:10px;
-}
+	}
+	body{
+		background-color:#FFFAF4
+	}
 </style>
 </head>
 <body>     
 	<div class='container' style="width: auto">
 
-		<h1 style="margin: 20px 0px; text-align: center">修改活動</h1>
+		<h2 style="margin: 20px 0px; text-align: center"><b>修改活動</b></h2>
 				 
-		<form action="/news" method="get" style="display: inline;width: 104px; float: right">
-			<button type="submit" class="btn btn-outline-dark" style="margin-bottom:10px">回上一頁</button>
+		<form action="/news" method="get" style="display: inline; float: right">
+			<button type="submit" class="btn btn-outline-success" style="margin-bottom:10px;border-radius:15px"><i class="fa-solid fa-house-chimney"></i> 活動首頁</button>
 		</form>
 				 						  
 			<form action="/news/updateSucess" method="post" enctype="multipart/form-data">
@@ -32,23 +36,23 @@
 		
 			<div class="mb-3">
 				<label for="newsType" class="form-label"></label> 
-				<input type="text" class="form-control" id="type" value="優惠攻略" readonly name="newsType"/>
+				<input type="text" class="form-control" id="type" value="優惠攻略" readonly name="newsType" style="border-radius:20px"/>
 			</div>
 			<div class="mb-3">
 				<label for="newsTitle" class="form-label"><b>標題</b>&emsp;<span style="color:red"></span></label> <em id="titleError" class="red"></em>
-				<input type="text" class="form-control nBlank" id="newsTitle" value="${newsList.newsTitle}" name="newsTitle"/>			
+				<input type="text" class="form-control nBlank" id="newsTitle" value="${newsList.newsTitle}" name="newsTitle" style="border-radius:20px"/>			
 			</div>
 			<div class="mb-3">
 				<label for="newsSubtitle" class="form-label"><b>副標題</b></label> 
-				<input type="text" class="form-control" id="newsSubtitle" value="${newsList.newsSubtitle}" name="newsSubtitle"/>
+				<input type="text" class="form-control" id="newsSubtitle" value="${newsList.newsSubtitle}" name="newsSubtitle" style="border-radius:20px"/>
 			</div>
 			<div class="mb-3">
 				<label for="newsContent" class="form-label"><b>活動內容</b>&emsp;<span style="color:red"></span></label><em id="contentError" class="red"></em>
-				<textarea class="form-control nBlank" id="newsContent" rows="12" style="resize: none"  name="newsContent">${newsList.newsContent}</textarea>				
+				<textarea class="form-control nBlank" id="newsContent" rows="12" style="resize: none;border-radius:25px"  name="newsContent">${newsList.newsContent}</textarea>				
 			</div>
 			<div class="mb-3">
          		<label for="News_PicName" class="form-label" ><b>活動照片</b></label>
-           		<input class="form-control uploadImages" style="width:280px" type="file" name="NewsPicBase64" value="${newsList.newsPicBase64}"/>
+           		<input class="form-control uploadImages" style="width:300px;border-radius:20px" type="file" name="NewsPicBase64" value="${newsList.newsPicBase64}"/>
        			<input type="hidden" id="News_PicBase64" name="news_PicBase64" value="${newsList.newsPicBase64}"/>
     		</div>
 	        <div class="mb-3" id="previewPicDiv">
@@ -56,14 +60,15 @@
 	        </div>
 			<div class="mb-3">
 				<label for="newsNote" class="form-label"><b>備註</b></label>
-				<textarea class="form-control" id="newsNote" rows="4" style="resize: none" name="newsNote">${newsList.newsNote}</textarea>
+				<textarea class="form-control" id="newsNote" rows="4" style="resize:none;border-radius:25px" name="newsNote">${newsList.newsNote}</textarea>
 			</div>
-
-			<button type="reset" class="btn btn-primary" style="margin-bottom:20px">清除修改</button>
-			<button type="submit" class="btn btn-primary send" style="margin-bottom:20px">送出</button>
-			<span><em class="red"></em></span>	
 			
-			</form>
+			<div style="text-align:center; width: auto; margin: 20px">
+			<button type="reset" class="btn btn-outline-primary btn-lg" style="border-radius:15px">清除修改</button>
+			<button type="submit" class="btn btn-outline-primary btn-lg send" style="border-radius:15px">送出</button>
+			</div>
+			
+		</form>
 					
 	</div>	
 	
@@ -160,10 +165,12 @@
 						
 					},1700)
 			  } else {
-			    swalWithBootstrapButtons.fire(
-			      '標題及內容不得空白'
-			    )
-			  }  
+				  if(result.isConfirmed!=false){
+					  swalWithBootstrapButtons.fire(
+					      '標題及活動內容不得空白'
+					    )
+				  	}
+			  	}  
 			})
 		})
 					

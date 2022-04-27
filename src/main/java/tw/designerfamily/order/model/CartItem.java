@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import org.springframework.stereotype.Component;
 
@@ -39,6 +40,7 @@ public class CartItem implements Serializable {
 	
 	@Column(name = "TOTALPRICE")
 	private int totalprice;
+
 	
 	public CartItem() {
 		
