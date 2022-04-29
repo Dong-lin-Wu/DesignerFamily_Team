@@ -97,13 +97,14 @@ public class Member {
 		this.statusId = statusId;
 	}
 
-	public Member(String account, String email, String phone, String gender, Timestamp birthday, Timestamp registerTime,
-			Status status) {
+	public Member(String account, String email, String phone, String gender, Timestamp birthday, String photo,
+			Timestamp registerTime, Status status) {
 		this.account = account;
 		this.email = email;
 		this.phone = phone;
 		this.gender = gender;
 		this.birthday = birthday;
+		this.photo = photo;
 		this.registerTime = registerTime;
 		this.status = status;
 	}

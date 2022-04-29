@@ -68,8 +68,8 @@
                         <div class="col-md-6 col-lg-5">
                             <div class="register-box bg-white box-shadow border-radius-10">
                                 <div class="wizard-content">
-                                    <form class="tab-wizard2 wizard-circle wizard" action="/checkregisterform" method="post"
-                                        onsubmit="return checkAll()" id="register">
+                                    <form class="tab-wizard2 wizard-circle wizard" action="/checkregisterform"
+                                        method="post" onsubmit="return checkAll()" id="register">
                                         <h5>基本資料</h5>
                                         <section>
                                             <div class="form-wrap max-width-600 mx-auto">
@@ -85,6 +85,7 @@
                                                     <div class="col-sm-8">
                                                         <input id="email" type="email" class="form-control" name="email"
                                                             required>
+                                                        <span class="emailsp" style="color: red;"></span>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -99,7 +100,7 @@
                                                     <div class="col-sm-8">
                                                         <input id="passwordCheck" type="password" class="form-control"
                                                             name="passwordCheck" required>
-                                                        <span class="passwordsp"></span>
+                                                        <span class="passwordsp" style="color: red;"></span>
                                                     </div>
                                                 </div>
                                                 <div class="form-group row">
@@ -107,7 +108,7 @@
                                                     <div class="col-sm-8">
                                                         <input id="phone" type="tel" class="form-control" name="phone"
                                                             required>
-                                                        <span class="phonesp"></span>
+                                                        <span class="phonesp" style="color: red;"></span>
                                                     </div>
                                                 </div>
                                             </div>
@@ -249,7 +250,7 @@
                         </div>
                         <div class="modal-footer justify-content-center">
                             <a href="#" onclick="$('#register').submit()" class="btn btn-success">確定</a>
-                            <button type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
+                            <button id="cancel" type="button" class="btn btn-danger" data-dismiss="modal">取消</button>
                         </div>
                     </div>
                 </div>
@@ -272,10 +273,23 @@
             <script src="/vendors/scripts/colorpicker.js"></script>
 
             <script>
-                let password = false, phone = false, checkbox = false;
+                let email = false, password = false, phone = false, checkbox = false;
+                $("#email").bind("input propertychange", checkEmail);
                 $("#password").bind("input propertychange", checkPassword1);
                 $("#passwordCheck").bind("input propertychange", checkPassword2);
                 $("#phone").bind("input propertychange", checkPhone);
+                function checkEmail() {
+                    let emailVal = $(this).val();
+                    let reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+                    if (reg.test(emailVal)) {
+                        $(this).next(".emailsp").html(``);
+                        email = true;
+                    } else {
+                        $(this).next(".emailsp").html(`格式錯誤`);
+                        email = false;
+                    }
+                }
+
                 function checkPassword1() {
                     let passwordVal = $(this).val();
                     let checkVal = $(this).parent("div").parent("div").next("div").children("div").children("#passwordCheck").val();
@@ -324,12 +338,19 @@
 
                 function checkAll() {
                     checkCheckBox();
-                    return password && phone && checkbox;
+                    if (email && password && phone && checkbox) {
+                        return true;
+                    } else {
+                        $("#cancel").click();
+                        return false;
+                    }
                 }
 
                 function resetAll() {
+                    email = true;
                     password = true;
                     phone = true;
+                    $(".emailsp").html(``);
                     $(".passwordsp").html(``);
                     $(".phonesp").html(``);
                 }

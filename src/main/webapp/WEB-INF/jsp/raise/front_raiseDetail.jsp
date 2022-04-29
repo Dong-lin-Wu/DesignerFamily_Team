@@ -16,11 +16,22 @@
 	src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 	$(document).ready(function() {
+		
 		$.ajax({
 			type : 'get',
 			url : '/raise/${raiseNo}',
 			success : function(item) {
-				var div_product_image = $('<div/>').addClass('product_image_area section-padding40');
+				//修改按鈕
+				if(item.raiseName == '${login.account}'){
+					var forminsert = $('<form>').attr('action','/raiseindexdonext.controller').attr('method','Post');
+					$('<input/>').attr('type','hidden').attr('name','donext').attr('value','RaiseUpdate').appendTo(forminsert);
+					$('<input/>').attr('type','hidden').attr('name','rID').attr('value','${raiseNo}').appendTo(forminsert);
+					var buttoninsert = $('<input/>').attr('type','submit').attr('value','修改').css('font-size','25px').css('margin-bottom','20px');
+					buttoninsert.appendTo(forminsert);
+					forminsert.appendTo($('#result'));
+				}
+				
+				var div_product_image = $('<div/>').addClass('product_image_area');
 				var div_row_s_p_i = $('<div/>').addClass('row s_product_inner');
 				var div_collg5 = $('<div/>').addClass('col-lg-5');
 				$('<img/>').addClass('w-100').attr('src',item.raisePicBase64).appendTo(div_collg5);

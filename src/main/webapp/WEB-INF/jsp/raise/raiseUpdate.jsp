@@ -12,9 +12,16 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 <html>
 <head>
 <meta charset="UTF-8">
+<script
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous">
+</script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
+<!-- Summer Note -->
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <title>Insert title here</title>
 <style>
 	div{
@@ -80,7 +87,9 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 			</div>
 			<label for="Raise_Describe" class="form-label"><b>計畫說明</b></label>
 			<div class="form-floating" style="margin-top:0px">
-				<textarea class="form-control" placeholder="" id="Raise_Describe" name="Raise_Describe" style="height: 200px" required>${raiseBean.raiseDescribe}</textarea>   
+<%-- 				<textarea class="form-control" placeholder="" id="Raise_Describe" name="Raise_Describe" style="height: 200px" required>${raiseBean.raiseDescribe}</textarea>    --%>
+			    <input type="hidden" id="Raise_Describe" name="Raise_Describe">
+			    <div id="summernote"></div>
 			    <div id="DescribeInfo" class="form-text">請告訴我們關於你計畫的故事、為什麼大家應該支持你的計畫。</div>
 			    <div id="DescribeInfo1" class="form-text">請注意：我們必須要有足夠的訊息才有辦法審核計畫，如果你所提供的資訊過少，或我們無法認證您計畫的真實性、可行性，計畫就會無法上架。</div>
 			</div>
@@ -177,22 +186,40 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 		
 	</div>
 	<!-- 以下為script -->
-	<script
-	    src="https://code.jquery.com/jquery-3.6.0.js"
-	    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
-	    crossorigin="anonymous">
-	</script>
+
 	<script>
+		$('#summernote').summernote({
+	        placeholder: '',
+	        tabsize: 2,
+	        height: 150,
+	        toolbar: [
+	          ['style', ['style']],
+	          ['font', ['bold', 'underline', 'clear']],
+	          ['color', ['color']],
+	          ['para', ['ul', 'ol', 'paragraph']],
+	          ['table', ['table']],
+	          ['insert', ['link', 'picture', 'video']],
+	          ['view', ['fullscreen', 'codeview', 'help']]
+	        ]
+	    });
+	    
 		let theCategory="${raiseBean.raiseCategory}";
 		let theSDate="${raiseBean.raiseSDate}";
 		let theExpDate="${raiseBean.raiseExpDate}";
+ 		let theDescribe='${raiseBean.raiseDescribe}';
 		let theADate1="${raiseBean.raisePlanBeanSet.toArray()[0].raisePlanADate}"; //回饋一預計實現日期
 		let theADate2="${raiseBean.raisePlanBeanSet.toArray()[1].raisePlanADate}"; //回饋二預計實現日期
-
+		
 		if(theCategory != ""){
 			$(`#Raise_Category option[value=\${theCategory}]`).remove(); //刪除Select中Value為選項的Option
 			$("#Raise_Category").append(`<option selected='selected' value=\${theCategory}>\${theCategory}</option>`); //為Select追加一個Option(下拉項)
-		}
+		};
+
+		//詳細內容summer note
+ 		$(".note-editable").children().html(theDescribe);
+ 		$("#Raise_Describe").val(theDescribe);//詳細內容若有修改，後台抓不到新的
+
+		
 		//限制頭尾日期
 		let dayNow=new Date();
 		let yy=dayNow.getFullYear();

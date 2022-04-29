@@ -17,6 +17,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -47,12 +48,12 @@ public class MemberAdmin {
 	}
 
 	@GetMapping("/members.insert")
-	public String processAction() {
+	public String processInsertAction() {
 		return "member/member_insert_admin";
 	}
 
 	@PostMapping("/members.checkinsert")
-	public String processInsertAction(HttpServletRequest request, Model m) {
+	public String processCheckInsertAction(HttpServletRequest request, Model m) {
 
 		String account = request.getParameter("account");
 		String email = request.getParameter("email");
@@ -110,8 +111,16 @@ public class MemberAdmin {
 		}
 	}
 
-	@PostMapping("/members.update")
-	public String processUpdateAction(HttpServletRequest request, Model m) {
+	@GetMapping("/members.update/{id}")
+	public String processUpdateAction(@PathVariable("id") int id, Model m) {
+		Member mSQL = mService.selectMemberById(id);
+		m.addAttribute("member", mSQL);
+
+		return "member/member_update";
+	}
+
+	@PostMapping("/members.checkupdate")
+	public String processCheckUpdateAction(HttpServletRequest request, Model m) {
 		int id = Integer.parseInt(request.getParameter("id"));
 		String name = request.getParameter("name");
 		String gender = request.getParameter("gender");
@@ -156,16 +165,14 @@ public class MemberAdmin {
 
 		mService.update(m1);
 
-		return "redirect:members";
+		return "redirect:/member/members.update/" + id;
 	}
 
-	@PostMapping("/members.delete")
-	public String processDeleteAction(@RequestParam("id") String idString, Model m) {
-		int id = Integer.parseInt(idString);
-
+	@GetMapping("/members.delete/{id}")
+	public String processDeleteAction(@PathVariable("id") int id) {
 		mService.delete(id);
 
-		return "redirect:members";
+		return "redirect:/member/members";
 	}
 
 }

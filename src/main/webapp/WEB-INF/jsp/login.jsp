@@ -86,7 +86,7 @@
                                                     <input type="checkbox" class="custom-control-input"
                                                         id="customCheck1" name="remember-me">
                                                     <label class="custom-control-label"
-                                                        for="customCheck1">Remember</label>
+                                                        for="customCheck1">記住我</label>
                                                 </div>
                                             </div>
                                             <div class="col-6">

@@ -47,24 +47,40 @@
         });
 
         //Warning Message
-        $('#sa-warning').click(function () {
+        $('.delmember').click(function () {
+            let id = $(this).parent().parent().parent().parent().children(".table-plus").text();
+
             swal({
-                title: 'Are you sure?',
-                text: "You won't be able to revert this!",
+                title: '確定刪除?',
+                text: "資料刪除後將無法復原!",
                 type: 'warning',
                 showCancelButton: true,
                 confirmButtonClass: 'btn btn-success',
                 cancelButtonClass: 'btn btn-danger',
-                confirmButtonText: 'Yes, delete it!'
-            }).then(function () {
-                swal(
-                    'Deleted!',
-                    'Your file has been deleted.',
-                    'success'
-                )
+                confirmButtonText: '確定',
+                cancelButtonText: '取消'
+            }).then((result) => {
+                if (result.dismiss !== 'cancel') {
+                    // $.ajax({
+                    //     type: 'delete',
+                    //     url: '/member/members.delete/' + id
+                    // });
+
+                    swal({
+                        title: '已刪除!',
+                        type: 'success',
+                        confirmButtonText: '確定'
+                    }).then(() => {
+                        window.location.href = '/member/members.delete/' + id;
+                    })
+                }
             })
         });
-
+	
+		
+ 	
+		
+		
         //Custom Position Message
         $('#sa-custom-position').click(function () {
             swal(
@@ -144,8 +160,8 @@
                 title: '<i>HTML</i> <u>example</u>',
                 type: 'info',
                 html: 'You can use <b>bold text</b>, ' +
-                '<a href="#" class="text-blue">links</a> ' +
-                'and other HTML tags',
+                    '<a href="#" class="text-blue">links</a> ' +
+                    'and other HTML tags',
                 showCloseButton: true,
                 showCancelButton: true,
                 confirmButtonClass: 'btn btn-success',
@@ -220,8 +236,8 @@
                 swal({
                     title: 'All done!',
                     html: 'Your answers: <pre>' +
-                    JSON.stringify(result) +
-                    '</pre>',
+                        JSON.stringify(result) +
+                        '</pre>',
                     confirmButtonText: 'Lovely!',
                     showCancelButton: false
                 })
@@ -236,7 +252,7 @@
                 title: 'Your public IP',
                 confirmButtonText: 'Show my public IP',
                 text: 'Your public IP will be received ' +
-                'via AJAX request',
+                    'via AJAX request',
                 showLoaderOnConfirm: true,
                 preConfirm: function () {
                     return new Promise(function (resolve) {
@@ -256,7 +272,7 @@
         $.SweetAlert = new SweetAlert, $.SweetAlert.Constructor = SweetAlert
 }(window.jQuery),
 
-//initializing
+    //initializing
     function ($) {
         "use strict";
         $.SweetAlert.init()

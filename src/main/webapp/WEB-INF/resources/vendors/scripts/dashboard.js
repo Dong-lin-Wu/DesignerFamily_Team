@@ -309,14 +309,14 @@ var options5 = {
 		colors: ['transparent']
 	},
 	series: [{
-		name: 'In Progress',
-		data: [40, 28, 47, 22, 34, 25]
+		name: '登入',
+		data: [100, 87, 55, 62, 95, 49]
 	}, {
-		name: 'Complete',
-		data: [30, 20, 37, 10, 28, 11]
+		name: '註冊',
+		data: [150, 69, 33, 26, 78, 49]
 	}],
 	xaxis: {
-		categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
+		categories: ['十二月', '一月', '二月', '三月', '四月', '五月'],
 		labels: {
 			style: {
 				colors: ['#353535'],

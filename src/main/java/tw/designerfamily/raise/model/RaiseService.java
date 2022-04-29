@@ -18,8 +18,12 @@ public class RaiseService {
 		return rRepo.save(rBean);
 	}
 	
-	public List<RaiseBean> selectAll(){
-		return rRepo.searchAll();
+	public List<RaiseBean> searchAllDESC(){
+		return rRepo.searchAllDESC();
+	}
+	
+	public List<RaiseBean> searchAll(){
+		return rRepo.findAll();
 	}
 	
 	public List<RaiseBean> selectByStatus(String status){

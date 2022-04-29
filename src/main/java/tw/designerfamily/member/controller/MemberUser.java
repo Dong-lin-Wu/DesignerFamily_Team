@@ -29,8 +29,13 @@ public class MemberUser {
 	public String processMainAction(HttpServletRequest request, Model m) {
 		Member mLogin = (Member) request.getSession().getAttribute("login");
 
-		Member member = mService.selectLogin(mLogin.getAccount());
-		m.addAttribute("member", member);
+		Member mSQL = mService.selectLogin(mLogin.getAccount());
+		m.addAttribute("member", mSQL);
+
+		Member member = new Member(mSQL.getAccount(), mSQL.getEmail(), mSQL.getPhone(), mSQL.getGender(),
+				mSQL.getBirthday(), mSQL.getPhoto(), mSQL.getRegisterTime(), mSQL.getStatus());
+		request.getSession().setAttribute("login", member);
+
 		return "member/member_user";
 	}
 

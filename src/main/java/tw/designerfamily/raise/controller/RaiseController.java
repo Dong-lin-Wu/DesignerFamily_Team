@@ -17,6 +17,7 @@ import org.springframework.boot.configurationprocessor.json.JSONObject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -78,7 +79,7 @@ public class RaiseController {
 	
 	// 導回Raise首頁時查詢全部放入session
 	public void redirectToRaiseIndex(Model model) {
-		List<RaiseBean> rlist = rService.selectAll();
+		List<RaiseBean> rlist = rService.searchAll();
 		model.addAttribute("raiseList", rlist);
 	}
 
@@ -88,8 +89,8 @@ public class RaiseController {
 		if (donext == null) {
 			redirectToRaiseIndex(model);
 			return "redirect:raiseindex";
-		} else if (donext.equals("RaiseAdd")) {
-			return "redirect:raiseadd.checklogin";
+//		} else if (donext.equals("RaiseAdd")) {
+//			return "redirect:raiseadd.checklogin";
 		} else if (donext.equals("RaiseReview")) {
 			model.addAttribute("donext", "RaiseReview");
 			RaiseBean raiseBean = rService.selectById(id);
@@ -168,7 +169,7 @@ public class RaiseController {
 			@RequestParam("RaisePlan_PicBase64_2") String pPicBase64_2,
 			@RequestParam("RaisePlan_ADate_2") String pADate2, @RequestParam("RaisePlan_Describe_2") String pDescribe2,
 			Model model) {
-
+		
 		Member m = (Member) model.getAttribute("login");
 		String pName;
 		if (m != null) {
@@ -194,7 +195,7 @@ public class RaiseController {
 		rBean.setRaisePlanBeanSet(rpBeans);
 		rService.update(rBean);
 		redirectToRaiseIndex(model);
-		return "redirect:raiseindex";
+		return "redirect:front_raiseindex.controller";
 	}
 
 	// 於審核頁面按下送出並導回首頁
@@ -237,7 +238,7 @@ public class RaiseController {
 	@GetMapping("/raise")
 	@ResponseBody
 	public List<RaiseBean> processSelectAll0() {
-		List<RaiseBean> rlist = rService.selectAll();
+		List<RaiseBean> rlist = rService.searchAllDESC();
 		return rlist;
 	}
 	
@@ -283,5 +284,12 @@ public class RaiseController {
 		rService.insert(rBean);
 		redirectToRaiseIndex(model);
 		return rBean;
+	}
+	
+	//刪除
+	@DeleteMapping("/raise/{raiseNo}")
+	@ResponseBody
+	public void processDeleteById0(@PathVariable("raiseNo") int raiseNo) {
+		rService.deleteById(raiseNo);
 	}
 }

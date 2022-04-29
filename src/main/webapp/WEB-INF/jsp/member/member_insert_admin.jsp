@@ -66,7 +66,7 @@
                                         <nav aria-label="breadcrumb" role="navigation">
                                             <ol class="breadcrumb">
                                                 <li class="breadcrumb-item">
-                                                    <a href="/admin">Home</a>
+                                                    <a href="/admin">首頁</a>
                                                 </li>
                                                 <li class="breadcrumb-item active" aria-current="page">成員</li>
                                             </ol>
@@ -80,11 +80,12 @@
 
                             <div class="pd-20 card-box mb-30">
                                 <div class="clearfix">
-                                    <h4 class="text-blue h4">新增</h4>
+                                    <h4 class="text-blue">新增</h4>
                                     <p class="mb-30">管理員</p>
                                 </div>
                                 <div>
-                                    <form action="/member/members.checkinsert" method="post" onsubmit="return checkAll()">
+                                    <form action="/member/members.checkinsert" method="post"
+                                        onsubmit="return checkAll()">
                                         <h5>基本資料</h5>
                                         <input type="hidden" name="member" value="insert">
                                         <div class="row">
@@ -98,6 +99,7 @@
                                                 <div class="form-group">
                                                     <label>Email* :</label>
                                                     <input type="email" class="form-control" name="email" required>
+                                                    <span class="emailsp" style="color: red;"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -114,7 +116,7 @@
                                                     <label>密碼確認* :</label>
                                                     <input id="passwordCheck" type="password" class="form-control"
                                                         name="passwordCheck" required>
-                                                    <span class="passwordsp"></span>
+                                                    <span class="passwordsp" style="color: red;"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -124,7 +126,7 @@
                                                     <label>手機* :</label>
                                                     <input id="phone" type="tel" class="form-control" name="phone"
                                                         required>
-                                                    <span class="phonesp"></span>
+                                                    <span class="phonesp" style="color: red;"></span>
                                                 </div>
                                             </div>
                                         </div>
@@ -218,10 +220,23 @@
                 <script>
                     $("#select").attr("action", "/admin/search.members");
 
-                    let password = false, phone = false;
+                    let email = false, password = false, phone = false;
+                    $("#email").bind("input propertychange", checkEmail);
                     $("#password").bind("input propertychange", checkPassword1);
                     $("#passwordCheck").bind("input propertychange", checkPassword2);
                     $("#phone").bind("input propertychange", checkPhone);
+                    function checkEmail() {
+                        let emailVal = $(this).val();
+                        let reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+                        if (reg.test(emailVal)) {
+                            $(this).next(".emailsp").html(``);
+                            email = true;
+                        } else {
+                            $(this).next(".emailsp").html(`格式錯誤`);
+                            email = false;
+                        }
+                    }
+
                     function checkPassword1() {
                         let passwordVal = $(this).val();
                         let checkVal = $(this).parent("div").parent("div").next("div").children("div").children("#passwordCheck").val();
@@ -259,12 +274,14 @@
                     }
 
                     function checkAll() {
-                        return password && phone;
+                        return email && password && phone;
                     }
 
                     function resetAll() {
+                        email = true;
                         password = true;
                         phone = true;
+                        $(".emailsp").html(``);
                         $(".passwordsp").html(``);
                         $(".phonesp").html(``);
                     }

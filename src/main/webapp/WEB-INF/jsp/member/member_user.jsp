@@ -73,7 +73,7 @@
                                                     <li class="nav-item" style="margin-bottom: 15px;">
                                                         <a class="nav-link" data-toggle="tab" href="#raise" role="tab"
                                                             aria-selected="false">我的募資</a>
-													</li>
+                                                    </li>
                                                     <c:if
                                                         test="${sessionScope.login.status.statusId == '9' || sessionScope.login.status.statusId == '8'}">
                                                         <li class="nav-item" style="margin-top: 50px;">
@@ -98,8 +98,9 @@
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
                                                                     <label>Email* :</label>
-                                                                    <input type="email" class="form-control"
+                                                                    <input id="email" type="email" class="form-control"
                                                                         name="email" value="${member.email}" required>
+                                                                    <span class="emailsp" style="color: red;"></span>
                                                                 </div>
                                                                 <div class="col-md-6 form-group"
                                                                     style="margin-bottom: 50px;">
@@ -207,7 +208,7 @@
                                                     </div>
                                                     <div class="tab-pane fade" id="product" role="tabpanel">
                                                         <div class="pd-20">
-															
+
                                                         </div>
                                                     </div>
                                                     <div class="tab-pane fade" id="order" role="tabpanel">
@@ -222,7 +223,7 @@
                                                     </div>
                                                     <div class="tab-pane fade" id="raise" role="tabpanel">
                                                         <div class="pd-20">
-															<%@ include file="../raise/front_myRaise.jsp"%>
+                                                            <%@ include file="../raise/front_myRaise.jsp" %>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -236,85 +237,99 @@
                 </div>
                 <%@ include file="../userfooter.jsp" %>
 
-                <!-- js -->
-                <script src="/vendors/scripts/core.js"></script>
-                <script src="/vendors/scripts/script.min.js"></script>
-                <script src="/vendors/scripts/process.js"></script>
-                <script src="/vendors/scripts/layout-settings.js"></script>
-                <script src="src/plugins/jquery-asColor/dist/jquery-asColor.js"></script>
-                <script src="src/plugins/jquery-asGradient/dist/jquery-asGradient.js"></script>
-                <script src="src/plugins/jquery-asColorPicker/jquery-asColorPicker.js"></script>
-                <script src="vendors/scripts/colorpicker.js"></script>
+                    <!-- js -->
+                    <script src="/vendors/scripts/core.js"></script>
+                    <script src="/vendors/scripts/script.min.js"></script>
+                    <script src="/vendors/scripts/process.js"></script>
+                    <script src="/vendors/scripts/layout-settings.js"></script>
+                    <script src="src/plugins/jquery-asColor/dist/jquery-asColor.js"></script>
+                    <script src="src/plugins/jquery-asGradient/dist/jquery-asGradient.js"></script>
+                    <script src="src/plugins/jquery-asColorPicker/jquery-asColorPicker.js"></script>
+                    <script src="vendors/scripts/colorpicker.js"></script>
 
-                <script>
-                    let phone = true;
-                    $("#phone").bind("input propertychange", checkPhone);
-                    function checkPhone() {
-                        let phoneVal = $(this).val();
-                        let reg = /^09\d{8}$/;
-                        if (reg.test(phoneVal)) {
-                            $(this).next(".phonesp").html(``);
-                            phone = true;
-                        } else {
-                            $(this).next(".phonesp").html(`格式錯誤`);
-                            phone = false;
+                    <script>
+                        let email = true, phone = true;
+                        $("#email").bind("input propertychange", checkEmail);
+                        $("#phone").bind("input propertychange", checkPhone);
+                        function checkEmail() {
+                            let emailVal = $(this).val();
+                            let reg = /^\w+((-\w+)|(\.\w+))*\@[A-Za-z0-9]+((\.|-)[A-Za-z0-9]+)*\.[A-Za-z]+$/;
+                            if (reg.test(emailVal)) {
+                                $(this).next(".emailsp").html(``);
+                                email = true;
+                            } else {
+                                $(this).next(".emailsp").html(`格式錯誤`);
+                                email = false;
+                            }
                         }
-                    }
 
-                    function checkAll() {
-                        return phone;
-                    }
+                        function checkPhone() {
+                            let phoneVal = $(this).val();
+                            let reg = /^09\d{8}$/;
+                            if (reg.test(phoneVal)) {
+                                $(this).next(".phonesp").html(``);
+                                phone = true;
+                            } else {
+                                $(this).next(".phonesp").html(`格式錯誤`);
+                                phone = false;
+                            }
+                        }
 
-                    function resetAll() {
-                        phone = true;
-                        $(".phonesp").html(``);
-                        $(".previewPhoto").children("img").attr("src", $(".previewPhoto").next(".hideImg").attr("src"));
-                    }
+                        function checkAll() {
+                            return email && phone;
+                        }
 
-                    // 當上傳檔案改變時清除目前預覽圖，並且呼叫previewFiles()
-                    $(".photo").change(function () {
-                        $(this).parent("div").next("div").empty() // 清空當下預覽
-                        previewFiles.call(this, this.files) // this即為<input>元素
-                    });
+                        function resetAll() {
+                            email = true;
+                            phone = true;
+                            $(".emailsp").html(``);
+                            $(".phonesp").html(``);
+                            $(".previewPhoto").children("img").attr("src", $(".previewPhoto").next(".hideImg").attr("src"));
+                        }
 
-                    // 預覽圖片，將取得的files一個個取出丟到convertFile()
-                    function previewFiles(files) {
-                        if (files && files.length >= 1) {
-                            $.map(files, file => {
-                                convertFile(file)
-                                    .then(data => {
-                                        //console.log(data) // 把編碼後的字串輸出到console
-                                        showPreviewImage.call(this, data, file.name)
-                                    })
-                                    .catch(err => console.log(err))
+                        // 當上傳檔案改變時清除目前預覽圖，並且呼叫previewFiles()
+                        $(".photo").change(function () {
+                            $(this).parent("div").next("div").empty() // 清空當下預覽
+                            previewFiles.call(this, this.files) // this即為<input>元素
+                        });
+
+                        // 預覽圖片，將取得的files一個個取出丟到convertFile()
+                        function previewFiles(files) {
+                            if (files && files.length >= 1) {
+                                $.map(files, file => {
+                                    convertFile(file)
+                                        .then(data => {
+                                            //console.log(data) // 把編碼後的字串輸出到console
+                                            showPreviewImage.call(this, data, file.name)
+                                        })
+                                        .catch(err => console.log(err))
+                                })
+                            }
+                        }
+
+                        // 使用FileReader讀取檔案，並且回傳Base64編碼後的source
+                        function convertFile(file) {
+                            return new Promise((resolve, reject) => {
+                                // 建立FileReader物件
+                                let reader = new FileReader()
+                                // 註冊onload事件，取得result則resolve (會是一個Base64字串)
+                                reader.onload = () => { resolve(reader.result) }
+                                // 註冊onerror事件，若發生error則reject
+                                reader.onerror = () => { reject(reader.error) }
+                                // 讀取檔案
+                                reader.readAsDataURL(file)
                             })
                         }
-                    }
 
-                    // 使用FileReader讀取檔案，並且回傳Base64編碼後的source
-                    function convertFile(file) {
-                        return new Promise((resolve, reject) => {
-                            // 建立FileReader物件
-                            let reader = new FileReader()
-                            // 註冊onload事件，取得result則resolve (會是一個Base64字串)
-                            reader.onload = () => { resolve(reader.result) }
-                            // 註冊onerror事件，若發生error則reject
-                            reader.onerror = () => { reject(reader.error) }
-                            // 讀取檔案
-                            reader.readAsDataURL(file)
-                        })
-                    }
-
-                    // 在頁面上新增<img>
-                    function showPreviewImage(src, fileName) {
-                        let image = new Image(250) // 設定寬250px
-                        image.name = fileName
-                        image.src = src // <img>中src屬性除了接url外也可以直接接Base64字串
-                        $(this).parent("div").next("div").append(image);
-                        $(this).next(".photoBase64").attr("value", `\${src}`);
-                    }
-                    
-                </script>
+                        // 在頁面上新增<img>
+                        function showPreviewImage(src, fileName) {
+                            let image = new Image(250) // 設定寬250px
+                            image.name = fileName
+                            image.src = src // <img>中src屬性除了接url外也可以直接接Base64字串
+                            $(this).parent("div").next("div").append(image);
+                            $(this).next(".photoBase64").attr("value", `\${src}`);
+                        }
+                    </script>
         </body>
 
         </html>

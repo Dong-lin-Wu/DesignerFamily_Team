@@ -29,7 +29,7 @@ $('document').ready(function(){
 		"lengthMenu": [[10, 25, 50, -1], [10, 25, 50, "All"]],
 		"language": {
 			"info": "_START_-_END_ of _TOTAL_ entries",
-			searchPlaceholder: "Search",
+			searchPlaceholder: "在此搜尋",
 			paginate: {
 				next: '<i class="ion-chevron-right"></i>',
 				previous: '<i class="ion-chevron-left"></i>'  

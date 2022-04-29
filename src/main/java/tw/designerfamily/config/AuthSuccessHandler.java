@@ -36,7 +36,7 @@ public class AuthSuccessHandler implements AuthenticationSuccessHandler {
 			Member mSQL = mService.selectLogin(account);
 
 			Member member = new Member(mSQL.getAccount(), mSQL.getEmail(), mSQL.getPhone(), mSQL.getGender(),
-					mSQL.getBirthday(), mSQL.getRegisterTime(), mSQL.getStatus());
+					mSQL.getBirthday(), mSQL.getPhoto(), mSQL.getRegisterTime(), mSQL.getStatus());
 
 			request.getSession().setAttribute("login", member);
 

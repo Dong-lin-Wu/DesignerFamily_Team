@@ -36,6 +36,8 @@
 
             gtag('config', 'UA-119386393-1');
         </script>
+
+        <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
         <style>
 
         </style>
@@ -43,6 +45,71 @@
 
     <body>
         <%@ include file="header.jsp" %>
+            <div class="main-container">
+                <div class="pd-ltr-20">
+                    <div class="card-box pd-20 height-100-p mb-30">
+                        <div class="row align-items-center">
+                            <div class="col-md-4">
+                                <img src="vendors/images/banner-img.png" alt="">
+                            </div>
+                            <div class="col-md-8">
+                                <h4 class="font-20 weight-500 mb-10 text-capitalize">
+                                    歡迎回來 <div class="weight-600 font-30 text-blue">${sessionScope.login.account}</div>
+                                </h4>
+                                <p class="font-18 max-width-600">
+                                    您的權限是
+                                    ${sessionScope.login.status.statusName}，點選左方導覽列可以對成員、商品、訂單、活動、討論區與募資進行增刪查改，或是在下方選擇功能以顯示統計圖表。
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="page-header">
+                        <div class="row">
+                            <div class="col-md-6 col-sm-12">
+                                <div class="title">
+                                    <h4>首頁</h4>
+                                </div>
+                                <nav aria-label="breadcrumb" role="navigation">
+                                    <ol class="breadcrumb">
+                                        <li class="breadcrumb-item active" aria-current="page">首頁</li>
+                                    </ol>
+                                </nav>
+                            </div>
+                            <div class="col-md-6 col-sm-12 text-right">
+                                <div class="dropdown">
+                                    <a class="btn btn-primary dropdown-toggle" href="/admin" role="button"
+                                        data-toggle="dropdown">
+                                        成員
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a class="dropdown-item" href="#">商品</a>
+                                        <a class="dropdown-item" href="#">訂單</a>
+                                        <a class="dropdown-item" href="#">活動</a>
+                                        <a class="dropdown-item" href="#">討論區</a>
+                                        <a class="dropdown-item" href="#">募資</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xl-6 mb-30">
+                            <div class="card-box height-80-p pd-20">
+                                <h4 class="h4 mb-20">流量</h4>
+                                <div id="chart5"></div>
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-30">
+                            <div class="card-box height-80-p pd-20">
+                                <h4 class="h4 mb-20">性別</h4>
+                                <div id="donutchart" style="width: 450px; height: 350px; margin-left: 80px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
 
             <!-- js -->
             <script src="/vendors/scripts/core.js"></script>
@@ -55,8 +122,28 @@
             <script src="/src/plugins/datatables/js/dataTables.responsive.min.js"></script>
             <script src="/src/plugins/datatables/js/responsive.bootstrap4.min.js"></script>
             <script src="/vendors/scripts/dashboard.js"></script>
+
             <script>
                 $("#select").attr("action", "/admin/search");
+
+                google.charts.load("current", { packages: ["corechart"] });
+                google.charts.setOnLoadCallback(drawChart);
+                function drawChart() {
+                    var data = google.visualization.arrayToDataTable([
+                        ['Task', '成員數'],
+                        ['男', 11],
+                        ['女', 2],
+                        ['未填寫', 7]
+                    ]);
+
+                    var options = {
+                        pieHole: 0.4,
+                        chartArea: { width: 400, height: 300 }
+                    };
+
+                    var chart = new google.visualization.PieChart(document.getElementById('donutchart'));
+                    chart.draw(data, options);
+                }
             </script>
     </body>
 
