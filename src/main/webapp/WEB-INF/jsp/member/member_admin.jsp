@@ -64,6 +64,9 @@
                                                     <a href="/admin">首頁</a>
                                                 </li>
                                                 <li class="breadcrumb-item active" aria-current="page">成員</li>
+                                                <li class="breadcrumb-item">
+                                                    <a href="/member/members">成員清單</a>
+                                                </li>
                                             </ol>
                                         </nav>
                                     </div>
@@ -82,7 +85,7 @@
                                     <table class="table hover stripe data-table-export nowrap">
                                         <thead>
                                             <tr>
-                                                <th class="table-plus datatable-nosort">編號</th>
+                                                <th class="table-plus">編號</th>
                                                 <th>使用者名稱</th>
                                                 <th>Email</th>
                                                 <th>手機</th>
@@ -115,8 +118,9 @@
                                                                     <a class="dropdown-item"
                                                                         href="/member/members.update/${member.id}"><i
                                                                             class="dw dw-edit2"></i> 修改</a>
-                                                                    <button type="button" class="dropdown-item delmember"
-                                                                        id="sa-warning1"><i class="dw dw-delete-3"></i>
+                                                                    <button type="button"
+                                                                        class="dropdown-item delmember"
+                                                                        id="sa-warning"><i class="dw dw-delete-3"></i>
                                                                         刪除</button>
                                                                 </c:if>
                                                             </div>

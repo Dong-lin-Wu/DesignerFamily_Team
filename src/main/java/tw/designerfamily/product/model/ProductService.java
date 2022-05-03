@@ -34,7 +34,7 @@ public class ProductService {
 	
 	//查詢*all
 	public List<ProductBean> selectAll(){
-		return pRepo.findAll();
+		return pRepo.findAllDesc();
 	}
 	
 	//查詢by id
@@ -80,4 +80,8 @@ public class ProductService {
 		return pRepo.findcate7();
 	}
 	
+	//查詢設計師
+	public List<ProductBean> findDesigner(String designer){
+		return pRepo.findDesigner(designer);
+	}
 }

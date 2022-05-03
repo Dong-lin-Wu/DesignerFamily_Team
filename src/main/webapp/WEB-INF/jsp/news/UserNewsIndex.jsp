@@ -6,20 +6,19 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>梅嘎 | Mega</title>
+<title>Mega|活動</title>
+<link rel="shortcut icon" type="image/x-icon" href="/assets/img/logo/logo2.ico">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
 <style>
-nav {
-	text-align: center;
-}
 
 .wrapper {
 	position: relative;
-	width: 1000px;
+	width: 1100px;
 	height: 350px;
 	overflow: hidden;
 	margin: 0 auto;
+	
 }
 
 ul#o {
@@ -35,13 +34,13 @@ li#l {
 }
 
 ul.slides {
-	width: 9000px;
+	width: 9900px;
 	left: 0px;
 	transition: all .5s;
 }
 
 ul.slides li {
-	width: 1000px;
+	width: 1100px;
 	height: 350px;
 	overflow: hidden;
 	/*            left:500px; */
@@ -51,27 +50,8 @@ ul.slides li {
 
 ul.slides li img {
 	width: 100%;
-	height: 325px;
+	height: 310px;
 	/*            object-fit: fill; */
-}
-
-.dot {
-	bottom: 10px;
-	width: 100%;
-	display: flex;
-	justify-content: center;
-}
-
-.dot li {
-	border: 1px solid #fff;
-	/* border-radius: 50%; */
-	margin: 0 5px;
-	width: 24px;
-	height: 10px;
-}
-
-.dot li:hover {
-	background: #fff;
 }
 
 .slide_btn {
@@ -95,7 +75,7 @@ ul.slides li img {
 }
 
 .slide_btn i {
-	color: black;
+	color: #ABABAB;
 	transition: .5s;
 }
 
@@ -109,32 +89,17 @@ ul.slides li img {
 	<main>
 		<section class="properties new-arrival fix">
 
-<!-- 				<div class="container" style="width: 100%"> -->
-<!-- 					<nav> -->
-<%-- 						<c:forEach var="n" items="${newsinfo}"> --%>
-<%-- 							<a href="/news/detail/${n.newsId}" role="button" --%>
-<!-- 								style="padding-left: 12px; color: black" class="det"><i -->
-<%-- 								class="fa-solid fa-otter"></i> ${n.newsTitle}</a> --%>
-<%-- 						</c:forEach> --%>
-<!-- 					</nav> -->
-<!-- 				</div> -->
-
 			<!--  輪播開始  -->
+			<div class="container">
 			<div class="wrapper">
 				<ul class="slides" id="o">
-					<c:forEach var="n1" items="${newsinfo1}">
-
+					<c:forEach var="n1" items="${newsinfo}">
 						<li id="l"><figure>
-								<a href="/news/newsdetail/${n1.newsId}" class="det"> 
-								<img src="${n1.newsPicBase64 }" title="${n1.newsTitle}"></a>
-
-								<figcaption
-									style="color: black; text-align: center; object-fit: contain">${n1.newsTitle}</figcaption>
-
-							</figure></li>
+							<figcaption style="color: black; text-align: center; object-fit: contain"><p style="font-size:20px">${n1.newsTitle}</p></figcaption>
+							<a href="/campaign/newsdetail/${n1.newsId}" class="det"> <img src="${n1.newsPicBase64 }" title="${n1.newsTitle}"></a>
+						</figure></li>
 					</c:forEach>
 				</ul>
-
 				<div id="prevSlide" class="slide_btn">
 					<i class="fa-solid fa-caret-left"></i>
 				</div>
@@ -142,70 +107,131 @@ ul.slides li img {
 					<i class="fa-solid fa-caret-right"></i>
 				</div>
 			</div>
-			<!--	輪播結束 -->
-
-
-			<!-- 						<div class="container"> -->
-			<%-- 							<c:forEach var="n" items="${newsinfo}"> --%>
-			<!-- 								<div> -->
-			<%-- 									<a href="/news/detail/${n.newsId}" class="det"><img --%>
-			<%-- 										src="${n.newsPicBase64}" width="65%" class="d-block w-100"></a> --%>
-			<!-- 								</div> -->
-			<!-- 								<div style="text-align: center"> -->
-			<%-- 									<a href="/news/detail/${n.newsId}" style="color: black" --%>
-			<%-- 										class="det">${n.newsTitle}</a> --%>
-			<%-- 									<p style="font-size: 14px">${n.newsSubtitle}</p> --%>
-			<!-- 								</div> -->
-			<%-- 							</c:forEach> --%>
-			<!-- 						</div> -->
-
-			<!-- 搜尋欄 -->
-			<div>
-			<form action="/news/newsinfo/query" method="get" class="d-flex form1" style="width: 300px; margin: 5px 15px; float: right">
-				<input class="form-control me-2" type="search" placeholder="搜尋···" aria-label="Search" name="keyword">
-				<button class="btn btn-dark" type="submit" style="width:100px ; padding:0px 15px">送出</button>
-			</form>
-			</div>
-
-			<!-- bootstrap-card -->
-			<div class="container" style="margin-top: 80px">
-				<div class="row row-cols-1 row-cols-md-2 g-4" style="width: 80%;margin:0px auto">
-					<c:forEach var="n" items="${newsinfo2}">
-						<div class="col">
-							<div class="card" style="width:390px">
-								<a href="/news/newsdetail/${n.newsId}" class="det"> <img
-									src="${n.newsPicBase64}" class="card-img-top" alt=""></a>
-								<div class="card-body">
-									<h4 class="card-date"><fmt:formatDate value="${n.newsDate}" pattern="yyyy-MM-dd" /></h4>
-									<h5 class="card-title">${n.newsTitle}</h5>
-									<p class="card-text">${n.newsSubtitle}</p>
-								</div>
-							</div><br>
-						</div>
-					</c:forEach>
+			<!-- 輪播結束 -->
+			
+			<!-- 導覽列 -->
+				<div class="row">
+                    <div class="col-xl-12">
+                        <div class="properties__button text-center">
+                           <!--	  Nav Button  -->
+                           <nav>                         
+                              <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                           	  	<a class="nav-item nav-link active" id="ALL" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="true" style="font-size:20px">所有活動</a>
+                              	<a class="nav-item nav-link" id="NEWS" data-toggle="tab" href="#news" role="tab" aria-controls="news" aria-selected="false" style="font-size:20px">熱門活動</a>
+                           		<a class="nav-item nav-link" id="COUPON" data-toggle="tab" href="#coupon" role="tab" aria-controls="coupon" aria-selected="false" style="font-size:20px">領取優惠</a>
+                           		<a class="nav-item nav-link" id="PERIOD" data-toggle="tab" href="#period" role="tab" aria-controls="period" aria-selected="false" style="font-size:20px">期間限定</a>
+                           		<a class="nav-item nav-link" id="EVENT" data-toggle="tab" href="#event" role="tab" aria-controls="event" aria-selected="false" style="font-size:20px">實體活動</a>
+                              </div>
+                           </nav>
+                            <!--End Nav Button  -->
+                        </div>
+                    </div>
+                </div>
+				
+		<!-- 套版 -->		
+		<div class="row">
+                   <!-- Nav Card -->
+                   <div class="tab-content" id="nav-tabContent">
+                       <!-- card one -->
+                       <div class="tab-pane fade show active" id="all" role="tabpanel" aria-labelledby="ALL">
+                           <div class="row">
+                           <c:forEach var="n2" items="${newsinfo}">
+                               <div class="col-lg-4 col-md-6 col-sm-6">
+                                   <div class="single-new-arrival mb-50 text-center">
+                                       <div>
+                                       <a href="/campaign/newsdetail/${n2.newsId}"><img src="${n2.newsPicBase64}" alt="${n2.newsTitle}" title="${n2.newsTitle}" width="70%"></a>
+                                       </div>
+                                       <div class="popular-caption">
+                                           <h2><a href="/campaign/newsdetail/${n2.newsId}">${n2.newsTitle}</a></h2>
+                                           <span>活動期間:${n2.newsStDate} ~ ${n2.newsExpDate}</span>
+                                       </div>
+                                   </div>
+                               </div> 
+                               </c:forEach>                                                                                                                                                   
+                           </div>
+                       </div>
+                                            
+                        <div class="tab-pane fade" id="news" role="tabpanel" aria-labelledby="NEWS">
+                           <div class="row">
+                           <c:forEach var="t1" items="${type1}">
+                               <div class="col-lg-4 col-md-6 col-sm-6">
+                                   <div class="single-new-arrival mb-50 text-center">
+                                       <div>
+                                       <a href="/campaign/newsdetail/${t1.newsId}"><img src="${t1.newsPicBase64}" alt="${t1.newsTitle}" title="${t1.newsTitle}" width="70%"></a>
+                                       </div>
+                                       <div class="popular-caption">
+                                           <h2><a href="/campaign/newsdetail/${t1.newsId}">${t1.newsTitle}</a></h2>
+                                           <span>活動期間:${t1.newsStDate} ~ ${t1.newsExpDate}</span>
+                                       </div>
+                                   </div>
+                               </div> 
+                               </c:forEach>                                                                                                                                                   
+                           </div>
+                       </div>
+                       
+                         <div class="tab-pane fade" id="coupon" role="tabpanel" aria-labelledby="COUPON">
+                           <div class="row">
+                           <c:forEach var="t2" items="${type2}">
+                               <div class="col-lg-4 col-md-6 col-sm-6">
+                                   <div class="single-new-arrival mb-50 text-center">
+                                       <div>
+                                       <a href="/campaign/newsdetail/${t2.newsId}"><img src="${t2.newsPicBase64}" alt="${t2.newsTitle}" title="${t2.newsTitle}" width="70%"></a>
+                                       </div>
+                                       <div class="popular-caption">
+                                           <h2><a href="/campaign/newsdetail/${t2.newsId}">${t2.newsTitle}</a></h2>
+                                           <span>活動期間:${t2.newsStDate} ~ ${t2.newsExpDate}</span>
+                                       </div>
+                                   </div>
+                               </div> 
+                               </c:forEach>                                                                                                                                                   
+                           </div>
+                       </div>
+                       
+                       <div class="tab-pane fade" id="period" role="tabpanel" aria-labelledby="PERIOD">
+                           <div class="row">
+                           <c:forEach var="t3" items="${type3}">
+                               <div class="col-lg-4 col-md-6 col-sm-6">
+                                   <div class="single-new-arrival mb-50 text-center">
+                                       <div>
+                                       <a href="/campaign/newsdetail/${t3.newsId}"><img src="${t3.newsPicBase64}" alt="${t3.newsTitle}" title="${t3.newsTitle}" width="70%"></a>
+                                       </div>
+                                       <div class="popular-caption">
+                                           <h2><a href="/campaign/newsdetail/${t3.newsId}">${t3.newsTitle}</a></h2>
+                                           <span>活動期間:${t3.newsStDate} ~ ${t3.newsExpDate}</span>
+                                       </div>
+                                   </div>
+                               </div> 
+                               </c:forEach>                                                                                                                                                   
+                           </div>
+                       </div>
+                       <div class="tab-pane fade" id="event" role="tabpanel" aria-labelledby="EVENT">
+                           <div class="row">
+                           <c:forEach var="t4" items="${type4}">
+                               <div class="col-lg-4 col-md-6 col-sm-6">
+                                   <div class="single-new-arrival mb-50 text-center">
+                                       <div>
+                                       <a href="/campaign/newsdetail/${t4.newsId}"><img src="${t4.newsPicBase64}" alt="${t4.newsTitle}" title="${t4.newsTitle}" width="70%"></a>
+                                       </div>
+                                       <div class="popular-caption">
+                                           <h2><a href="/campaign/newsdetail/${t4.newsId}">${t4.newsTitle}</a></h2>
+                                           <span>活動期間:${t4.newsStDate} ~ ${t4.newsExpDate}</span>
+                                       </div>
+                                   </div>
+                               </div> 
+                               </c:forEach>                                                                                                                                                   
+                           </div>
+                       </div> 		
 				</div>
 			</div>
-
+			</div>
 		</section>
 	</main>
-
 	<%@ include file="../userfooter.jsp"%>
-
+	
+	
+	
 	<script>
-// 		$('.det').on("click", function(e) {
-
-// 			e.preventDefault();
-// 			var href = $(this).attr('href');
-// 			// 		 var tr= $(this).parent().parent().parent();
-// 			// 		 var id= tr.children(":first-child").text();
-
-// 			console.log(href);
-// 			Swal.fire({
-// 				html : '<iframe src = '+href+' width="750px" height="500px">',
-// 				width : "800px"
-// 			})
-// 		})
-
+	
 		//輪播
 		let slideNum = 0;
 		let slideCount = $(".slides li").length;
@@ -219,7 +245,7 @@ ul.slides li img {
 			$(".dot li").eq(slideNum).css("background-color", "#fff")
 					.siblings().css("background-color", "transparent");
 
-			let slidemove = 0 - 1000 * slideNum;
+			let slidemove = 0 - 1100 * slideNum;
 			$("ul.slides").css("left", slidemove);
 		}
 
@@ -243,16 +269,19 @@ ul.slides li img {
 			slideNum = ++slideNum > lastIndex ? 0 : slideNum;
 			show();
 		}
-		auto = setInterval(autoplay, 2000);
+		auto = setInterval(autoplay, 3000);
 
 		$("ul.slides").on("mouseenter", function() {
 			clearInterval(auto);
 		})
 
 		$("ul.slides").on("mouseleave", function() {
-			auto = setInterval(autoplay, 2000);
+			auto = setInterval(autoplay, 3000);
 		})
+		
+		//共用搜尋欄
+//        $("#select").attr("action", "/news/newsmain/query");
+		
 	</script>
-
 </body>
 </html>

@@ -27,19 +27,19 @@
               <h2>NT$ ${comm.commPrice }</h2>
               <ul class="list">
                   <li>
-                     <span>現有庫存: ${comm.commQuantity}</span>  
+                     <span style="font-size:20px">現有庫存: ${comm.commQuantity}</span>  
                   </li>
                    <li>
-                     <span>設計師: ${comm.designer}</span>
+                     <span style="font-size:20px">設計師: ${comm.designer}</span>
                   </li>
                 </ul>
-                <p>
+                <p style="font-size:20px">
                   ${comm.commDES}
                 </p>
                 <div class="card_area">
                   <div class="product_count d-inline-block">
                     <span class="inumber-decrement down"> <i class="ti-minus min"></i></span>
-                    <input class="input-number" type="text" name="qty" value="1" min="1" max="${comm.commQuantity}" id="value" readonly>
+                    <input class="input-number" type="text" name="qty" value="1" min="1" max="${comm.commQuantity}" id="value" oninput ="value=value.replace(/[^\d]/g,'')">
                     <span class="number-increment up"> <i class="ti-plus ad"></i></span>
                   </div>
                   <div class="add_to_cart">
@@ -472,33 +472,82 @@
               </main>  
             <%@ include file="../userfooter.jsp"%>   
             <script>
-            $('.add').on('click',function(e){
-           	 
+            
+            $('#value').change(function(){
+            	var count=Number($('#value').attr('max'));
+            	var val = Number($('#value').val())
+            	console.log(val)
+            	console.log(count);
+            	if(val>count){
+            		$('#value').val(count)
+            	}
+            	if(val<=0 || isNaN(val)){
+            		$('#value').val(1)
+            	}
+            })
+            
+            
+            $('.add').on('click',function(e){                 
             	var id=$(this).attr("id");
             	e.preventDefault();
             	var a = Number($("#qty").text());
-            	console.log(a)
             	var b = Number(1);
             	a+=b
             	$("#qty").text(a)
             	
-            	$.ajax({
-            		type:'post',
-            		url:'/order/mycart',
-            		dataType:"json",
-      	            data:{"qty":$("#value").val(), "id":$(this).attr("id"), "val":$("#qty").text(),       	   
-      	            },      				           		
+            	if(${login.account == comm.designer}){
+            		Swal.fire({
+                        icon: 'warning',
+                        title: '不能購買自己的商品',
+                        showConfirmButton: false,
+                        timer: 1500
+                         })   
+        		}else{
+        			Swal.fire({
+                        icon: 'success',
+                        title: '商品已加入購物車',
+                        showConfirmButton: false,
+                        timer: 1500
+                         })   
+        			
+        		}
+       	
             	})
             	
-            	Swal.fire({
-                icon: 'success',
-                title: '商品已加入購物車',
-                showConfirmButton: false,
-                timer: 1500
-                 })
-                 
-            })
-            
+            	$(function(){
+            	var num=Number(0);
+            	var cart = Number($('#cartval').text());
+            	console.log(cart)
+            	$('.add').click(function(){
+            		num++
+            		console.log(num)
+            		if(num<=1 & ${login.account != comm.designer}){
+            			$('#cartval').text(cart+1);
+            		}
+            		
+            		if(${login.account == comm.designer}){
+            			Swal.fire({
+                            icon: 'warning',
+                            title: '不能購買自己的商品',
+                            showConfirmButton: false,
+                            timer: 1500
+                             })   
+            		}else{
+            			
+            			$.ajax({
+                    		type:'post',
+                    		url:'/order/mycart',
+                    		dataType:"json",
+              	            data:{"qty":$("#value").val(), "id":$(this).attr("id"), "val":$("#qty").text(),"count":$('#cartval').text(),    	   
+              	            },      				           		
+                    	})
+            			
+            		}
+    		
+            	})
+            	})
+
+
             $('.min').on('click',function(){
             
             	var a =$('#value').val();
@@ -513,7 +562,7 @@
             })
             
             $('.ad').on('click',function(){
-            	var a =Number($('#value').val());
+            	var a =Number($('#value').val());            
             	console.log(a)
             	var b = 1
             	b=b+a

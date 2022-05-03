@@ -8,7 +8,7 @@
 <style>
         .wrapper{
             position: relative;
-            width:1000px;
+            width:1100px;
             height:350px;
             overflow: hidden;
             margin:0 auto;   
@@ -25,20 +25,19 @@
             list-style: none;
         }
         ul.slides{
-            width: 9000px;
+            width: 8800px;
             left: 0px;
             transition: all .5s;
         }
         ul.slides li{
-            width:1000px;
+            width:1100px;
             height:350px;
             overflow: hidden;
             float: left;
         }
         ul.slides li img{
             width: 100%;
-            height: 100%;
-            object-fit: contain;
+           height: 325px;
         }
         .dot{
             bottom:10px;
@@ -88,26 +87,26 @@
     <main>
         <section class="properties new-arrival fix">
             <div class="container">
-            <!-- 輪播開始 
-            <div class="wrapper">
-        <ul class="slides" id="o">
-        <c:forEach var="a" items="${list}">
-            <li id="l"><img src="${a.commImg }" title="${a.commTitle}"></li>
-            </c:forEach>
-        </ul>
-        <ul class="dot" id="o">
-          <c:forEach var="b" items="${list}">
-            <li id="${b.commNo }"></li>
-              </c:forEach>
-        </ul>
-        <div id="prevSlide" class="slide_btn">
-            <i class="fa-solid fa-caret-left"></i>
-        </div>
-        <div  id="nextSlide" class="slide_btn">
-            <i class="fa-solid fa-caret-right"></i>
-        </div>
-    </div>
-    輪播結束-->
+        
+         <!--  輪播開始  -->
+			<div class="wrapper">
+				<ul class="slides" id="o">
+					<c:forEach var="n1" items="${news}">
+						<li id="l"><figure>
+							<figcaption style="color: black; text-align: center; object-fit: contain;font-size:20px">${n1.newsTitle}</figcaption>
+							<a href="/campaign/newsdetail/${n1.newsId}" class="det"> <img src="${n1.newsPicBase64 }" title="${n1.newsTitle}"></a>
+						</figure></li>
+					</c:forEach>
+				</ul>
+				<div id="prevSlide" class="slide_btn">
+					<i class="fa-solid fa-caret-left"></i>
+				</div>
+				<div id="nextSlide" class="slide_btn">
+					<i class="fa-solid fa-caret-right"></i>
+				</div>
+			</div>
+			<!-- 輪播結束 -->
+
                 <!-- Section tittle -->
                <div class="row">
                     <div class="col-xl-12">
@@ -115,14 +114,14 @@
                             <!--Nav Button  -->
                             <nav>                         
                                 <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                                	<a class="nav-item nav-link active" id="ALL" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="true">所有商品</a>
-                                    <a class="nav-item nav-link" id="CLOTH" data-toggle="tab" href="#cloth" role="tab" aria-controls="cloth" aria-selected="false">衣著</a>
-                                    <a class="nav-item nav-link" id="ACC" data-toggle="tab" href="#acc" role="tab" aria-controls="acc" aria-selected="false">配件飾品</a>
-                                    <a class="nav-item nav-link" id="BAG" data-toggle="tab" href="#bag" role="tab" aria-controls="bag" aria-selected="false">包包提袋</a>
-                                    <a class="nav-item nav-link" id="LIFE" data-toggle="tab" href="#life" role="tab" aria-controls="life" aria-selected="false">居家生活</a>
-                                    <a class="nav-item nav-link" id="TECH" data-toggle="tab" href="#tech" role="tab" aria-controls="tech" aria-selected="false">創意科技</a>
-                                    <a class="nav-item nav-link" id="Stationery" data-toggle="tab" href="#stationery" role="tab" aria-controls="stationery" aria-selected="false">文具</a>
-                                    <a class="nav-item nav-link" id="OTHER" data-toggle="tab" href="#other" role="tab" aria-controls="other" aria-selected="false">其他</a>
+                                	<a class="nav-item nav-link active" id="ALL" data-toggle="tab" href="#all" role="tab" aria-controls="all" aria-selected="true" style="font-size:20px">所有商品</a>
+                                    <a class="nav-item nav-link" id="CLOTH" data-toggle="tab" href="#cloth" role="tab" aria-controls="cloth" aria-selected="false" style="font-size:20px">衣著</a>
+                                    <a class="nav-item nav-link" id="ACC" data-toggle="tab" href="#acc" role="tab" aria-controls="acc" aria-selected="false" style="font-size:20px">配件飾品</a>
+                                    <a class="nav-item nav-link" id="BAG" data-toggle="tab" href="#bag" role="tab" aria-controls="bag" aria-selected="false" style="font-size:20px">包包提袋</a>
+                                    <a class="nav-item nav-link" id="LIFE" data-toggle="tab" href="#life" role="tab" aria-controls="life" aria-selected="false" style="font-size:20px">居家生活</a>
+                                    <a class="nav-item nav-link" id="TECH" data-toggle="tab" href="#tech" role="tab" aria-controls="tech" aria-selected="false" style="font-size:20px">創意科技</a>
+                                    <a class="nav-item nav-link" id="Stationery" data-toggle="tab" href="#stationery" role="tab" aria-controls="stationery" aria-selected="false" style="font-size:20px">文具</a>
+                                    <a class="nav-item nav-link" id="OTHER" data-toggle="tab" href="#other" role="tab" aria-controls="other" aria-selected="false" style="font-size:20px">其他</a>
                                 </div>
                             </nav>
                             <!--End Nav Button  -->
@@ -288,7 +287,7 @@
             $(".dot li").eq(slideNum).css("background-color","#fff")
              .siblings().css("background-color","transparent");
 
-            let slidemove=0-1000*slideNum;
+            let slidemove=0-1100*slideNum;
             $("ul.slides").css("left",slidemove);
         }
 
@@ -312,14 +311,14 @@
             slideNum=++slideNum>lastIndex?0:slideNum;
             show();
         }
-        auto=setInterval(autoplay,4000);
+        auto=setInterval(autoplay,5000);
 
         $("ul.slides").on("mouseenter",function(){
             clearInterval(auto);
         })
 
         $("ul.slides").on("mouseleave",function(){
-            auto=setInterval(autoplay,4000);
+            auto=setInterval(autoplay,5000);
         })                  
            
     </script>

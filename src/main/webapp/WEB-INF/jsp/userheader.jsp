@@ -49,8 +49,8 @@
                                 <div class="main-menu  d-none d-lg-block" >
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="/index" style="font-size:16px">首頁</a></li> 
-                                            <li><a href="/index" style="font-size:16px">商品</a>
+                                            <li><a href="/index" style="font-size:22px">首頁</a></li> 
+                                            <li><a href="/index" style="font-size:22px">商品</a>
                                                 <ul class="submenu">
                                                     <li><a href="product/catagory">配件飾品</a></li>
                                                     <li><a href="product/catagory">文具</a></li>
@@ -61,10 +61,10 @@
                                                     <li><a href="product/catagory">其他</a></li>
                                                 </ul>
                                             </li>
-                                            <li><a href="/news/newsinfo" style="font-size:16px">最新活動</a></li>
-                                            <li><a href="/forum/forum" style="font-size:16px">討論區</a></li>
-                                            <li><a href="/front_raiseindex.controller" style="font-size:16px">募資</a></li>
-                                            <li><a href="contact.html" style="font-size:16px">聯絡我們</a></li>
+                                            <li><a href="/campaign/index" style="font-size:22px">最新活動</a></li>
+                                            <li><a href="/forum/forum_user_index" style="font-size:22px">討論區</a></li>
+                                            <li><a href="/front_raiseindex.controller" style="font-size:22px">募資</a></li>
+                                            <li><a href="contact.html" style="font-size:22px">聯絡我們</a></li>
                                         </ul>
                                     </nav>
                                 </div>   
@@ -87,11 +87,12 @@
 											    <div class="main-menu  d-none d-lg-block">
                                     <nav>
                                         <ul id="navigation">
-                                            <li><a href="#" style="font-size:16px">${sessionScope.login.account}</a>
+                                            <li><a href="#" style="font-size:22px">${sessionScope.login.account}</a>
                                                 <ul class="submenu">
                                                     <li><a href="/user">會員中心</a></li>
-                                                    <li><a href="product/catagory">我的訂單</a></li>
-                                                    <li><a href="product/catagory">優惠券</a></li>   
+                                                    <li><a href="/order/myorder">我的訂單</a></li>
+                                                    <li><a href="/product/catagory">優惠券</a></li>
+                                                    <li><a href="/user/change-password">更改密碼</a></li>   
                                                     <li><a href="/logout">登出</a></li>                                               
                                                 </ul>
                                             </li>
@@ -100,12 +101,13 @@
                                 </div> 
 											</c:when>
 											 <c:otherwise>
-									    <a href="/login" class="account-btn" target="_blank">登入|註冊</a>
+									    <a href="/login" class="account-btn" target="_blank" style="font-size:22px">登入|註冊</a>
 											 </c:otherwise>
 									    </c:choose>                                  
                                         <li>                                 
                                             <div class="card-stor">
-                                             <a href="/order/mycart" ><img src="/assets/img/icon/card.svg" alt="" title="購物車"></a>                                        
+                                             <a href="/order/mycart" ><img src="/assets/img/icon/cart2.svg" alt="" title="購物車"></a>
+                                             <span id="cartval">${cartcount}</span>                                        
                                             </div>
                                         </li>
                                     </ul>
@@ -117,46 +119,6 @@
             </div>
         </header>
         <!-- header end -->
-        
-        <!-- Jquery, Popper, Bootstrap -->
-<script src="/assets/js/vendor/modernizr-3.5.0.min.js"></script>
-<script src="/assets/js/vendor/jquery-1.12.4.min.js"></script>
-<script src="/assets/js/popper.min.js"></script>
-<script src="/assets/js/bootstrap.min.js"></script>
-
-<!-- Slick-slider , Owl-Carousel ,slick-nav -->
-<script src="/assets/js/owl.carousel.min.js"></script>
-<script src="/assets/js/jquery.slicknav.min.js"></script>
-
-<!-- One Page, Animated-HeadLin, Date Picker , price, light-slider -->
-<script src="/assets/js/wow.min.js"></script>
-<script src="/assets/js/animated.headline.js"></script>
-<script src="/assets/js/jquery.magnific-popup.js"></script>
-<script src="/assets/js/gijgo.min.js"></script>
-<script src="/assets/js/lightslider.min.js"></script>
-<script src="/assets/js/price_rangs.js"></script>
-
-<!-- Nice-select, sticky,Progress -->
-<script src="/assets/js/jquery.nice-select.min.js"></script>
-<script src="/assets/js/jquery.sticky.js"></script>
-<script src="/assets/js/jquery.barfiller.js"></script>
-
-<!-- counter , waypoint,Hover Direction -->
-<script src="/assets/js/jquery.counterup.min.js"></script>
-<script src="/assets/js/waypoints.min.js"></script>
-<script src="/assets/js/jquery.countdown.min.js"></script>
-<script src="/assets/js/hover-direction-snake.min.js"></script>
-
-<!-- contact js -->
-<script src="/assets/js/contact.js"></script>
-<script src="/assets/js/jquery.form.js"></script>
-<script src="/assets/js/jquery.validate.min.js"></script>
-<script src="/assets/js/mail-script.js"></script>
-<script src="/assets/js/jquery.ajaxchimp.min.js"></script>
-
-<!-- Jquery Plugins, main Jquery -->	
-<script src="/assets/js/plugins.js"></script>
-<script src="/assets/js/main.js"></script>
 </body>
 
 </html>

@@ -48,7 +48,8 @@
 
         //Warning Message
         $('.delmember').click(function () {
-            let id = $(this).parent().parent().parent().parent().children(".table-plus").text();
+            let tr = $(this).parent().parent().parent().parent();
+            let id = tr.children(".table-plus").text();
 
             swal({
                 title: '確定刪除?',
@@ -61,26 +62,53 @@
                 cancelButtonText: '取消'
             }).then((result) => {
                 if (result.dismiss !== 'cancel') {
-                    // $.ajax({
-                    //     type: 'delete',
-                    //     url: '/member/members.delete/' + id
-                    // });
+                    $.ajax({
+                        type: 'delete',
+                        url: '/member/members.delete/' + id
+                    });
+
+                    $('.data-table-export').DataTable().row(tr).remove().draw(false);
 
                     swal({
                         title: '已刪除!',
                         type: 'success',
                         confirmButtonText: '確定'
-                    }).then(() => {
-                        window.location.href = '/member/members.delete/' + id;
-                    })
+                    });
                 }
             })
         });
-	
-		
- 	
-		
-		
+
+        $('.deldesigner').click(function () {
+            let tr = $(this).parent().parent().parent().parent();
+            let id = $(this).parent().parent().parent().parent().children(".table-plus").text();
+
+            swal({
+                title: '確定取消設計師資格?',
+                text: "",
+                type: 'warning',
+                showCancelButton: true,
+                confirmButtonClass: 'btn btn-success',
+                cancelButtonClass: 'btn btn-danger',
+                confirmButtonText: '確定',
+                cancelButtonText: '取消'
+            }).then((result) => {
+                if (result.dismiss !== 'cancel') {
+                    $.ajax({
+                        type: 'delete',
+                        url: '/member/designers.delete/' + id
+                    });
+
+                    $('.data-table-export').DataTable().row(tr).remove().draw(false);
+
+                    swal({
+                        title: '已取消!',
+                        type: 'success',
+                        confirmButtonText: '確定'
+                    });
+                }
+            })
+        });
+
         //Custom Position Message
         $('#sa-custom-position').click(function () {
             swal(
@@ -155,19 +183,21 @@
         });
 
         //custom html alert
-        $('#custom-html-alert').click(function () {
+        $('#terms').click(function () {
             swal({
-                title: '<i>HTML</i> <u>example</u>',
-                type: 'info',
-                html: 'You can use <b>bold text</b>, ' +
-                    '<a href="#" class="text-blue">links</a> ' +
-                    'and other HTML tags',
+                html: '',
                 showCloseButton: true,
-                showCancelButton: true,
-                confirmButtonClass: 'btn btn-success',
-                cancelButtonClass: 'btn btn-danger',
-                confirmButtonText: '<i class="fa fa-thumbs-up"></i>',
-                cancelButtonText: '<i class="fa fa-thumbs-down"></i>'
+                showConfirmButton: false,
+                showCancelButton: false
+            })
+        });
+
+        $('#policy').click(function () {
+            swal({
+                html: '',
+                showCloseButton: true,
+                showConfirmButton: false,
+                showCancelButton: false
             })
         });
 

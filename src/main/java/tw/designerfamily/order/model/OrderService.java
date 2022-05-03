@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -30,7 +31,7 @@ public class OrderService {
 	
 	//查詢*all
 	public List<Order> selectAll(){
-		return oRepo.findAll();
+		return oRepo.findAllDesc();
 	}
 	
 	//查詢by id
@@ -56,5 +57,11 @@ public class OrderService {
 	public List<Order> findyByOrderNo(int orderNo){
 		return oRepo.findByOrderNo(orderNo);
 	}
+	
+	//目前登入帳號之訂單
+	public List<Order> findByOrderOwner(String owner){
+		return oRepo.findByOrderOwner(owner);
+	}
+	
 	
 }

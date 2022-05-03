@@ -21,6 +21,10 @@ public class MemberService {
 		return mRepo.selectAll();
 	}
 
+	public List<Member> selectDesigners() {
+		return mRepo.selectDesigners();
+	}
+
 	public Member selectMemberById(int id) {
 		Optional<Member> op1 = mRepo.findById(id);
 		return op1.get();
@@ -29,6 +33,10 @@ public class MemberService {
 	public Status selectStatusById(int id) {
 		Optional<Status> op2 = sRepo.findById(id);
 		return op2.get();
+	}
+
+	public Member selectByEmail(String email) {
+		return mRepo.selectByEmail(email);
 	}
 
 	public List<Member> selectByPhoneAccountEmail(String keyword) {

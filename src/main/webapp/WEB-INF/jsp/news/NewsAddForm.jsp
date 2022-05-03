@@ -35,31 +35,45 @@
 		<h2 style="margin: 20px 0px; text-align: center"><b>新增活動</b></h2>
 					
 		<form action="/news" method="get" style="display: inline; float: right">
-			<button type="submit" class="btn btn-outline-success" style="margin-bottom:10px;border-radius:15px" ><i class="fa-solid fa-house-chimney"></i> 活動首頁</button>
+			<button type="submit" class="btn btn-outline-success" style="margin-bottom:10px;border-radius:15px" ><i class="fa-solid fa-house-chimney"></i> 活動清單</button>
 		</form>
 			
 		<%-- 最新消息 --%>
 		<form action="newsAdd" method="post" >
 			<div class="mb-3">
-				<label for="type" class="form-label"></label> 
-				<input type="text" class="form-control" id="type" value="優惠攻略" readonly name="newsType" style="border-radius:20px"/>
+				<label for="type" class="form-label"><b>活動類別</b></label> 							
+				<select id="newsType" name="newsType" class="form-select event" style="border-radius:20px"
+                       aria-label="Default select example" aria-describedby="CategoryInfo">
+                       <option value="熱門活動">熱門活動</option>
+                       <option value="領取優惠">領取優惠</option>
+                       <option value="期間限定">期間限定</option>
+                       <option value="實體活動">實體活動</option>
+                </select>
+				<div id="CategoryInfo" class="form-text">請選擇活動類別。</div>
 			</div>
 			<div class="mb-3">
-				<label for="newsTitle" class="form-label"><b>標題</b>&emsp;<span style="color:red"></span></label> <em id="titleError" class="red"></em>
-				<input type="text" class="form-control nBlank" id="newsTitle" name="newsTitle" style="border-radius:20px"/>					
+				<label for="newsTitle" class="form-label"><b>活動名稱</b>&emsp;<span style="color:red"></span></label> <em id="titleError" class="red"></em>
+				<input type="text" class="form-control nBlank" id="newsTitle" name="newsTitle" style="border-radius:20px"/>				
 			</div>
 			<div class="mb-3">
 				<label for="newsSubtitle" class="form-label"><b>副標題</b></label> 
 				<input type="text" class="form-control" id="newsSubtitle" name="newsSubtitle" style="border-radius:20px"/>
 			</div>
 			<div class="mb-3">
+	            <label for="newsStDate" class="form-label"><b>活動開始日</b></label><br>
+	            <input type="date" id="newsStDate" name="newsStDate" style="border-radius:15px;width:140px">      
+	        </div>
+			<div class="mb-3">
+	            <label for="newsExpDate" class="form-label"><b>活動結束日</b></label><br>
+	            <input type="date" id="newsExpDate" name="newsExpDate" style="border-radius:15px;width:140px">      
+	        </div>
+			<div class="mb-3">
 				<label for="newsContent" class="form-label"><b>活動內容</b>&emsp;<span style="color:red"></span></label><em id="contentError" class="red"></em>
 				<textarea class="form-control nBlank" id="newsContent" rows="12" style="resize:none ;border-radius:25px" name="newsContent"></textarea>						
 			</div>
-
 	        <div class="mb-3">
            		<label class="form-label" ><b>活動照片</b></label>
-           		<input class="form-control uploadImages" style="width:300px;border-radius:20px" type="file" name="PicBase64"/>
+           		<input class="form-control uploadImages" style="border-radius:20px" type="file" name="PicBase64"/>
            		<input type="hidden" id="news_PicBase64" name="news_PicBase64" value="">
       			 </div>
        		<div class="mb-3" id="previewPicDiv"></div>
@@ -68,6 +82,23 @@
 				<label for="newsNote" class="form-label"><b>備註</b></label>
 				<textarea class="form-control" id="newsNote" rows="4" style="resize:none;border-radius:25px" name="newsNote"></textarea>						
 			</div>	
+			
+<!--        		隱藏table -->
+       		<c:if test="${n.newsType=='實體活動'}">
+				<div class="mb-3">
+					<label for="place" class="form-label"><b>地點</b></label> 
+					<input type="text" class="form-control" id="place" name="place" style="border-radius:20px"/>
+				</div>
+				<div class="mb-3">
+					<label for="maxEnterNum" class="form-label"><b>人數上限</b></label> 
+					<input type="text" class="form-control" id="maxEnterNum" name="maxEnterNum" style="border-radius:20px"/>
+				</div>
+				<div class="mb-3">
+					<label for="enterNum" class="form-label"><b>已報名人數</b></label> 
+					<input type="text" class="form-control" id="enterNum" name="enterNum" style="border-radius:20px"/>
+				</div>
+			</c:if>
+       		
        		
        		<div style="text-align:center; width: auto; margin: 20px" >					
 			<button type="submit" class="btn btn-outline-primary btn-lg send" name="upload" style="border-radius:15px">送出</button>
@@ -85,12 +116,19 @@
 		<script>
 		<%-- 一鍵輸入 --%>
 		function oneClick() {
-			$("#newsTitle").attr("value","邀請朋友活動");
-               	$("#newsSubtitle").attr("value","2022年邀請優惠");                	
-               	$("#newsContent").html("● 邀請朋友加入會員 <br>邀請朋友成功加入會員 ，就可獲得 300 M Coins，可以在結帳時折抵消費金額或換取限量獎勵。<br>當你邀請的朋友完成首次購買，或是也邀請新朋友加入會員 ，你可以分別再獲得 300 M Coins。邀請一個朋友，等於最多可以獲得 900 M Coins！<br><br> ◎ 優惠期間：無限期<br>◎ 優惠內容：邀請朋友成功加入，就可獲得 300 M Coins，可用於折抵消費或換取限量獎勵。<br>");
-               	$("#newsNote").html("300 M Coins 價值 NT$ 30，可以用來折抵消費跟兌換回饋獎勵。<br> ◎ 優惠期間：即日起-2022/12/31");
+				$("#newsTitle").attr("value","限定工藝Way 精選台灣綠工藝作品");
+               	$("#newsSubtitle").attr("value","購買臺灣綠工藝入選作品，滿 NT$5000，折抵 NT$500"); 
+               	$("#newsStDate").attr("value","2022-05-09");
+               	$("#newsExpDate").attr("value","2022-05-31");               	
+               	$("#newsContent").html("● 精選臺灣綠工藝入選作品！專屬你的生活工藝<br><br>生活在水泥叢林，你還記得與自然之間的連結嗎？<br>沒時間出走山林沒關係，<br>先讓源於大地的工藝走入日常，<br>陪伴並療癒每日工作、生活的點滴！<br><br>少了機械的筆直與工整，<br>卻多了職人手作的線條與變化，紮實地溫暖每一刻。<br>一起探索隱身台灣各地的美麗綠工藝，<br>打造個人專屬的生活味吧！");
+               	$("#newsNote").html("綠工藝入選作品只在 MEGA 限定販售！");
                 }
 
+		<%-- 跳出活動欄位 --%>
+		(".event").blur(function(addtable){
+			
+
+		})
 		<%--必填欄位提醒--%>
 		$(".nBlank").blur(function(event){					
 			$("#titleError,#contentError").text("");
@@ -148,6 +186,7 @@
 				
 				
 		$(".send").on("click",function(e){
+			console.log(this)
 		e.preventDefault();
 		const swalWithBootstrapButtons = Swal.mixin({
 		 	 customClass: {
@@ -164,7 +203,7 @@
 		  reverseButtons: true,
 		  showCancelButton: true
 		}).then((result) => {
-		  if ($("#newsTitle").val()!="" & $("#newsContent").val()!="" & result.isConfirmed!=false) {
+		  if ($("#newsTitle").val()!="" & $("#newsContent").val()!=""& $("#newsStDate").val()!="" & $("#newsExpDate").val()!="" & result.isConfirmed!=false) {
 			  Swal.fire({
 				  position: 'center',
 				  icon: 'success',
@@ -179,7 +218,7 @@
 		  } else {
 			if(result.isConfirmed!=false){
 				swalWithBootstrapButtons.fire(
-			      '標題及活動內容不得空白'
+			      '標題、活動時間、活動內容不得空白'
 			    )
   			  }
 		   }  

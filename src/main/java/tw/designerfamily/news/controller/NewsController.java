@@ -2,6 +2,8 @@ package tw.designerfamily.news.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -53,12 +55,14 @@ public class NewsController {
 	// 新增
 	@PostMapping(path = "/newsAdd")
 	public String addNews(@RequestParam("newsType") String type, @RequestParam("newsTitle") String title,
-			@RequestParam(value = "newsSubtitle", required = false) String subtitle,
+			@RequestParam("newsSubtitle") String subtitle,
+			@RequestParam("newsStDate") String StDate,
+			@RequestParam("newsExpDate") String ExpDate,
 			@RequestParam("newsContent") String content,
-			@RequestParam(value = "news_PicBase64", required = false) String picbase64,
-			@RequestParam(value = "newsNote", required = false) String note) {
+			@RequestParam("news_PicBase64") String picbase64,
+			@RequestParam("newsNote") String note) {
 
-		nService.insert(new NewsBean(type, title, subtitle, content, picbase64, note));
+		nService.insert(new NewsBean(type, title, subtitle,StDate,ExpDate, content, picbase64, note));
 		System.out.println("");
 		return "redirect:/news";
 	}
@@ -71,7 +75,7 @@ public class NewsController {
 		return "news/Newsdetail";
 	}
 
-	// 修改(待修改)
+	// 修改
 	@GetMapping(path = "/newsupdate/{id}")
 	public String processActionUpdate(@PathVariable("id") int id, Model m) {
 		NewsBean news = nService.selectById(id);
@@ -82,12 +86,14 @@ public class NewsController {
 	@PostMapping("/updateSucess")
 	public String updateNews(@RequestParam("newsId") int id, @RequestParam("newsType") String type,
 			@RequestParam("newsTitle") String title,
-			@RequestParam(value = "newsSubtitle", required = false) String subtitle,
+			@RequestParam("newsSubtitle") String subtitle,
+			@RequestParam("newsStDate") String StDate,
+			@RequestParam("newsExpDate") String ExpDate,
 			@RequestParam("newsContent") String content,
 			@RequestParam(value = "news_PicBase64", required = false) String picbase64,
 			@RequestParam(value = "newsNote", required = false) String note) {
 
-		nService.update(new NewsBean(id, type, title, subtitle, content, picbase64, note));
+		nService.update(new NewsBean(id, type, title, subtitle,StDate,ExpDate, content, picbase64, note));
 		return "redirect:/news";
 	}
 
@@ -97,32 +103,8 @@ public class NewsController {
 		return "news/NewsAddForm";
 	}
 
-	// User端
-	@GetMapping("newsinfo")
-	public String usermain(Model m) {
-		List<NewsBean> list = nService.selectAll();
-		m.addAttribute("newsinfo1", list);
-		m.addAttribute("newsinfo2", list);
-		return "news/UserNewsIndex";
-	}
 	
-	
-	@GetMapping("newsinfo/query")
-	public String userquery(@RequestParam("keyword") String keyword,Model m) {
-		List<NewsBean> list1 = nService.selectAll();
-		List<NewsBean> list2 = nService.searchByKey(keyword);
-		m.addAttribute("newsinfo1", list1);
-		m.addAttribute("newsinfo2", list2);	
-		return "news/UserNewsIndex";
-	}
-	
-	
-	// 詳細-用id取值
-	@GetMapping("/newsdetail/{id}")
-	public String userDetail(@PathVariable("id") int id, Model m) {
-		NewsBean n = nService.selectById(id);
-		m.addAttribute("n", n);
-		return "news/UserNewsdetail";
-	}
 
+	
+	
 }

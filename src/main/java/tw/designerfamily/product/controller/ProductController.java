@@ -2,8 +2,6 @@ package tw.designerfamily.product.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -56,6 +54,7 @@ public class ProductController {
 		return"product/ProductAdd";
 	}
 	
+	//後台新增商品
 	@PostMapping(path ="/addProduct")
 	public String processAction6(@RequestParam("commTitle")String title,@RequestParam("commDES") String des,
 	@RequestParam("commSPE") String spe,@RequestParam("category") String catgory,@RequestParam("designer")String designer,@RequestParam("commPrice")int price,
@@ -96,6 +95,21 @@ public class ProductController {
 			ProductBean comm = pService.selectById(id);
 			m.addAttribute("comm", comm);
 			return "/product/Comminfo";
+		}
+		
+		@GetMapping("/userAddProduct")
+		public String addproduct() {
+			return"/product/userProductAdd";
+			
+		}
+		//設計師新增商品
+		@PostMapping("/123")
+		public String processAction7(@RequestParam("commTitle")String title,@RequestParam("commDES") String des,
+		@RequestParam("commSPE") String spe,@RequestParam("category") String catgory,@RequestParam("designer")String designer,@RequestParam("commPrice")int price,
+		@RequestParam("commQuantity")int qty,@RequestParam("product_PicBase64")String img) {
+
+		pService.insert(new ProductBean(title, des, spe, catgory, designer, price, qty, img));
+		return"redirect:/user";
 		}
 		
 }

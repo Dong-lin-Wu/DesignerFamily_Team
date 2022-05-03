@@ -27,7 +27,7 @@
 		<h2 style="margin: 20px 0px; text-align: center"><b>修改活動</b></h2>
 				 
 		<form action="/news" method="get" style="display: inline; float: right">
-			<button type="submit" class="btn btn-outline-success" style="margin-bottom:10px;border-radius:15px"><i class="fa-solid fa-house-chimney"></i> 活動首頁</button>
+			<button type="submit" class="btn btn-outline-success" style="margin-bottom:10px;border-radius:15px"><i class="fa-solid fa-house-chimney"></i> 活動清單</button>
 		</form>
 				 						  
 			<form action="/news/updateSucess" method="post" enctype="multipart/form-data">
@@ -35,11 +35,17 @@
 				<input type="hidden" name="newsId" value="${newsList.newsId}" />
 		
 			<div class="mb-3">
-				<label for="newsType" class="form-label"></label> 
-				<input type="text" class="form-control" id="type" value="優惠攻略" readonly name="newsType" style="border-radius:20px"/>
+				<label for="newsType" class="form-label"><b>活動類別</b></label> 
+				<select id="newsType" name="newsType" class="form-select" style="border-radius:20px"
+                       aria-label="Default select example" aria-describedby="CategoryInfo">
+                       <option value="熱門活動">熱門活動</option>
+                       <option value="領取優惠">領取優惠</option>
+                       <option value="期間限定">期間限定</option>
+                       <option value="實體活動">實體活動</option>
+                </select>
 			</div>
 			<div class="mb-3">
-				<label for="newsTitle" class="form-label"><b>標題</b>&emsp;<span style="color:red"></span></label> <em id="titleError" class="red"></em>
+				<label for="newsTitle" class="form-label"><b>活動名稱</b>&emsp;<span style="color:red"></span></label> <em id="titleError" class="red"></em>
 				<input type="text" class="form-control nBlank" id="newsTitle" value="${newsList.newsTitle}" name="newsTitle" style="border-radius:20px"/>			
 			</div>
 			<div class="mb-3">
@@ -47,21 +53,31 @@
 				<input type="text" class="form-control" id="newsSubtitle" value="${newsList.newsSubtitle}" name="newsSubtitle" style="border-radius:20px"/>
 			</div>
 			<div class="mb-3">
+	            <label for="newsStDate" class="form-label"><b>活動開始日</b></label><br>
+	            <input type="date" id="newsStDate" value="${newsList.newsStDate}" name="newsStDate" style="border-radius:15px;width:140px">      
+	        </div>
+			<div class="mb-3">
+	            <label for="newsExpDate" class="form-label"><b>活動結束日</b></label><br>
+	            <input type="date" id="newsExpDate" value="${newsList.newsExpDate}" name="newsExpDate" style="border-radius:15px;width:140px">      
+	        </div>
+			<div class="mb-3">
 				<label for="newsContent" class="form-label"><b>活動內容</b>&emsp;<span style="color:red"></span></label><em id="contentError" class="red"></em>
 				<textarea class="form-control nBlank" id="newsContent" rows="12" style="resize: none;border-radius:25px"  name="newsContent">${newsList.newsContent}</textarea>				
 			</div>
 			<div class="mb-3">
          		<label for="News_PicName" class="form-label" ><b>活動照片</b></label>
-           		<input class="form-control uploadImages" style="width:300px;border-radius:20px" type="file" name="NewsPicBase64" value="${newsList.newsPicBase64}"/>
+           		<input class="form-control uploadImages" style="border-radius:20px" type="file" name="NewsPicBase64" value="${newsList.newsPicBase64}"/>
        			<input type="hidden" id="News_PicBase64" name="news_PicBase64" value="${newsList.newsPicBase64}"/>
     		</div>
 	        <div class="mb-3" id="previewPicDiv">
-	        	<img style="width:250px" name="${newsList.newsPicBase64}" src="${newsList.newsPicBase64}">
+	        	<img style="width:400px" name="${newsList.newsPicBase64}" src="${newsList.newsPicBase64}">
 	        </div>
 			<div class="mb-3">
 				<label for="newsNote" class="form-label"><b>備註</b></label>
 				<textarea class="form-control" id="newsNote" rows="4" style="resize:none;border-radius:25px" name="newsNote">${newsList.newsNote}</textarea>
 			</div>
+			
+			
 			
 			<div style="text-align:center; width: auto; margin: 20px">
 			<button type="reset" class="btn btn-outline-primary btn-lg" style="border-radius:15px">清除修改</button>

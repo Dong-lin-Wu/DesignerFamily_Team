@@ -1,21 +1,26 @@
 package tw.designerfamily.order.controller;
 
-import java.io.IOException;
+
 import java.sql.Timestamp;
 import java.time.Instant;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -30,6 +35,7 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import ecpay.payment.integration.AllInOne;
 import ecpay.payment.integration.domain.AioCheckOutOneTime;
+import tw.designerfamily.member.model.Member;
 import tw.designerfamily.order.model.CartItem;
 import tw.designerfamily.order.model.Order;
 import tw.designerfamily.order.model.OrderService;
@@ -38,7 +44,6 @@ import tw.designerfamily.product.model.ProductService;
 
 @Controller
 @RequestMapping("/order")
-@SessionAttributes(names ={"carts","info"})
 public class OrderController {
 	
 	@Autowired
@@ -48,8 +53,12 @@ public class OrderController {
 	private ProductService pservice;
 	
 	@Autowired
-	private CartItem car;
+    private JavaMailSender mailSender;
 	
+    @Autowired 
+    freemarker.template.Configuration freemarkerConfig;
+	
+
 	@GetMapping
 	public String processMain(Model m) {
 		List<Order> list = oserviece.selectAll();
@@ -94,13 +103,16 @@ public class OrderController {
 	
 	@PostMapping("/mycart")
 	@ResponseBody
-	public String processCart(@RequestParam("id")int id,Model m,@RequestParam("qty")int qty,HttpServletRequest request) {
+	public String processCart(@RequestParam("id")int id,Model m,@RequestParam("qty")int qty,@RequestParam("count")int count,HttpServletRequest request) {
+
+		request.getSession().setAttribute("cartcount", count);
+
 		ProductBean goods = pservice.selectById(id);
 		CartItem od = new CartItem(goods, qty, goods.getCommPrice()*qty);
 		if(request.getSession().getAttribute("carts")==null) {//判斷是否有carts這個session,若為空值 new一個Arraylist放入CartItem物件
 			List<CartItem> list = new ArrayList<CartItem>();
 			list.add(od);
-			m.addAttribute("carts", list);
+			request.getSession().setAttribute("carts", list);
 		}else {//若carts session不為 null
 			@SuppressWarnings("unchecked")
 			List<CartItem> list = (List<CartItem>)request.getSession().getAttribute("carts");//list抓取carts中的物件
@@ -130,7 +142,7 @@ public class OrderController {
 	
 	@DeleteMapping("/mycart/{id}")
 	@ResponseBody
-	public void processAction8(@PathVariable("id") int id,HttpServletRequest request,Model m) {
+	public void processAction8(@PathVariable("id") int id,HttpServletRequest request,Model m, SessionStatus sessionStatus) {
 		@SuppressWarnings("unchecked")
 		List<CartItem> list = (List<CartItem>)request.getSession().getAttribute("carts");
 		Iterator<CartItem> it = list.iterator();
@@ -138,6 +150,8 @@ public class OrderController {
 			CartItem aod = it.next();
 			if(aod.getProduct().getCommNo()==id) {
 				it.remove();
+				int count =(int) request.getSession().getAttribute("cartcount");
+				request.getSession().setAttribute("cartcount", count-1);
 			}
 		}
 		
@@ -155,7 +169,7 @@ public class OrderController {
 			if(aod.getProduct().getCommNo()==id) {
 				aod.setQty(qty);
 				aod.setTotalprice(goods.getCommPrice()*qty);
-				m.addAttribute("carts", list);
+				request.getSession().setAttribute("carts", list);
 		}
 	}	
 		return "order/Cart";	
@@ -181,14 +195,14 @@ public class OrderController {
 	}
 	
 	@PostMapping("/info2")
-	public String processInfo2(@RequestParam("buyername")String name,@RequestParam("buyerphone")String phone,@RequestParam("buyeraddress")String address,Model m,HttpServletRequest request) {
+	public String processInfo2(@RequestParam("buyername")String name,@RequestParam("buyerphone")String phone,@RequestParam("buyeraddress")String address,Model m,HttpServletRequest request,SessionStatus sessionStatus) {
 		Order info = new Order(address, phone, name);
-		m.addAttribute("info", info);		
+		request.getSession().setAttribute("info", info);
 		return"/order/InfoSuccess";
 	}
 	
 	@PostMapping("/pay")
-	public String processAction10(HttpServletRequest request, HttpSession session,SessionStatus sessionStatus,@RequestParam("name")String name,@RequestParam("phone") String phone,@RequestParam("address") String address,@RequestParam("total")int total,Model m) {
+	public String processAction10(HttpServletRequest request, HttpSession session,SessionStatus sessionStatus,@RequestParam("name")String name,@RequestParam("phone") String phone,@RequestParam("address") String address,@RequestParam("total")int total,Model m){
 		
 		UUID uuid = UUID.randomUUID();
 		String key=uuid.toString().replaceAll("-", "").substring(0,20);
@@ -217,10 +231,12 @@ public class OrderController {
 			for(CartItem item:list) {
 				item.setOrder(order);
 			}
-		    oserviece.insert(order);
-			session.removeAttribute("carts");
-			session.removeAttribute("info");
-			sessionStatus.setComplete();//清除session,讓購物車清空,當完成訂單時
+			request.getSession().removeAttribute("carts");
+			request.getSession().removeAttribute("info");
+			request.getSession().removeAttribute("cartcount");
+			
+		    Order orderlist = oserviece.insert(order);
+			request.getSession().setAttribute("orderlist", orderlist);
 			
 			AioCheckOutOneTime obj = new AioCheckOutOneTime();
 			String totalprice = Integer.toString(total);
@@ -241,6 +257,7 @@ public class OrderController {
 			AllInOne all = new AllInOne("");
 			String form = all.aioCheckOut(obj, null);
 			session.setAttribute("form", form);
+			
 			return "/order/ECpage";
 		}
 			
@@ -251,21 +268,80 @@ public class OrderController {
 	}
 	
 	@PostMapping("/PaySuccess")
-	public String TestEC(HttpSession session,HttpServletRequest request,@RequestParam("RtnCode")String RtnCode,@RequestParam("MerchantTradeNo") String No) throws IOException{
+	public String TestEC(HttpSession session,HttpServletRequest request,@RequestParam("RtnCode")String RtnCode,@RequestParam("MerchantTradeNo") String No,SessionStatus sessionStatus) throws Exception{
+		
+		  String test = request.getReader().lines().collect(Collectors.joining(System.lineSeparator()));
+		  System.out.println(test);
+		  
 		if(RtnCode.equals("1")) {
 			Order id = oserviece.findByOrderNum(No);
 			id.setOrderStatus("已付款");
 			oserviece.update(id);
-
+			 Order orderlist = (Order) request.getSession().getAttribute("orderlist");
+			 Member m = (Member) request.getSession().getAttribute("login");
+			    //送信
+				MimeMessage mimeMessage = mailSender.createMimeMessage();
+				MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+			    helper.setFrom("Mega<ispanmega2022@gmail.com>");
+				helper.setTo(m.getEmail());//這裡要抓註冊者mail 因此要註冊真的
+				helper.setSubject("Mega|付款成功通知");
+				
+				Map<String, Object> model = new HashMap<String, Object>();
+				model.put("account", orderlist.getOrderReceive());
+				model.put("orderNumber", orderlist.getOrderNumber());
+				model.put("orderDate", orderlist.getOrderDate());
+				model.put("orderPrice", orderlist.getOrderPrice());
+				model.put("orderPhone", orderlist.getOrderPhone());
+				model.put("orderAddress", orderlist.getOrderAddress());
+				
+				String templateString = FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerConfig.getTemplate("template.html"), model);
+				helper.setText(templateString,true);
+				mailSender.send(mimeMessage);
+			 
 			return"/order/successpay";
-
 		}else {
 
 			return"/order/failpay";
 		}
 
 	}
-
+	
+	@PostMapping("/back")
+	public String payok(HttpServletRequest request) {
+		request.getSession().removeAttribute("orderlist");
+		return"redirect:/index";
+	}
+	
+	@GetMapping("/myorder")
+	public String myorder(HttpServletRequest request) {
+		
+		Member m1 =(Member) request.getSession().getAttribute("login");
+		List<Order> detail = oserviece.findByOrderOwner(m1.getAccount());
+		request.getSession().setAttribute("detail", detail);
+		
+		return "/order/myorder";
+	}
+	
+	@PutMapping("/myorder/{id}")
+	@ResponseBody
+	public void myordercancel(@PathVariable("id")int id,HttpServletRequest request) {
+		Order order = oserviece.findById(id);
+		order.setOrderStatus("取消待確認");
+		oserviece.insert(order);
+		Member m1 =(Member) request.getSession().getAttribute("login");
+		List<Order> detail = oserviece.findByOrderOwner(m1.getAccount());
+		request.getSession().setAttribute("detail", detail);
+	}
+	
+	@PutMapping("/checkorder/{id}")
+	public void shiporderdel(@PathVariable("id") int id,HttpServletRequest request) {
+		Order order = oserviece.findById(id);
+		order.setOrderStatus("訂單取消");	
+		oserviece.insert(order);
+		List<Order> detail = oserviece.selectAll();
+		request.getSession().setAttribute("shiporder", detail);
+	}
+	
 	
 }
 

@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -97,10 +98,11 @@ public class MemberAdmin {
 					s.setMember(member);
 
 					mService.insert(m1);
+
+					return "redirect:members";
 				} else {
 					throw new SQLException();
 				}
-				return "redirect:members";
 			} catch (Exception e) {
 				m.addAttribute("error", "新增失敗");
 				return "member/member_insert_admin";
@@ -168,11 +170,26 @@ public class MemberAdmin {
 		return "redirect:/member/members.update/" + id;
 	}
 
-	@GetMapping("/members.delete/{id}")
-	public String processDeleteAction(@PathVariable("id") int id) {
+	@DeleteMapping("/members.delete/{id}")
+	public void processDeleteAction(@PathVariable("id") int id) {
 		mService.delete(id);
+	}
 
-		return "redirect:/member/members";
+	@GetMapping("/designers")
+	public String processDesignersAction(Model m) {
+		List<Member> list = mService.selectDesigners();
+		m.addAttribute("members", list);
+		return "member/member_designer";
+	}
+
+	@DeleteMapping("/designers.delete/{id}")
+	public void processDeleteDesignersAction(@PathVariable("id") int id) {
+		Member mSQL = mService.selectMemberById(id);
+		Status sSQL = mService.selectStatusById(0);
+
+		mSQL.setStatus(sSQL);
+
+		mService.update(mSQL);
 	}
 
 }

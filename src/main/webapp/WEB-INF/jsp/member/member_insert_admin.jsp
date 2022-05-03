@@ -45,10 +45,7 @@
                 gtag('config', 'UA-119386393-1');
             </script>
             <style>
-                .passwordsp,
-                .phonesp {
-                    color: red;
-                }
+
             </style>
         </head>
 
@@ -69,6 +66,9 @@
                                                     <a href="/admin">首頁</a>
                                                 </li>
                                                 <li class="breadcrumb-item active" aria-current="page">成員</li>
+                                                <li class="breadcrumb-item">
+                                                    <a href="/member/members.insert">新增管理員</a>
+                                                </li>
                                             </ol>
                                         </nav>
                                     </div>
@@ -98,7 +98,8 @@
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Email* :</label>
-                                                    <input type="email" class="form-control" name="email" required>
+                                                    <input id="email" type="email" class="form-control" name="email"
+                                                        required>
                                                     <span class="emailsp" style="color: red;"></span>
                                                 </div>
                                             </div>

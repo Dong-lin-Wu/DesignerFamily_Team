@@ -11,11 +11,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-	//提案按鈕
-	var forminsert = $('<form>').attr('action','/raiseadd.checklogin').attr('method','Get');
-	var buttoninsert = $('<input/>').attr('type','submit').attr('value','提案').css('font-size','25px');
-	buttoninsert.appendTo(forminsert);
-	forminsert.appendTo($('#result'));
+// 	//提案按鈕
+// 	var forminsert = $('<form>').attr('action','/raiseadd.checklogin').attr('method','Get');
+// 	var buttoninsert = $('<input/>').attr('type','submit').attr('value','提案').css('font-size','25px');
+// 	buttoninsert.appendTo(forminsert);
+// 	forminsert.appendTo($('#result'));
 	//展示所有募資
 	$.ajax({
 		type:'get',

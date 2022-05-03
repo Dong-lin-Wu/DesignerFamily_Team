@@ -9,10 +9,13 @@ import java.util.Locale;
 
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import tw.designerfamily.member.model.Member;
 import tw.designerfamily.member.model.MemberService;
@@ -87,6 +90,53 @@ public class MemberUser {
 
 			mService.update(m1);
 		}
+		return "redirect:/user";
+	}
+
+	@GetMapping("/change-password")
+	public String processChangeAction(HttpServletRequest request, Model m) {
+		Member mLogin = (Member) request.getSession().getAttribute("login");
+
+		Member mSQL = mService.selectLogin(mLogin.getAccount());
+		m.addAttribute("account", mSQL.getAccount());
+
+		return "member/member_password";
+	}
+
+	@PostMapping("/checkchange-password")
+	public String processCheckChangeAction(@RequestParam("account") String account,
+			@RequestParam("oldpassword") String oldpassword, @RequestParam("password") String password,
+			@RequestParam("passwordCheck") String passwordCheck) {
+
+		if ((account != null && !account.isEmpty()) && (oldpassword != null && !oldpassword.isEmpty())
+				&& (password != null && !password.isEmpty()) && (passwordCheck != null && !passwordCheck.isEmpty())) {
+			Member mSQL = mService.selectLogin(account);
+			BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+
+			if (password.equals(passwordCheck)) {
+				if (encoder.matches(oldpassword, mSQL.getPassword())) {
+					String encodePwd = encoder.encode(password);
+
+					mSQL.setPassword(encodePwd);
+
+					mService.update(mSQL);
+				}
+			}
+		}
+		return "redirect:/logout";
+	}
+
+	@GetMapping("/apply.designer")
+	public String processApplyAction(HttpServletRequest request, Model m) {
+		Member mLogin = (Member) request.getSession().getAttribute("login");
+
+		Member mSQL = mService.selectLogin(mLogin.getAccount());
+		Status sSQL = mService.selectStatusById(1);
+
+		mSQL.setStatus(sSQL);
+
+		mService.update(mSQL);
+
 		return "redirect:/user";
 	}
 

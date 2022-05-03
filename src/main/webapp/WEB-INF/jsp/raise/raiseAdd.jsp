@@ -24,10 +24,10 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <title>Insert title here</title>
 <style>
-	div{
-		margin-top:20px;
+ 	/*div{ 
+ 		margin-top:20px; 
 		
-	}
+ 	} */
 </style>
 
 </head>
@@ -160,7 +160,6 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
             <br>
             <br>
 	</div>
-	
 	<!-- 以下為script -->
 
 	<script>

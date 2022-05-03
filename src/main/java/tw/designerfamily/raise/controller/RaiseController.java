@@ -1,12 +1,17 @@
 package tw.designerfamily.raise.controller;
 
+import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +19,11 @@ import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.boot.configurationprocessor.json.JSONArray;
 import org.springframework.boot.configurationprocessor.json.JSONException;
 import org.springframework.boot.configurationprocessor.json.JSONObject;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +42,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import freemarker.core.ParseException;
+import freemarker.template.MalformedTemplateNameException;
+import freemarker.template.TemplateException;
+import freemarker.template.TemplateNotFoundException;
 import tw.designerfamily.member.model.Member;
 import tw.designerfamily.raise.model.RaiseBean;
 import tw.designerfamily.raise.model.RaisePlanBean;
@@ -47,6 +59,13 @@ public class RaiseController {
 
 	@Autowired
 	private RaiseService rService;
+	
+	@Autowired
+    private JavaMailSender mailSender;
+	
+    @Autowired 
+    freemarker.template.Configuration freemarkerConfig;
+	
 
 	// 日期格式轉換
 	@InitBinder
@@ -200,8 +219,31 @@ public class RaiseController {
 
 	// 於審核頁面按下送出並導回首頁
 	@PostMapping("/raisereview.controller")
-	public String processReview(@RequestParam("rComment") String rComment, @RequestParam("rID") int id, Model model) {
+	public String processReview(@RequestParam("rComment") String rComment, @RequestParam("rID") int id, Model model) throws MessagingException, TemplateNotFoundException, MalformedTemplateNameException, ParseException, IOException, TemplateException {
 		rService.updateStatus(id, rComment);
+		
+		if(rComment.equals("Approved")) {
+			//送信
+			Member m = (Member) model.getAttribute("login");
+			RaiseBean rBean = rService.selectById(id);
+			MimeMessage mimeMessage = mailSender.createMimeMessage();
+			MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, true);
+			helper.setFrom("Mega<ispanmega2022@gmail.com>");
+			helper.setTo("ispanmega2022@gmail.com");//目前自己寄送給自己，m.getEmail()這裡要抓註冊者mail 因此要註冊真的
+			helper.setSubject("Mega|募資審核通過");
+			
+			Map<String, String> map_message = new HashMap<String, String>();
+			map_message.put("account", rBean.getRaiseName());
+			map_message.put("raiseNo", Integer.toString(id));
+			System.out.println(Integer.toString(id));
+			
+			String templateString = FreeMarkerTemplateUtils.processTemplateIntoString(freemarkerConfig.getTemplate("raiseApprovedMail.html"), map_message);
+			helper.setText(templateString,true);
+			mailSender.send(mimeMessage);
+			
+		}
+				
+		
 		redirectToRaiseIndex(model);
 		return "redirect:raiseindex";
 	}
@@ -283,6 +325,7 @@ public class RaiseController {
 
 		rService.insert(rBean);
 		redirectToRaiseIndex(model);
+		
 		return rBean;
 	}
 	

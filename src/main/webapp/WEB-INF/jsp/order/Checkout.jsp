@@ -17,7 +17,7 @@
                         <table class="table">													
 								<thead>
                                 <tr>
-                                    <th scope="col" style="font-size:20px">訂單商品</th>
+                                    <th scope="col" style="font-size:22px">訂單商品</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -29,8 +29,8 @@
                                         <a href="/product/${c.product.commNo}"><img src="${c.product.commImg}" alt="" /></a>
                                             </div>
                                             <div class="media-body">
-                                                <p style="font-size:16px">${c.product.commTitle} X  ${c.qty}</p>
-                                                <p style="font-size:16px">NT:$ ${c.totalprice}</p>
+                                                <p style="font-size:20px">${c.product.commTitle} X  ${c.qty}</p>
+                                                <p style="font-size:20px">NT:$ ${c.totalprice}</p>
                                                  <input type="hidden" value="${c.totalprice}" id="val">
                                             </div>
                                         </div>
@@ -41,9 +41,9 @@
                                 <tr> 
                                 <c:choose>                           
                                   <c:when test="${!empty sessionScope.info}">
-                                 <td><p style="font-size:16px" id="name">收件人姓名: ${info.orderReceive }</p>                                                         
-                                     <p style="font-size:16px" id="phone"> 收件人手機: ${info.orderPhone }</p>  
-                                     <p style="font-size:16px" id="address"> 收件人地址: ${info.orderAddress }</p>
+                                 <td><p style="font-size:20px" id="name">收件人姓名: ${info.orderReceive }</p>                                                         
+                                     <p style="font-size:20px" id="phone"> 收件人手機: ${info.orderPhone }</p>  
+                                     <p style="font-size:20px" id="address"> 收件人地址: ${info.orderAddress }</p>
                                      <a class="btn checkout_bnt detail" href="/order/info">修改購買人資訊</a>
                                      </td>                                                         
                                     </c:when>        

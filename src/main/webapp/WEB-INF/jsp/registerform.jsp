@@ -36,11 +36,7 @@
                 gtag('config', 'UA-119386393-1');
             </script>
             <style>
-                .passwordsp,
-                .phonesp,
-                .customCheck1sp {
-                    color: red;
-                }
+
             </style>
         </head>
 
@@ -211,7 +207,7 @@
                                                     <label class="custom-control-label" for="customCheck1">我已閱讀並同意<a
                                                             href="#">服務條款</a>與<a href="#">隱私政策</a></label>
                                                 </div>
-                                                <span class="customCheck1sp"></span>
+                                                <span class="customCheck1sp" style="color: red;"></span>
                                             </div>
                                         </section>
                                     </form>

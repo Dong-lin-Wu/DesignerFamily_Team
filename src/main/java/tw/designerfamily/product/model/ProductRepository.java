@@ -5,6 +5,8 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import tw.designerfamily.order.model.Order;
+
 public interface ProductRepository extends JpaRepository<ProductBean, Integer> {
 	
 	
@@ -32,4 +34,13 @@ public interface ProductRepository extends JpaRepository<ProductBean, Integer> {
 	
 	@Query(value="select * from commodity where category = '其他'", nativeQuery = true)
 	public List<ProductBean> findcate7();
+	
+	@Query(value="from ProductBean where designer=?1")
+	public List<ProductBean> findDesigner(String designer);
+	
+	//DESC ALL
+	@Query(value = "from ProductBean Order By commNo DESC")
+	public List<ProductBean> findAllDesc();
+	
+	
 }

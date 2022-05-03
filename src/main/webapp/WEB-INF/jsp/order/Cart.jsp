@@ -5,7 +5,7 @@
 <html class="no-js" lang="zxx">
 <link rel="shortcut icon" type="image/x-icon" href="/assets/img/logo/logo2.png">
 <head>
-    <title>購物車</title>
+    <title>Mega|購物車</title>
 </head>
 <body>
 <%@ include file="../userheader.jsp"%>
@@ -19,10 +19,10 @@
 								 <c:if test="${!empty sessionScope.carts}">
 								<thead>
                                 <tr>
-                                    <th scope="col" class="text-justify" style="font-size:20px">訂單商品</th>
-                                    <th scope="col" class="text-justify" style="font-size:20px">單價</th>
-                                    <th scope="col" class="text-justify" style="font-size:20px">數量</th>
-                                    <th scope="col" class="text-justify" style="font-size:20px">小計</th>
+                                    <th scope="col" class="text-justify" style="font-size:22px">訂單商品</th>
+                                    <th scope="col" class="text-justify" style="font-size:22px">單價</th>
+                                    <th scope="col" class="text-justify" style="font-size:22px">數量</th>
+                                    <th scope="col" class="text-justify" style="font-size:22px">小計</th>
                                     <th scope="col" class="text-justify"></th>
                                 </tr>
                             </thead>
@@ -35,22 +35,22 @@
                                                <a  href="/product/${c.product.commNo}"> <img src="${c.product.commImg}" alt="" /></a>
                                             </div>
                                             <div class="media-body">
-                                                <p style="font-size:16px">${c.product.commTitle}</p>
+                                                <p style="font-size:20px">${c.product.commTitle}</p>
                                             </div>
                                         </div>
                                     </td>
                                     <td>
-                                       <h5 style="font-size:16px">${c.product.commPrice}</h5>
+                                       <h5 style="font-size:20px">${c.product.commPrice}</h5>
                                     </td>
                                     <td>
                                         <div class="product_count">
                                             <span class="input-number-decrement"> <i class="ti-minus min"></i></span>
-                                            <input class="input-number qty" type="text"  id="${c.product.commNo}" value="${c.qty}" min="1" max="${c.product.commQuantity}" size="1" readonly>
+                                            <input class="input-number qty" type="text"  id="${c.product.commNo}" value="${c.qty}" min="1" max="${c.product.commQuantity}" size="1" oninput ="value=value.replace(/[^\d]/g,'')">
                                          <span class="input-number-increment"> <i class="ti-plus add"></i></span>
                                         </div>                                                                     
                                     </td>
                                     <td>
-                                        <h3 style="font-size:16px">${c.totalprice}</h3>
+                                        <h3 style="font-size:20px">${c.totalprice}</h3>
                                     </td>
                                     <td><button  class="btn btn-sm del" id="${c.product.commNo}">刪除</button></td>
                                 </tr>
@@ -105,6 +105,56 @@ if($('#discount').val()=="test1234"){
 }
   
 total();
+
+$('.qty').change(function(){
+	var id=$(this).attr('id')
+	var to = Number($(this).val())
+	var max = Number($(this).attr('max'))
+	var num = Number($(this).parent().parent().parent().children('td').eq(1).text())
+	console.log(num)
+	if(to>max){
+		$(this).val(max)
+		$(this).parent().parent().parent().children('td').eq(3).children('h3').text(max*num)
+		
+		$.ajax({
+		type:"put",
+		url:'/order/mycart/'+id,
+		data:{"qty":max},
+		success:function(data){		
+			console.log("success")
+		}
+	})
+		total();
+	}else if(to<=0 || isNaN(to)){
+		var tx= $(this).val(1);
+		console.log(tx)
+		$(this).parent().parent().parent().children('td').eq(3).children('h3').text(num*$(this).val())
+		$.ajax({
+			type:"put",
+			url:'/order/mycart/'+id,
+			data:{"qty":$(this).val()},
+			success:function(data){		
+				console.log("success")
+			}
+		})
+		total();
+		
+	}else{
+		
+		$(this).parent().parent().parent().children('td').eq(3).children('h3').text(num*to)
+		$.ajax({
+			type:"put",
+			url:'/order/mycart/'+id,
+			data:{"qty":to},
+			success:function(data){		
+				console.log("success")
+			}
+		})
+		total();	
+	}
+	
+	
+})
 	
 	
 $('.min').on('click',function(e){
@@ -197,6 +247,8 @@ $('.add').on('click',function(e){
 })
 
 $('.del').on('click',function(){
+	var count=Number($('#cartval').text())
+	$('#cartval').text(count-1)
 	var id = $(this).attr("id")
 	 $.ajax({
 			type:"delete",

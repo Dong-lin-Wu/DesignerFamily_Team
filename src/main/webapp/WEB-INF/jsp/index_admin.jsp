@@ -111,6 +111,9 @@
             </div>
             </div>
 
+            <script src="https://code.jquery.com/jquery-3.6.0.js"
+                integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous">
+                </script>
             <!-- js -->
             <script src="/vendors/scripts/core.js"></script>
             <script src="/vendors/scripts/script.min.js"></script>
@@ -131,9 +134,9 @@
                 function drawChart() {
                     var data = google.visualization.arrayToDataTable([
                         ['Task', '成員數'],
-                        ['男', 11],
-                        ['女', 2],
-                        ['未填寫', 7]
+                        ['男', 64],
+                        ['女', 159],
+                        ['未填寫', 182]
                     ]);
 
                     var options = {

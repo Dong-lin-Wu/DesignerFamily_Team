@@ -8,14 +8,20 @@ public interface MemberRepository extends JpaRepository<Member, Integer> {
 
 	@Query(value = "from Member order by id")
 	public List<Member> selectAll();
+	
+	@Query(value = "from Member where statusid = 1 order by id")
+	public List<Member> selectDesigners();
+	
+	@Query(value = "from Member where email = ?1")
+	public Member selectByEmail(String email);
 
 	@Query(value = "from Member where phone like concat('%',?1,'%') or account like concat('%',?1,'%') or email like concat('%',?1,'%') order by id")
 	public List<Member> selectByPhoneAccountEmail(String keyword);
 	
-	@Query(value = "from Member where (phone = ?1 or account = ?1 or email = ?1) order by id")
+	@Query(value = "from Member where (phone = ?1 or account = ?1 or email = ?1)")
 	public Member selectLogin(String account);
 	
-	@Query(value = "from Member where phone = ?1 or account = ?2 or email = ?3 order by id")
+	@Query(value = "from Member where phone = ?1 or account = ?2 or email = ?3")
 	public Member selectRegister(String phone, String account, String email);
 
 }

@@ -19,8 +19,8 @@ public class NewsService  {
 
 	//新增
 	public void insert(NewsBean nBean) {
-		Timestamp newsDate = new Timestamp(System.currentTimeMillis());
-		nBean.setNewsDate(newsDate);
+		Timestamp newsCtDate = new Timestamp(System.currentTimeMillis());
+		nBean.setNewsCrDate(newsCtDate);
 		nRo.save(nBean);		
 	}
 
@@ -37,8 +37,8 @@ public class NewsService  {
 
 	//修改
 	public void update(NewsBean nBean) {
-		Timestamp newsDate = new Timestamp(System.currentTimeMillis());
-		nBean.setNewsDate(newsDate);
+		Timestamp newsCrDate = new Timestamp(System.currentTimeMillis());
+		nBean.setNewsCrDate(newsCrDate);
 		nRo.save(nBean);		
 	}
 	
@@ -48,9 +48,29 @@ public class NewsService  {
 		nRo.deleteById(id);		
 	}
 	
+	
 	//關鍵字查詢(標題、副標題、活動內容)
 	public List<NewsBean> searchByKey(String key){
 		return nRo.searchByKey(key);
 	}
-		
+	
+	
+	//分類查詢
+	//熱門活動
+	public List<NewsBean> findType1(){
+		return nRo.findType1();
+	}
+	//領取優惠
+	public List<NewsBean> findType2(){
+		return nRo.findType2();
+	}
+	//期間限定
+	public List<NewsBean> findType3(){
+		return nRo.findType3();
+	}
+	
+	//實體活動
+	public List<NewsBean> findType4(){
+		return nRo.findType4();
+	}
 }

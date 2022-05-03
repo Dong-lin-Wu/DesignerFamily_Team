@@ -66,10 +66,12 @@
                                                 <li class="breadcrumb-item">
                                                     <a href="/admin">首頁</a>
                                                 </li>
+                                                <li class="breadcrumb-item active" aria-current="page">成員</li>
                                                 <li class="breadcrumb-item">
-                                                    <a href="/member/members">成員</a>
+                                                    <a href="/member/members">成員清單</a>
                                                 </li>
-                                                <li class="breadcrumb-item active" aria-current="page">${member.account}</li>
+                                                <li class="breadcrumb-item active" aria-current="page">${member.account}
+                                                </li>
                                             </ol>
                                         </nav>
                                     </div>
@@ -298,7 +300,7 @@
                                                             style="display: none;">
                                                     </div>
                                                 </div>
-                                                <div class="col-md-6">
+                                                <div class="col-md-8">
                                                     <div class="form-group">
                                                         <label>權限 :</label><br>
                                                         <div class="btn-group btn-group-toggle" data-toggle="buttons"
@@ -312,6 +314,28 @@
                                                                     </label>
                                                                     <label class="btn btn-outline-secondary">
                                                                         <input type="radio" name="statusId"
+                                                                            autocomplete="off" value="1,設計師">
+                                                                        設計師
+                                                                    </label>
+                                                                    <label class="btn btn-outline-secondary">
+                                                                        <input type="radio" name="statusId"
+                                                                            autocomplete="off" value="0,一般會員">
+                                                                        一般會員
+                                                                    </label>
+                                                                </c:when>
+                                                                <c:when test="${member.status.statusId == '1'}">
+                                                                    <label class="btn btn-outline-secondary">
+                                                                        <input type="radio" name="statusId"
+                                                                            autocomplete="off" value="8,管理員">
+                                                                        管理員
+                                                                    </label>
+                                                                    <label class="btn btn-outline-secondary active">
+                                                                        <input type="radio" name="statusId"
+                                                                            autocomplete="off" value="1,設計師" checked>
+                                                                        設計師
+                                                                    </label>
+                                                                    <label class="btn btn-outline-secondary">
+                                                                        <input type="radio" name="statusId"
                                                                             autocomplete="off" value="0,一般會員">
                                                                         一般會員
                                                                     </label>
@@ -321,6 +345,11 @@
                                                                         <input type="radio" name="statusId"
                                                                             autocomplete="off" value="8,管理員">
                                                                         管理員
+                                                                    </label>
+                                                                    <label class="btn btn-outline-secondary">
+                                                                        <input type="radio" name="statusId"
+                                                                            autocomplete="off" value="1,設計師">
+                                                                        設計師
                                                                     </label>
                                                                     <label class="btn btn-outline-secondary active">
                                                                         <input type="radio" name="statusId"
@@ -333,6 +362,11 @@
                                                                         <input type="radio" name="statusId"
                                                                             autocomplete="off" value="8,管理員">
                                                                         管理員
+                                                                    </label>
+                                                                    <label class="btn btn-outline-secondary">
+                                                                        <input type="radio" name="statusId"
+                                                                            autocomplete="off" value="1,設計師">
+                                                                        設計師
                                                                     </label>
                                                                     <label class="btn btn-outline-secondary">
                                                                         <input type="radio" name="statusId"

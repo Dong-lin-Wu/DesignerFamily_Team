@@ -35,16 +35,14 @@
                 gtag('config', 'UA-119386393-1');
             </script>
             <style>
-                .phonesp {
-                    color: red;
-                }
+
             </style>
         </head>
 
         <body>
             <%@ include file="../userheader.jsp" %>
                 <div class="pd-ltr-20 xs-pd-20-10">
-                    <div style="margin-top: 50px;">
+                    <div style="margin: 50px 100px;">
                         <div class="row clearfix">
                             <div class="col-md-12 mb-30">
                                 <div class="pd-20">
@@ -53,35 +51,57 @@
                                             <div class="col-md-3 col-sm-12 order_box">
                                                 <h2 class="mb-20" style="margin: 0px 12px 25px 12px;">
                                                     ${sessionScope.login.account}</h2>
-                                                <ul class="nav flex-column nav-tabs customtab" role="tablist">
+                                                <ul class="nav flex-column" role="tablist">
                                                     <li class="nav-item" style="margin-bottom: 15px;">
                                                         <a class="nav-link active" data-toggle="tab" href="#member"
-                                                            role="tab" aria-selected="true">我的帳戶</a>
+                                                            role="tab" aria-selected="true"
+                                                            style="color: black;">我的帳戶</a>
                                                     </li>
                                                     <li class="nav-item" style="margin-bottom: 15px;">
                                                         <a class="nav-link" data-toggle="tab" href="#product" role="tab"
-                                                            aria-selected="false">我的商品</a>
+                                                            aria-selected="false" style="color: black;">我的商品</a>
                                                     </li>
+                                                    <c:if test="${sessionScope.login.status.statusId == '1'}">
+                                                        <li class="nav-item" style="margin-bottom: 15px;">
+                                                            <a class="nav-link" data-toggle="tab" href="#shiporder"
+                                                                role="tab" aria-selected="false"
+                                                                style="color: black;">出貨訂單</a>
+                                                        </li>
+                                                    </c:if>
                                                     <li class="nav-item" style="margin-bottom: 15px;">
                                                         <a class="nav-link" data-toggle="tab" href="#order" role="tab"
-                                                            aria-selected="false">我的訂單</a>
+                                                            aria-selected="false" style="color: black;">我的訂單</a>
                                                     </li>
                                                     <li class="nav-item" style="margin-bottom: 15px;">
                                                         <a class="nav-link" data-toggle="tab" href="#forum" role="tab"
-                                                            aria-selected="false">我的討論區</a>
+                                                            aria-selected="false" style="color: black;">我的討論區</a>
                                                     </li>
                                                     <li class="nav-item" style="margin-bottom: 15px;">
                                                         <a class="nav-link" data-toggle="tab" href="#raise" role="tab"
-                                                            aria-selected="false">我的募資</a>
+                                                            aria-selected="false" style="color: black;">我的募資</a>
                                                     </li>
-                                                    <c:if
-                                                        test="${sessionScope.login.status.statusId == '9' || sessionScope.login.status.statusId == '8'}">
-                                                        <li class="nav-item" style="margin-top: 50px;">
-                                                            <a class="nav-link" href="/admin">管理員頁面</a>
-                                                        </li>
-                                                    </c:if>
+                                                    <c:choose>
+                                                        <c:when
+                                                            test="${sessionScope.login.status.statusId == '9' || sessionScope.login.status.statusId == '8'}">
+                                                            <li class="nav-item" style="margin-top: 50px;">
+                                                                <a class="nav-link" href="/admin"
+                                                                    style="color: black;">管理中心</a>
+                                                            </li>
+                                                        </c:when>
+                                                        <c:when test="${sessionScope.login.status.statusId == '0'}">
+                                                            <li class="nav-item" style="margin-top: 50px;">
+                                                                <a class="nav-link" data-toggle="tab" href="#apply"
+                                                                    role="tab" aria-selected="false"
+                                                                    style="color: black;">申請成為設計師</a>
+                                                            </li>
+                                                        </c:when>
+                                                        <c:otherwise>
+
+                                                        </c:otherwise>
+                                                    </c:choose>
                                                 </ul>
                                             </div>
+
                                             <div class="col-md-9 col-sm-12">
                                                 <div class="tab-content checkout_area">
                                                     <div class="tab-pane fade show active" id="member" role="tabpanel">
@@ -107,7 +127,7 @@
                                                                     <label>手機* :</label>
                                                                     <input id="phone" type="tel" class="form-control"
                                                                         name="phone" value="${member.phone}" required>
-                                                                    <span class="phonesp"></span>
+                                                                    <span class="phonesp" style="color: red;"></span>
                                                                 </div>
                                                                 <input type="hidden" name="statusId"
                                                                     value="${member.status.statusId}">
@@ -208,12 +228,17 @@
                                                     </div>
                                                     <div class="tab-pane fade" id="product" role="tabpanel">
                                                         <div class="pd-20">
-
+                                                            <%@ include file="../product/userproduct.jsp" %>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="shiporder" role="tabpanel">
+                                                        <div class="pd-20">
+                                                            <%@ include file="../order/ordershipping.jsp" %>
                                                         </div>
                                                     </div>
                                                     <div class="tab-pane fade" id="order" role="tabpanel">
                                                         <div class="pd-20">
-
+                                                            <%@ include file="../order/foruser.jsp" %>
                                                         </div>
                                                     </div>
                                                     <div class="tab-pane fade" id="forum" role="tabpanel">
@@ -224,6 +249,15 @@
                                                     <div class="tab-pane fade" id="raise" role="tabpanel">
                                                         <div class="pd-20">
                                                             <%@ include file="../raise/front_myRaise.jsp" %>
+                                                        </div>
+                                                    </div>
+                                                    <div class="tab-pane fade" id="apply" role="tabpanel">
+                                                        <div class="pd-20">
+                                                            <h1 style="margin-bottom: 20px;">確定申請成為設計師？</h1>
+                                                            <div>
+                                                                <a class="btn btn-primary"
+                                                                    href="/user/apply.designer">確定</a>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>

@@ -15,8 +15,16 @@ public interface OrderRepository extends JpaRepository<Order, Integer> {
 	
 	public Order findByOrderNumber(String orderNum);
 	
+	//DESC ALL
+	@Query(value = "from Order Order By orderNo DESC")
+	public List<Order> findAllDesc();
+	
 	//查詢訂單詳細使用
 	public List<Order> findByOrderNo(int orderNo);
+	
+	//查詢訂單屬於誰
+	@Query(value = "from Order where orderOwner=?1 Order By orderDate DESC")
+	public List<Order> findByOrderOwner(String owner);
 	
 		
 }
