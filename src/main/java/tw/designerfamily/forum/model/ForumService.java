@@ -46,9 +46,18 @@ public class ForumService {
 		return null;
 	}
 	
-	public List<ForumBean> searchBySubject(String subject){
-		return forumRepo.searchBySubject(subject);
+//	public List<ForumBean> searchBySubject(String subject){
+//		return forumRepo.searchBySubject(subject);
+//	}
+	public List<ForumBean> searchByKey(String key){
+		return forumRepo.searchByKey(key);
 	}
+	
+	public List<CommentBean> searchByCommKey(String key){
+		return commentRepo.searchByCommKey(key);
+		
+	}
+	
 	
 	public Page<ForumBean> findAllByPage(Pageable pageable){
 		return forumRepo.findAll(pageable);

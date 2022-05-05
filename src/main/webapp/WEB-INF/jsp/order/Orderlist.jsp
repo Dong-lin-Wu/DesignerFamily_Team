@@ -43,10 +43,7 @@
                 gtag('js', new Date());
 
                 gtag('config', 'UA-119386393-1');
-            </script>
-            <style>
-
-            </style>
+            </script>     
         </head>
 
         <body>
@@ -81,7 +78,7 @@
                                     <table class="table hover stripe data-table-export nowrap">
                                         <thead>
                                             <tr>
-                                                <th class="table-plus datatable-nosort">編號</th>
+                                                <th class="table-plus">編號</th>
                                                 <th>訂單編號</th>
 		                                     	<th>下單日期</th>
 		    	                                <th>訂單價格</th>

@@ -4,8 +4,8 @@
 
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <title>member_password</title>
-
+        <title>Mega|更改密碼</title>
+         <link rel="shortcut icon" type="image/x-icon" href="/assets/img/logo/logo2.png">
         <style>
 
         </style>

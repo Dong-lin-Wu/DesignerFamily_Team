@@ -342,6 +342,35 @@ public class OrderController {
 		request.getSession().setAttribute("shiporder", detail);
 	}
 	
+	//募資綠界
+	@PostMapping("/raisepay")
+	public String raiseecpay(@RequestParam("title")String title,@RequestParam("price")String price,HttpSession session) {
+		
+		UUID uuid = UUID.randomUUID();//產生訂單號
+		String OrderNum=uuid.toString().replaceAll("-", "").substring(0,20);
+		
+		Timestamp time =new Timestamp(Instant.now().toEpochMilli());//產生下單時間
+		String orderdate=time.toString().replaceAll("-", "/").substring(0, 19);
+		
+		AioCheckOutOneTime obj = new AioCheckOutOneTime();
+		
+		obj.setMerchantTradeNo(OrderNum);
+		obj.setMerchantTradeDate(orderdate);
+		obj.setTotalAmount(price);
+		obj.setTradeDesc("Mega");		
+		obj.setItemName("Mega募資商品--"+title);
+		obj.setReturnURL("http://211.23.128.214:5000");
+		obj.setOrderResultURL("http://localhost:8082/order/PaySuccess");//使用者付費完希望他看到的畫面
+		obj.setNeedExtraPaidInfo("N");
+		obj.setRedeem("Y");
+		AllInOne all = new AllInOne("");
+		String form = all.aioCheckOut(obj, null);
+		session.setAttribute("form", form);
+		
+		return "/order/ECpage";
+		
+	}
+	
 	
 }
 

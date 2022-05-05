@@ -42,6 +42,11 @@ public class RaiseService {
 		return rRepo.searchByName(name);
 	}
 	
+	public List<RaiseBean> selectByCategory(String name){
+		return rRepo.searchByCategory(name);
+	}
+
+	
 	public RaiseBean update(RaiseBean rBean) {
 		return rRepo.save(rBean);
 	}

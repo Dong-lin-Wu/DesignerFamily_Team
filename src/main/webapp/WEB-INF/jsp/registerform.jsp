@@ -45,12 +45,12 @@
                 <div class="container-fluid d-flex justify-content-between align-items-center">
                     <div class="brand-logo">
                         <a href="/login">
-                            <img src="/vendors/images/deskapp-logo.svg" alt="">
+                            <img src="/assets/logob.png" alt="">
                         </a>
                     </div>
                     <div class="login-menu">
                         <ul>
-                            <li><a href="/login">登入</a></li>
+                            <li><a href="/login" style="color:black">登入</a></li>
                         </ul>
                     </div>
                 </div>

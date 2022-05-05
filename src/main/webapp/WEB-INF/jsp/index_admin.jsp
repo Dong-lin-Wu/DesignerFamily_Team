@@ -83,11 +83,11 @@
                                         成員
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right">
-                                        <a class="dropdown-item" href="#">商品</a>
-                                        <a class="dropdown-item" href="#">訂單</a>
-                                        <a class="dropdown-item" href="#">活動</a>
-                                        <a class="dropdown-item" href="#">討論區</a>
-                                        <a class="dropdown-item" href="#">募資</a>
+                                        <a class="dropdown-item" href="/product">商品</a>
+                                        <a class="dropdown-item" href="/order">訂單</a>
+                                        <a class="dropdown-item" href="/news">活動</a>
+                                        <a class="dropdown-item" href="/forum/forum_backend.controller">討論區</a>
+                                        <a class="dropdown-item" href="/raiseindex.controller">募資</a>
                                     </div>
                                 </div>
                             </div>

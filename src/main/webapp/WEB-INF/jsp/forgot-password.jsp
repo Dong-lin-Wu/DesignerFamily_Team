@@ -41,12 +41,12 @@
             <div class="container-fluid d-flex justify-content-between align-items-center">
                 <div class="brand-logo">
                     <a href="/login">
-                        <img src="/vendors/images/deskapp-logo.svg" alt="">
+                        <img src="/assets/logob.png" alt="">
                     </a>
                 </div>
                 <div class="login-menu">
                     <ul>
-                        <li><a href="/login">登入</a></li>
+                        <li><a href="/login" style="color:black">登入</a></li>
                     </ul>
                 </div>
             </div>
@@ -60,7 +60,7 @@
                     <div class="col-md-6">
                         <div class="login-box bg-white box-shadow border-radius-10">
                             <div class="login-title">
-                                <h2 class="text-center text-primary">重新設定密碼</h2>
+                                <h2 class="text-center" style="color:black">重新設定密碼</h2>
                             </div>
                             <form action="/checkforgot-password" method="post" onsubmit="return checkAll()">
                                 <div class="input-group custom">
@@ -89,7 +89,7 @@
                                     </div>
                                     <div class="col-5">
                                         <div class="input-group mb-0">
-                                            <a class="btn btn-outline-primary btn-lg btn-block" href="/login">登入</a>
+                                            <a class="btn btn-primary btn-lg btn-block" href="/login" style="color:black">登入</a>
                                         </div>
                                     </div>
                                 </div>

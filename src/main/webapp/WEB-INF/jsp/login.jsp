@@ -42,12 +42,12 @@
                 <div class="container-fluid d-flex justify-content-between align-items-center">
                     <div class="brand-logo">
                         <a href="/login">
-                            <img src="/vendors/images/deskapp-logo.svg" alt="">
+                            <img src="/assets/logob.png" alt="">
                         </a>
                     </div>
                     <div class="login-menu">
                         <ul>
-                            <li><a href="/registerform">註冊</a></li>
+                            <li><a href="/registerform" style="color:black">註冊</a></li>
                         </ul>
                     </div>
                 </div>
@@ -61,7 +61,7 @@
                         <div class="col-md-6 col-lg-5">
                             <div class="login-box bg-white box-shadow border-radius-10">
                                 <div class="login-title">
-                                    <h2 class="text-center text-primary">登入至 Mega</h2>
+                                    <h2 class="text-center">登入Mega</h2>
                                 </div>
                                 <form action="/login" method="post">
                                     <div class="input-group custom">
@@ -101,11 +101,7 @@
                                                     type="submit">登入</button>
                                             </div>
                                             <div class="font-16 weight-600 pt-10 pb-10 text-center"
-                                                data-color="#707373">或</div>
-                                            <div class="input-group mb-0">
-                                                <a class="btn btn-outline-primary btn-lg btn-block"
-                                                    href="/registerform">註冊</a>
-                                            </div>
+                                                data-color="#707373">Mega新朋友? <a href="/registerform" style="color:#d9ab48">註冊</a></div>
                                         </div>
                                     </div>
                                 </form>

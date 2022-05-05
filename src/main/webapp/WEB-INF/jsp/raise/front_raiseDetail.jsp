@@ -34,7 +34,7 @@
 				var div_product_image = $('<div/>').addClass('product_image_area');
 				var div_row_s_p_i = $('<div/>').addClass('row s_product_inner');
 				var div_collg5 = $('<div/>').addClass('col-lg-5');
-				$('<img/>').addClass('w-100').attr('src',item.raisePicBase64).appendTo(div_collg5);
+				$('<img/>').addClass('w-100').css('height','350px').attr('src',item.raisePicBase64).appendTo(div_collg5);
 				div_collg5.appendTo(div_row_s_p_i);
 				var div_collg5_offset = $('<div/>').addClass('col-lg-5 offset-lg-1');
 				var div_s_p_t = $('<div/>').addClass('s_product_text');
@@ -46,7 +46,7 @@
 				$('<span/>').css('font-weight','bold').html(item.raiseCategory).appendTo(div_style_gray);
 				div_style_gray.appendTo(div_s_p_t);
 
-				$('<h3/>').css('margin-top','12px').html(item.raiseTitle).appendTo(div_s_p_t);
+				$('<h3/>').css('margin-top','12px').html(item.raiseTitle).addClass('title').appendTo(div_s_p_t);
 				$('<span/>').css('font-size','12px').html('提案人 ' + item.raiseName).appendTo(div_s_p_t);
 				$('<p/>').html(item.raiseBrief).appendTo(div_s_p_t);
 				//金額包含千分位符號
@@ -79,8 +79,8 @@
 				$.each(item.raisePlanBeanSet,function(i,item){
 					var div_col = $('<div/>').css('width','380px').css('margin','10px');
 					var div_card = $('<div/>').addClass('card h-100');
-					//連結至付款尚未更新
-					var a_img = $('<a/>').attr('href','');
+					//連結至付款
+					var a_img = $('<a/>').attr('href','/order/rasiepay').addClass('pa');
 					$('<img/>').attr('src',item.raisePlanPicBase64).addClass('card-img-top').appendTo(a_img);
 					//金額包含千分位符號
 					var rpAmount = Number(parseFloat(item.raisePlanAmount)).toLocaleString("en");
@@ -106,6 +106,24 @@
 				div_product_image.appendTo($('#result'));
 			}
 		});
+	});
+	//為append事件建立動態繫結
+	$(document).on('click', '.pa', function(e){
+	    e.preventDefault();
+	    var title = $('.title').text();
+	    var price = $(this).children().next().children().text().replace(/,/g, "").substr(3);
+
+	    
+	    $.ajax({
+	    	type:'post',
+	    	url:'/order/raisepay',
+	    	data:{"title":title,"price":price},
+	        success: function(data){
+	        	window.location.href='/order/myecpage';
+	        }
+	    	
+	    })
+	    
 	});
 </script>
 </head>

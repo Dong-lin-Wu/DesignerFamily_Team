@@ -288,12 +288,12 @@
                     }
 
                     function oneClick() {
-                        $("input").eq(11).val("謝昀軒");
-                        $("input").eq(12).val("987654@gmail.com");
+                        $("input").eq(10).val("謝昀軒");
+                        $("input").eq(11).val("987654@gmail.com");
+                        $("input").eq(12).val("123456");
                         $("input").eq(13).val("123456");
-                        $("input").eq(14).val("123456");
-                        $("input").eq(15).val("0998765432");
-                        $("input").eq(16).val("謝昀軒");
+                        $("input").eq(14).val("0998765432");
+                        $("input").eq(15).val("謝昀軒");
                         resetAll();
                     }
 

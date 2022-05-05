@@ -7,16 +7,21 @@ import java.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
+import tw.designerfamily.forum.model.CommentBean;
 import tw.designerfamily.forum.model.ForumBean;
 import tw.designerfamily.forum.model.ForumService;
 import tw.designerfamily.member.model.Member;
+import tw.designerfamily.raise.model.RaiseBean;
 
 @Controller
 @RequestMapping("/forum")
@@ -40,7 +45,7 @@ public class DiscussControllerServlet {
 //		m.addAttribute("commList", clist);
 //	}	
 			
-	//到首頁+顯示全部
+	//到管理者頁面首頁+顯示全部
 		@GetMapping("/forum_backend.controller") 
 		public String processMainAction(Model m) {
 			redirectToForum(m);		
@@ -81,7 +86,7 @@ public class DiscussControllerServlet {
 				//								
 				Model m)
 	{
-		
+		System.out.println("Dis_Descri: "+Dis_Descri);
 //	String paccount = (String) request.getSession(true).getAttribute("login.account"); 
 //	String forumAccount = m.getAccount();	
 //	String forumAccount = "qqq123"; 		
@@ -100,15 +105,32 @@ public class DiscussControllerServlet {
 	    redirectToForum(m);
 	    return "redirect:/forum/forum_backend.controller"; //redirect可以避免refresh後重複執行
 	}
+		
+	//詳細 用id取值
+		@GetMapping("/detail/{id}")
+		public String processDetail(@PathVariable("id") int id, Model m) {
+			ForumBean fBean = fService.findById(id);
+			m.addAttribute("n", fBean);
+			return "forum/ForumDetail";
+		}
+		
 		  
 	//刪除討論
-		@PostMapping("/forum_backend_delete.controller")
-		public String processAction(@RequestParam("forumid") int forumid, Model m) {			
+//		@PostMapping("/forum_backend_delete.controller")
+//		public String processAction(@RequestParam("forumid") int forumid, Model m) {			
+//			fService.deleteById(forumid);
+//			System.out.println(forumid);
+//			redirectToForum(m);
+//		    return "redirect:/forum/forum_backend.controller";
+//		}
+		
+		@DeleteMapping("/forumdelete/{id}")
+		@ResponseBody
+		public void processDelete(@PathVariable("id")int forumid,Model m) {
 			fService.deleteById(forumid);
-			System.out.println(forumid);
-			redirectToForum(m);
-		    return "redirect:/forum/forum_backend.controller";
+			
 		}
+		
 		
 	//刪除留言
 		@PostMapping("/forum_backend_delete_comment.controller")
@@ -144,12 +166,83 @@ public class DiscussControllerServlet {
 		}
 	
 	//主題查詢
+//		@PostMapping("/forum_backend_gotosearch.controller")
+//		public String processSearch(@RequestParam("keyword") String forum_search, Model m) {
+//			
+//			List<ForumBean> flist = fService.searchBySubject(forum_search);
+//			m.addAttribute("disList", flist);
+//			return "redirect:/forum/forum_backend_search.controller";
+//		}
+		
 		@PostMapping("/forum_backend_gotosearch.controller")
-		public String processSearch(@RequestParam("keyword") String forum_search, Model m) {
-			
-			List<ForumBean> flist = fService.searchBySubject(forum_search);
-			m.addAttribute("disList", flist);
-			return "redirect:/forum/forum_backend_search.controller";
-		}	
+		public String processSearchByKey(@RequestParam("keyword") String key, Model m) {
+		    List<ForumBean> flist = fService.searchByKey(key);
+		    m.addAttribute("disList", flist);
+		    return "redirect:/forum/forum_backend_search.controller";
+		}
+//		@PostMapping("/forum_backend_gotocommentsearch.controller")
+//		public String processSearchByCommKey(@RequestParam("keyword") String key, Model m) {
+//		    List<CommentBean> clist = fService.searchByCommKey(key);
+//		    m.addAttribute("disList", clist);
+//		    return "redirect:/forum/forum_backend_search.controller";
+//		}
+//--------------------------------------------------------------------------------------------------------------
+		//使用者
+		
+		//到首頁+顯示全部
+				
+				@GetMapping("/forum_user_index") //使用者頁面路徑
+				public String processMainActionFrontend(Model m) {
+					redirectToForum(m);		
+					return "forum/forumIndex";		
+			}
+		//到討論區新增頁面
+				@GetMapping("/new_post") 
+				public String processMainActionFrontend1(Model m) {	
+					return "forum/userAddForum";		
+				}
+				
+		//查詢全部
+				@GetMapping("/forumfindall") 
+				@ResponseBody
+				public List<ForumBean> processMainActionFrontend2(Model m) {
+					List<ForumBean> flist = fService.selectAll();							
+					return flist;		
+			}
+				
+		//新增討論
+				@PostMapping("/addnewpost")
+				public String processInsertFrontend(
+						@RequestParam("Dis_Title") String Dis_Title,
+						@RequestParam("Dis_Descri") String Dis_Descri,
+						@RequestParam("Dis_Category") String Dis_Category,
+						//								
+						Model m)
+			{ 		
+			    Member member = (Member) m.getAttribute("login");	
+			    String forumAccount;
+			    System.out.println("member:"+member);
+				if (member != null) {
+					forumAccount = member.getAccount();
+				} else {
+					forumAccount = "Guest";
+				}
+			   
+			    ForumBean fBean =  new ForumBean(Dis_Title, Dis_Descri, forumAccount, Dis_Category); 
+
+			    fService.insert(fBean);
+			    redirectToForum(m);
+			    return "redirect:/forum/forum_user_index"; //redirect可以避免refresh後重複執行
+			}
+				
+		//查詢單筆
+		@GetMapping("/{forumid}")
+		@ResponseBody
+		public ForumBean processFindById(@PathVariable("forumid") int forumid,Model m) {
+			ForumBean fBean= fService.findById(forumid);
+			m.addAttribute("forumBean", fBean);
+			return fBean;
+		}
+		
 }      
 	      

@@ -52,19 +52,20 @@
                                             <li><a href="/index" style="font-size:22px">首頁</a></li> 
                                             <li><a href="/index" style="font-size:22px">商品</a>
                                                 <ul class="submenu">
-                                                    <li><a href="product/catagory">配件飾品</a></li>
-                                                    <li><a href="product/catagory">文具</a></li>
-                                                    <li><a href="product/catagory">包包提袋</a></li>
-                                                    <li><a href="product/catagory">衣著</a></li>
-                                                    <li><a href="product/catagory">居家生活</a></li>
-                                                    <li><a href="product/catagory">創意科技</a></li>
-                                                    <li><a href="product/catagory">其他</a></li>
+                                                    <li><a href="product/catagory">商品上架</a></li>
                                                 </ul>
                                             </li>
                                             <li><a href="/campaign/index" style="font-size:22px">最新活動</a></li>
-                                            <li><a href="/forum/forum_user_index" style="font-size:22px">討論區</a></li>
-                                            <li><a href="/front_raiseindex.controller" style="font-size:22px">募資</a></li>
-                                            <li><a href="contact.html" style="font-size:22px">聯絡我們</a></li>
+                                            <li><a href="/forum/forum_user_index" style="font-size:22px">討論區</a>
+                                              <ul class="submenu">
+                                                    <li><a href="/forum/new_post">發布討論</a></li>
+                                                </ul>
+                                                </li>
+                                            <li><a href="/front_raiseindex.controller" style="font-size:22px">募資</a> 
+                                             <ul class="submenu">
+                                                    <li><a href="/raiseadd.checklogin">募資提案</a></li>
+                                                </ul>    
+                                                </li>                                   
                                         </ul>
                                     </nav>
                                 </div>   
@@ -80,14 +81,15 @@
                                                     <i class="ti-search"></i>
                                                 </div>
                                             </form>
-                                        </li>
+                                        </li>                                          
                                         <li>
                                         <c:choose>
 											<c:when test="${not empty sessionScope.login}">
 											    <div class="main-menu  d-none d-lg-block">
                                     <nav>
-                                        <ul id="navigation">
-                                            <li><a href="#" style="font-size:22px">${sessionScope.login.account}</a>
+                                        <ul id="navigation">                                                                                                         
+                                            <li>                         
+                                            <a href="#" style="font-size:22px"><c:if test="${ empty login.photo}"><span class="card-stor"><img src="/assets/img/logo/logo2.png" alt=""></span></c:if><c:if test="${ !empty login.photo}"><span class="card-stor"><img src="${login.photo }" alt=""></span></c:if>${sessionScope.login.account}</a>
                                                 <ul class="submenu">
                                                     <li><a href="/user">會員中心</a></li>
                                                     <li><a href="/order/myorder">我的訂單</a></li>
@@ -107,7 +109,7 @@
                                         <li>                                 
                                             <div class="card-stor">
                                              <a href="/order/mycart" ><img src="/assets/img/icon/cart2.svg" alt="" title="購物車"></a>
-                                             <span id="cartval">${cartcount}</span>                                        
+                                             <span id="cartval">${cartcount}<c:if test="${ empty cartcount}">0</c:if></span>                                        
                                             </div>
                                         </li>
                                     </ul>

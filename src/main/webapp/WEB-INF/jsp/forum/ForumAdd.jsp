@@ -4,8 +4,15 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script
+	    src="https://code.jquery.com/jquery-3.6.0.js"
+	    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+	    crossorigin="anonymous">
+	</script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
 <title>forum</title>
 <style>
 span {
@@ -13,7 +20,10 @@ span {
             
             font-style: italic;
         }
-        </style>
+.container{
+			width:800px;
+			}
+</style>
 </head>
 <body>
 <div class='container'>
@@ -26,7 +36,8 @@ span {
       
       <hr />
 	<h3 style="margin-top:20px">新增討論</h3>
-				<form action="forum_backend_insert.controller" method="POST">
+	
+		<form id="form_forum" action="forum_backend_insert.controller" method="POST">
 				
 				<div class="mb-3">
 					  <label for="Dis_Category" class="form-label">類別</label>
@@ -46,22 +57,56 @@ span {
 				
 				  <div class="mb-3">
 				      <label for="Dis_Title" class="form-label">主題</label>
-				      <input type="text" class="form-control" id="Dis_Title" name="Dis_Title" required="required">
-				      <span id="idspn"></span>
+				      <input type="text" class="form-control" id="Dis_Title" name="Dis_Title" required="required" maxlength="50">
+				      
             			
 				  </div>
 				  
 				  <div class="mb-3">
 				      <label for="Dis_Descri" class="form-label">內容</label>
-				      <textarea class="form-control" id="Dis_Descri" name="Dis_Descri"rows="10" required></textarea>
-				      <span id="idspd"></span><br/>
+<!-- 				      <textarea class="form-control" id="Dis_Descri" name="Dis_Descri"rows="10" required></textarea> -->
+                        <input type="hidden" name="Dis_Descri"  id="Dis_Descri">
+				      <div id="summernote" ></div>
+				      
+				      
 				  </div>
+				  
+				  <button type="button" class="btn btn-primary" onclick="forum_submit()">提交</button>
 			  
-				  <input type="hidden" name="nextto" value="Forumadd">
-				  <button type="submit" class="btn btn-primary">提交</button>				  
+<!-- 				  <input type="hidden" name="nextto" value="Forumadd"> -->
+<!-- 				  <button type="submit" class="btn btn-primary">提交</button>				   -->
 				  
 				</form>
 			</div> 
-<script src="/js/DiscussAddjs.js"></script>
+<!-- <script src="/js/DiscussAddjs.js"></script> -->
+ <script>
+      $('#summernote').summernote({
+		       placeholder: '',
+		       tabsize: 2,
+		       height: 380,
+		       toolbar: [
+			         ['style', ['style']],
+			         ['font', ['bold', 'underline', 'clear']],
+			         ['color', ['color']],
+			         ['para', ['ul', 'ol', 'paragraph']],
+			         ['table', ['table']],
+			         ['insert', ['link', 'picture', 'video']],
+			         ['view', ['fullscreen', 'codeview', 'help']]
+			       ]
+		      	});
+         
+   function forum_submit(){	   
+	    var theDescri = $('.note-editable').html();
+	    $('#Dis_Descri').val(theDescri);
+	    var boolean_checkrequired = $('#form_forum')[0].reportValidity();
+// 	    console.log(theDescri);
+	    if(boolean_checkrequired && theDescri != "<br>"){
+	    	$('#form_forum').submit();
+// 			console.log("sumbit OK");
+		}
+  	  	
+	   }       
+  	  	 
+    </script>
 </body>
 </html>

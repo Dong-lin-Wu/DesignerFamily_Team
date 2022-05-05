@@ -7,7 +7,6 @@
             <meta http-equiv="content-type" content="text/html; charset=UTF-8">
             <title>header</title>
         </head>
-
         <body>
 
             <div class="header">
@@ -91,7 +90,7 @@
                                         </c:otherwise>
                                     </c:choose>
                                 </span>
-                                <span class="user-name">${sessionScope.login.account}</span>
+                                <span class="user-name" style="font-size:20px">${sessionScope.login.account}</span>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
                                 <a href="/user" class="dropdown-item"><i class="dw dw-user1"></i> 會員中心</a>
@@ -199,8 +198,8 @@
             <div class="left-side-bar">
                 <div class="brand-logo">
                     <a href="/admin">
-                        <img src="/vendors/images/deskapp-logo.svg" alt="" class="dark-logo">
-                        <img src="/vendors/images/deskapp-logo-white.svg" alt="" class="light-logo">
+                        <img src="/assets/logow.png" alt="" class="">
+                     
                     </a>
                     <div class="close-sidebar" data-toggle="left-sidebar-close">
                         <i class="ion-close-round"></i>
@@ -211,47 +210,47 @@
                         <ul id="accordion-menu">
                             <li>
                                 <a href="/admin" class="dropdown-toggle no-arrow">
-                                    <span class="micon dw dw-house-1"></span><span class="mtext">首頁</span>
+                                    <span class="micon dw dw-house-1"></span><span class="mtext" style="font-size:20px">首頁</span>
                                 </a>
                             </li>
                             <li class="dropdown">
                                 <a href="javascript:;" class="dropdown-toggle">
-                                    <span class="micon icon-copy fa fa-user-o"></span><span class="mtext">成員</span>
+                                    <span class="micon icon-copy fa fa-user-o"></span><span class="mtext" style="font-size:20px">成員</span>
                                 </a>
                                 <ul class="submenu">
-                                    <li><a href="/member/members">成員清單</a></li>
-                                    <li><a href="/member/designers">設計師清單</a></li>
-                                    <li><a href="/member/members.insert">新增管理員</a></li>
+                                    <li><a href="/member/members" style="font-size:20px">成員清單</a></li>
+                                    <li><a href="/member/designers" style="font-size:20px">設計師清單</a></li>
+                                    <li><a href="/member/members.insert" style="font-size:20px">新增管理員</a></li>
                                 </ul>
                             </li>
                             <li>
                                 <a href="/product" class="dropdown-toggle no-arrow">
                                     <span class="micon icon-copy dw dw-shop" aria-hidden="true"></span><span
-                                        class="mtext">商品</span>
+                                        class="mtext" style="font-size:20px">商品</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="/order" class="dropdown-toggle no-arrow">
                                     <span class="micon icon-copy dw dw-shopping-cart" aria-hidden="true"></span><span
-                                        class="mtext">訂單</span>
+                                        class="mtext" style="font-size:20px">訂單</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="/news" class="dropdown-toggle no-arrow">
                                     <span class="micon icon-copy fa fa-newspaper-o" aria-hidden="true"></span><span
-                                        class="mtext">活動</span>
+                                        class="mtext" style="font-size:20px">活動</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="/forum/forum_backend.controller" class="dropdown-toggle no-arrow">
                                     <span class="micon icon-copy dw dw-chat-2" aria-hidden="true"></span><span
-                                        class="mtext">討論區</span>
+                                        class="mtext" style="font-size:20px">討論區</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="/raiseindex.controller" class="dropdown-toggle no-arrow">
                                     <span class="micon icon-copy dw dw-sprout-1" aria-hidden="true"></span><span
-                                        class="mtext">募資</span>
+                                        class="mtext" style="font-size:20px">募資</span>
                                 </a>
                             </li>
                         </ul>

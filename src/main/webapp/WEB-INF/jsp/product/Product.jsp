@@ -84,7 +84,7 @@
                                     <table class="table hover stripe data-table-export nowrap">
                                         <thead>
                                             <tr>
-                                                <th class="table-plus datatable-nosort">編號</th>
+                                                <th class="table-plus">編號</th>
                                                 <th>標題</th>
 						                        <th>類別</th>
 						                        <th>設計師</th>
@@ -210,8 +210,8 @@
 		 
 		 console.log(id);
 		 Swal.fire({
-		      html:'<iframe src = /product/detail/'+id+' width="430px" height="380px">',
-		      width:"500px"
+		      html:'<iframe src = /product/detail/'+id+' width="430px" height="410px">',
+		      width:"550px"
 			})
 	 }) 
 	 

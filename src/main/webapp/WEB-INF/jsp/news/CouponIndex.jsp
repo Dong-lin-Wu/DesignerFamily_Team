@@ -90,7 +90,7 @@
                                     <table class="table hover stripe data-table-export nowrap">
                                         <thead>
                                             <tr>
-                                               <th class="table-plus datatable-nosort">編號</th>
+                                               <th class="table-plus">編號</th>
                                                <th>優惠券名稱</th>
 						                       <th>創建時間</th>					
 						                       <th>狀態</th> 

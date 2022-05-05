@@ -5,12 +5,10 @@
 
         <head>
             <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-            <title>member_user</title>
+            <title>Mega|會員中心</title>
 
             <!-- Site favicon -->
-            <link rel="apple-touch-icon" sizes="180x180" href="/vendors/images/apple-touch-icon.png">
-            <link rel="icon" type="image/png" sizes="32x32" href="/vendors/images/favicon-32x32.png">
-            <link rel="icon" type="image/png" sizes="16x16" href="/vendors/images/favicon-16x16.png">
+            <link rel="shortcut icon" type="image/x-icon" href="/assets/img/logo/logo2.png">
 
             <!-- Mobile Specific Metas -->
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -49,47 +47,49 @@
                                     <div class="tab">
                                         <div class="row clearfix">
                                             <div class="col-md-3 col-sm-12 order_box">
-                                                <h2 class="mb-20" style="margin: 0px 12px 25px 12px;">
+                                                <h2 class="mb-20" style="margin: 0px 12px 25px 12px;font-size:24px">
                                                     ${sessionScope.login.account}</h2>
                                                 <ul class="nav flex-column" role="tablist">
-                                                    <li class="nav-item" style="margin-bottom: 15px;">
+                                                    <li class="nav-item" style="margin-bottom: 15px;font-size:20px">
                                                         <a class="nav-link active" data-toggle="tab" href="#member"
                                                             role="tab" aria-selected="true"
                                                             style="color: black;">我的帳戶</a>
                                                     </li>
-                                                    <li class="nav-item" style="margin-bottom: 15px;">
+                                                    <li class="nav-item" style="margin-bottom: 15px;font-size:20px">
                                                         <a class="nav-link" data-toggle="tab" href="#product" role="tab"
                                                             aria-selected="false" style="color: black;">我的商品</a>
                                                     </li>
+                                                    
                                                     <c:if test="${sessionScope.login.status.statusId == '1'}">
-                                                        <li class="nav-item" style="margin-bottom: 15px;">
-                                                            <a class="nav-link" data-toggle="tab" href="#shiporder"
-                                                                role="tab" aria-selected="false"
-                                                                style="color: black;">出貨訂單</a>
-                                                        </li>
+                                                    <li class="nav-item" style="margin-bottom: 15px;font-size:20px">
+                                                        <a class="nav-link" data-toggle="tab" href="#shiporder" role="tab"
+                                                            aria-selected="false" style="color: black;">出貨訂單</a>
+                                                    </li>
                                                     </c:if>
-                                                    <li class="nav-item" style="margin-bottom: 15px;">
+                                                    
+                                                    <li class="nav-item" style="margin-bottom: 15px;font-size:20px">
                                                         <a class="nav-link" data-toggle="tab" href="#order" role="tab"
                                                             aria-selected="false" style="color: black;">我的訂單</a>
                                                     </li>
-                                                    <li class="nav-item" style="margin-bottom: 15px;">
+                                                  
+                                                    <li class="nav-item" style="margin-bottom: 15px;font-size:20px">
                                                         <a class="nav-link" data-toggle="tab" href="#forum" role="tab"
                                                             aria-selected="false" style="color: black;">我的討論區</a>
                                                     </li>
-                                                    <li class="nav-item" style="margin-bottom: 15px;">
+                                                    <li class="nav-item" style="margin-bottom: 15px;font-size:20px">
                                                         <a class="nav-link" data-toggle="tab" href="#raise" role="tab"
                                                             aria-selected="false" style="color: black;">我的募資</a>
                                                     </li>
                                                     <c:choose>
                                                         <c:when
                                                             test="${sessionScope.login.status.statusId == '9' || sessionScope.login.status.statusId == '8'}">
-                                                            <li class="nav-item" style="margin-top: 50px;">
+                                                            <li class="nav-item" style="margin-top: 50px;font-size:20px">
                                                                 <a class="nav-link" href="/admin"
                                                                     style="color: black;">管理中心</a>
                                                             </li>
                                                         </c:when>
                                                         <c:when test="${sessionScope.login.status.statusId == '0'}">
-                                                            <li class="nav-item" style="margin-top: 50px;">
+                                                            <li class="nav-item" style="margin-top: 50px;font-size:20px">
                                                                 <a class="nav-link" data-toggle="tab" href="#apply"
                                                                     role="tab" aria-selected="false"
                                                                     style="color: black;">申請成為設計師</a>
@@ -111,22 +111,22 @@
                                                                 method="post" onsubmit="return checkAll()">
                                                                 <input type="hidden" name="id" value="${member.id}">
                                                                 <div class="col-md-6 form-group">
-                                                                    <label>使用者名稱* :</label>
+                                                                    <label style="font-size:20px">使用者名稱* :</label>
                                                                     <input type="text" class="form-control"
                                                                         name="account" value="${member.account}"
-                                                                        required>
+                                                                        required style="font-size:20px">
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
-                                                                    <label>Email* :</label>
+                                                                    <label style="font-size:20px">Email* :</label>
                                                                     <input id="email" type="email" class="form-control"
-                                                                        name="email" value="${member.email}" required>
+                                                                        name="email" value="${member.email}" required style="font-size:20px">
                                                                     <span class="emailsp" style="color: red;"></span>
                                                                 </div>
                                                                 <div class="col-md-6 form-group"
                                                                     style="margin-bottom: 50px;">
-                                                                    <label>手機* :</label>
+                                                                    <label style="font-size:20px">手機* :</label>
                                                                     <input id="phone" type="tel" class="form-control"
-                                                                        name="phone" value="${member.phone}" required>
+                                                                        name="phone" value="${member.phone}" required style="font-size:20px">
                                                                     <span class="phonesp" style="color: red;"></span>
                                                                 </div>
                                                                 <input type="hidden" name="statusId"
@@ -135,12 +135,12 @@
                                                                     value="${member.status.statusName}">
                                                                 <!-- Step 2 -->
                                                                 <div class="col-md-6 form-group">
-                                                                    <label>姓名 :</label>
+                                                                    <label style="font-size:20px">姓名 :</label>
                                                                     <input type="text" class="form-control" name="name"
-                                                                        value="${member.name}">
+                                                                        value="${member.name}" style="font-size:20px">
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
-                                                                    <label>性別 :</label><br>
+                                                                    <label style="font-size:20px">性別 :</label><br>
                                                                     <div class="btn-group btn-group-toggle"
                                                                         data-toggle="buttons" style="margin-top: 2px;">
                                                                         <c:choose>
@@ -196,20 +196,20 @@
                                                                     </div>
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
-                                                                    <label>生日 :</label>
+                                                                    <label style="font-size:20px">生日 :</label>
                                                                     <input type="text" class="form-control date-picker"
                                                                         placeholder="點此選擇日期" name="birthday"
-                                                                        value="${member.birthday}">
+                                                                        value="${member.birthday}" style="font-size:20px">
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
-                                                                    <label>圖片 :</label><br>
+                                                                    <label style="font-size:20px">圖片 :</label><br>
                                                                     <div style="margin-top: 4px;">
                                                                         <input
                                                                             class="photo form-control-file height-auto"
                                                                             type="file" name="photo"
-                                                                            style="width: 250px">
+                                                                            style="width: 250px" >
                                                                         <input class="photoBase64" type="hidden"
-                                                                            name="photoBase64" value="">
+                                                                            name="photoBase64" value="" >
                                                                     </div>
                                                                     <div class="previewPhoto" style="margin-top: 10px;">
                                                                         <img src="${member.photo}" style="width: 250px">
@@ -231,11 +231,13 @@
                                                             <%@ include file="../product/userproduct.jsp" %>
                                                         </div>
                                                     </div>
+                                                                                     
                                                     <div class="tab-pane fade" id="shiporder" role="tabpanel">
                                                         <div class="pd-20">
-                                                            <%@ include file="../order/ordershipping.jsp" %>
+                                                             <%@ include file="../order/ordershipping.jsp" %>
                                                         </div>
                                                     </div>
+
                                                     <div class="tab-pane fade" id="order" role="tabpanel">
                                                         <div class="pd-20">
                                                             <%@ include file="../order/foruser.jsp" %>
@@ -255,8 +257,7 @@
                                                         <div class="pd-20">
                                                             <h1 style="margin-bottom: 20px;">確定申請成為設計師？</h1>
                                                             <div>
-                                                                <a class="btn btn-primary"
-                                                                    href="/user/apply.designer">確定</a>
+                                                                <a class="btn btn-primary" href="/user/apply.designer">確定</a>
                                                             </div>
                                                         </div>
                                                     </div>

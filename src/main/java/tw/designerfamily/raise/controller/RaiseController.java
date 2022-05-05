@@ -284,6 +284,14 @@ public class RaiseController {
 		return rlist;
 	}
 	
+	//查詢-依照類別(status:Approved)
+	@GetMapping("/raisebycategory/{raiseCategory}")
+	@ResponseBody
+	public List<RaiseBean> processSelectByCategory0(@PathVariable("raiseCategory") String raiseCategory) {
+		List<RaiseBean> rlist = rService.selectByCategory(raiseCategory);
+		return rlist;
+	}
+	
 	//查詢單筆
 	@GetMapping("/raise/{raiseNo}")
 	@ResponseBody

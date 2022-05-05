@@ -9,5 +9,8 @@ public interface CommentRepository extends JpaRepository<CommentBean, Integer> {
 	
 	@Query(value = "from CommentBean Order By forumid DESC")
 	public List<CommentBean> selectCommAll();
+	
+	@Query(value = "from CommentBean where commentdescription like concat('%',?1,'%') or commentaccount like concat('%',?1,'%')  Order By commentId DESC")
+	public List<CommentBean> searchByCommKey(String key);
 
 }

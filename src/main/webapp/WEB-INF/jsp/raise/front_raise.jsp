@@ -11,11 +11,21 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function(){
-// 	//提案按鈕
-// 	var forminsert = $('<form>').attr('action','/raiseadd.checklogin').attr('method','Get');
-// 	var buttoninsert = $('<input/>').attr('type','submit').attr('value','提案').css('font-size','25px');
-// 	buttoninsert.appendTo(forminsert);
-// 	forminsert.appendTo($('#result'));
+	//類別篩選
+	$('<span/>').html('探索類別:').css('margin-right','20px').css('font-size','20px').css('color','black').css('font-weight','bold').appendTo($('#div_cat'));
+	var select_cat = $('<select/>').addClass('onchange').css('width','100px');
+	$('<option/>').val('').text('全部').appendTo(select_cat);
+	$('<option/>').val('音樂').text('音樂').appendTo(select_cat);
+	$('<option/>').val('攝影').text('攝影').appendTo(select_cat);
+	$('<option/>').val('時尚').text('時尚').appendTo(select_cat);
+	$('<option/>').val('設計').text('設計').appendTo(select_cat);
+	$('<option/>').val('遊戲').text('遊戲').appendTo(select_cat);
+	$('<option/>').val('飲食').text('飲食').appendTo(select_cat);
+	$('<option/>').val('教育').text('教育').appendTo(select_cat);
+	$('<option/>').val('科技').text('科技').appendTo(select_cat);
+	$('<option/>').val('藝術').text('藝術').appendTo(select_cat);
+	select_cat.appendTo($('#div_cat'));
+	
 	//展示所有募資
 	$.ajax({
 		type:'get',
@@ -37,7 +47,7 @@ function showdata(data){
 		var div_col = $('<div/>').css('width','380px').css('margin','10px');
 		var div_card = $('<div/>').addClass('card h-100');
 		var a_img = $('<a/>').attr('href','/front_raisedetail/'+item.raiseNo);
-		$('<img/>').attr('src',item.raisePicBase64).addClass('card-img-top').appendTo(a_img);
+		$('<img/>').attr('src',item.raisePicBase64).addClass('card-img-top').css('height','280px').appendTo(a_img);
 		
 		$('<h3/>').addClass('card-title').css('padding','1.25rem 1.25rem 0rem 1.25rem').html('<b>'+item.raiseTitle+'</b>').appendTo(a_img);
 		a_img.appendTo(div_card);
@@ -66,6 +76,42 @@ function showdata(data){
     });
     div_row.appendTo($('#result'));
 }
+//動態繫節尚未完成!!!
+$(document).on('change','.onchange',function(){
+	$('#result').empty();
+	var cat = $('.onchange').val();
+	if(cat!= ''){
+		//展示指定類別的募資
+		$.ajax({
+			type:'get',
+			url:'/raisebycategory/'+cat,
+			success: function(data){
+				console.log(data.length);
+				if(data.length > 0){
+					showdata(data);
+				}else{
+					var p_nodata = $('<p/>').css('font-size','30px').html('尚無資料，歡迎前往').appendTo($('#result'));
+					$('<a/>').attr('href','/raiseadd.checklogin').css('color','red').html('提案!').appendTo(p_nodata);
+				}	
+			},
+			error: function(e){
+				console.log('something is wrong!');	
+			}
+		});
+	}else{
+		//展示所有募資
+		$.ajax({
+			type:'get',
+			url:'/raisebystatus',
+			success: function(data){
+				showdata(data);
+			},
+			error: function(e){
+				console.log('something is wrong!');	
+			}
+		});
+	}
+})
 
 </script>
 </head>
@@ -78,6 +124,7 @@ function showdata(data){
 		<div class="container">
 			<div class="row">
 				<div class="tab-content" id="nav-tabContent">
+					<div id="div_cat" style="margin-bottom:15px"></div>
 					<div id="result" style="width:1200px"></div>
 				</div>
 			</div>

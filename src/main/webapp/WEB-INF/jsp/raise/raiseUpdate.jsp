@@ -33,7 +33,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 <body>
 	<div class='container'>
 		<h3 style="margin-top:20px">募資計畫明細</h3>
-		<form action="raiseupdate.controller" method="POST" style="display:inline">
+		<form action="raiseupdate.controller" method="POST" style="display:inline" id="form_raiseupdate">
 			<div class="mb-3">
 			    <label for="Raise_Title" class="form-label"><b>計畫名稱</b></label>
 			    <input type="text" class="form-control" id="Raise_Title" name="Raise_Title" value="${raiseBean.raiseTitle}" required="required">
@@ -177,7 +177,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 					<input type="hidden" name="rID" value="${raiseBean.raiseNo}">
 					<input type="hidden" name="rpId1" value="${raiseBean.raisePlanBeanSet.toArray()[0].raisePlanNo}">			
 					<input type="hidden" name="rpId2" value="${raiseBean.raisePlanBeanSet.toArray()[1].raisePlanNo}">			
-					<button type="submit" class="btn btn-primary">確認修改</button>
+					<button type="button" class="btn btn-primary" onclick="raise_submit()">確認修改</button>
 				</form>
 		    </c:otherwise>
 		</c:choose>
@@ -219,6 +219,10 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
  		$(".note-editable").children().html(theDescribe);
  		$("#Raise_Describe").val(theDescribe);//詳細內容若有修改，後台抓不到新的
 
+		function raise_submit(){
+			$("#Raise_Describe").val($(".note-editable").children().html());
+			$('#form_raiseupdate').submit();
+		}
 		
 		//限制頭尾日期
 		let dayNow=new Date();
