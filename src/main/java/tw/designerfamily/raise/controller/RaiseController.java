@@ -291,6 +291,14 @@ public class RaiseController {
 		List<RaiseBean> rlist = rService.selectByCategory(raiseCategory);
 		return rlist;
 	}
+
+	//查詢-依照關鍵字
+	@GetMapping("/raisebykey/{keyword}")
+	@ResponseBody
+	public List<RaiseBean> processSelectByKeyword0(@PathVariable("keyword") String keyword) {
+		List<RaiseBean> rlist = rService.searchByKey(keyword);
+		return rlist;
+	}
 	
 	//查詢單筆
 	@GetMapping("/raise/{raiseNo}")
@@ -299,7 +307,7 @@ public class RaiseController {
 		RaiseBean rBean = rService.selectById(raiseNo);
 		return rBean;
 	}
-	
+
 	//查詢某會員的for使用者端
 	@GetMapping("/raisebyname.checklogin")
 	@ResponseBody

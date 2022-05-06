@@ -10,6 +10,19 @@
 <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script> -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script type="text/javascript">
+//展示所有募資
+function showallraise(){
+	$.ajax({
+		type:'get',
+		url:'/raisebystatus',
+		success: function(data){
+			showdata(data);
+		},
+		error: function(e){
+			console.log('something is wrong!');	
+		}
+	});
+}
 $(document).ready(function(){
 	//類別篩選
 	$('<span/>').html('探索類別:').css('margin-right','20px').css('font-size','20px').css('color','black').css('font-weight','bold').appendTo($('#div_cat'));
@@ -26,17 +39,7 @@ $(document).ready(function(){
 	$('<option/>').val('藝術').text('藝術').appendTo(select_cat);
 	select_cat.appendTo($('#div_cat'));
 	
-	//展示所有募資
-	$.ajax({
-		type:'get',
-		url:'/raisebystatus',
-		success: function(data){
-			showdata(data);
-		},
-		error: function(e){
-			console.log('something is wrong!');	
-		}
-	});
+	showallraise();
 });
 //以下方法同front_myRaise
 function showdata(data){
@@ -76,7 +79,7 @@ function showdata(data){
     });
     div_row.appendTo($('#result'));
 }
-//動態繫節尚未完成!!!
+//動態繫節探索類別
 $(document).on('change','.onchange',function(){
 	$('#result').empty();
 	var cat = $('.onchange').val();
@@ -99,19 +102,35 @@ $(document).on('change','.onchange',function(){
 			}
 		});
 	}else{
-		//展示所有募資
+		showallraise();
+	}
+});
+
+//動態繫節搜尋bar
+$(document).on('click', '#search',function(){
+	$('#result').empty();
+	var text = $('#text').val();
+	if(text != ''){
+		//展示搜尋後的資料
 		$.ajax({
 			type:'get',
-			url:'/raisebystatus',
+			url:'/raisebykey/'+text,
 			success: function(data){
-				showdata(data);
+				console.log(data.length);
+				if(data.length > 0){
+					showdata(data);
+				}else{
+					$('<p/>').css('font-size','30px').html('查無資料，請重新查詢!').appendTo($('#result'));	
+				}	
 			},
 			error: function(e){
 				console.log('something is wrong!');	
 			}
 		});
-	}
-})
+	}else{
+		showallraise();
+	}	
+});
 
 </script>
 </head>

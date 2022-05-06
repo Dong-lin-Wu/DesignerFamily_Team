@@ -26,7 +26,7 @@
 					var forminsert = $('<form>').attr('action','/raiseindexdonext.controller').attr('method','Post');
 					$('<input/>').attr('type','hidden').attr('name','donext').attr('value','RaiseUpdate').appendTo(forminsert);
 					$('<input/>').attr('type','hidden').attr('name','rID').attr('value','${raiseNo}').appendTo(forminsert);
-					var buttoninsert = $('<input/>').attr('type','submit').attr('value','修改').css('font-size','25px').css('margin-bottom','20px');
+					var buttoninsert = $('<input/>').attr('type','submit').attr('value','修改').addClass('btn').css('font-size','25px').css('margin-bottom','20px');
 					buttoninsert.appendTo(forminsert);
 					forminsert.appendTo($('#result'));
 				}
@@ -73,11 +73,11 @@
 				//中間分隔線
 				$('<div/>').css('margin','20px 0px 20px 0px').css('border-bottom','solid 1px #e0e0e0').appendTo(div_product_image);
 				var div_flex =$('<div/>').css('display','flex')
-				$('<div/>').css('flex','67%').html(item.raiseDescribe).appendTo(div_flex);
-				var div_flex30 = $('<div/>').css('flex','30%').css('margin-left','3%');
+				$('<div/>').css('width','67%').html(item.raiseDescribe).appendTo(div_flex);
+				var div_flex30 = $('<div/>').css('width','30%').css('margin-left','3%');
 
 				$.each(item.raisePlanBeanSet,function(i,item){
-					var div_col = $('<div/>').css('width','380px').css('margin','10px');
+					var div_col = $('<div/>').css('width','360px').css('margin','10px');
 					var div_card = $('<div/>').addClass('card h-100');
 					//連結至付款
 					var a_img = $('<a/>').attr('href','/order/rasiepay').addClass('pa');
@@ -125,6 +125,8 @@
 	    })
 	    
 	});
+
+	
 </script>
 </head>
 

@@ -76,9 +76,9 @@
                                         <li>
                                             <!-- Search Box -->
                                             <form action="#" class="form-box f-right ">
-                                                <input type="text" name="Search" placeholder="搜尋...">
+                                                <input type="text" name="Search" placeholder="搜尋..." id="text">
                                                 <div class="search-icon">
-                                                    <i class="ti-search"></i>
+                                                    <i class="ti-search" id="search"></i>
                                                 </div>
                                             </form>
                                         </li>                                          

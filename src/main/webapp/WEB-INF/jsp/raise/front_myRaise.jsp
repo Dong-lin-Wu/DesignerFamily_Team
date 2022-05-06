@@ -9,7 +9,7 @@
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 		<script type="text/javascript">
 			$(document).ready(function () {
-				$('#result').empty();
+				$('#result_raise').empty();
 				var account = '${login.account}';
 				if (account == '') {
 					location.href = "/login";
@@ -64,14 +64,14 @@
 					div_col.appendTo(div_row);
 
 				});
-				div_row.appendTo($('#result'));
+				div_row.appendTo($('#result_raise'));
 			}
 			
 		</script>
 	</head>
 
 	<body>
-		<div id="result"></div>
+		<div id="result_raise"></div>
 
 	</body>
 
