@@ -1,5 +1,8 @@
 package tw.designerfamily.forum.model;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -57,15 +60,15 @@ public class CommentBean {
 		this.commentAccount = commentAccount;		
 	}
 	//新增
-	public CommentBean(String commentDescription, String commentCreatetime, String commentUpdatetime,
-			String commentAccount) {
+	public CommentBean(String commentAccount, String commentDescription) {
 		super();
 		this.commentDescription = commentDescription;
-		this.commentCreatetime = commentCreatetime;
-		this.commentUpdatetime = commentUpdatetime;
-		this.commentAccount = commentAccount;		
+		this.commentCreatetime = getTime();
+		this.commentUpdatetime = getTime();
+		this.commentAccount = commentAccount;
+		
 	}
-
+	
 
 	public int getCommentId() {
 		return commentId;
@@ -119,7 +122,11 @@ public class CommentBean {
 		this.forumBean = forumBean;
 	}
 	
-	
+	private String getTime(){
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		Date now = new Date();
+		return simpleDateFormat.format(now);		
+}
 
 	
 	

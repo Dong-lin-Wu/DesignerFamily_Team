@@ -12,6 +12,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="shortcut icon" type="image/x-icon" href="/assets/img/logo/logo2.png">
 <script
     src="https://code.jquery.com/jquery-3.6.0.js"
     integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -22,7 +23,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 <!-- Summer Note -->
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote-lite.min.js"></script>
-<title>Insert title here</title>
+<title>Mega|提案修正</title>
 <style>
 	div{
 		margin-top:20px;

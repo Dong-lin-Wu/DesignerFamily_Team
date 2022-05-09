@@ -1,50 +1,96 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"  pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>user product</title>
+<style>
+th{
+padding:10px 40px;
+}
+</style>
+ <script src="https://code.jquery.com/jquery-3.6.0.js"
+                    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
 </head>
 <body>
 
-	<a href="/product/userAddProduct"><button type="button" class="btn btn-outline-primary flip"
-		style="margin-bottom: 25px">新增商品</button></a>
+	<a href="/product/userAddProduct"><button type="button" class="btn"
+		style="margin-bottom: 25px">商品上架</button></a>
 	<div class="addp" style="display: none">
 	</div>
 	<div id="designer" role="tabpanel" aria-labelledby="DESIGNER">
-		<table style="text-align: center" class="example">
+		<table style="text-align: center;" class="example">
 			<thead>
-				<tr>
-					<th>圖片</th>
-					<th>標題</th>
-					<th>類別</th>
-					<th>價格</th>
-					<th>庫存</th>
-					<th>操作</th>
+				<tr style="border-bottom:2px #BEBEBE solid;">
+					<th style="width:120px;font-size: 20px">圖片</th>
+					<th style="font-size: 20px">標題</th>
+					<th style="font-size: 20px">類別</th>
+					<th style="font-size: 20px">價格</th>
+					<th style="font-size: 20px">庫存</th>
+					<th style="font-size: 20px">操作</th>
 				</tr>
 			</thead>
 			<tbody>
 				<c:forEach var="p" items="${pdetail}">
-					<tr>
-						<td width="100px"><img src="${p.commImg}" width="100%"></td>
-						<td>${p.commTitle}</td>
-						<td>${p.category}</td>
-						<td>${p.commPrice}</td>
-						<td>${p.commQuantity}</td>
-						<td>
+					<tr style="border-bottom:2px #F0F0F0 solid;">
+						<td style="padding:10px;font-size: 20p"><img src="${p.commImg}" width="100%"></td>
+						<td style="font-size: 20px">${p.commTitle}</td>
+						<td style="font-size: 20px">${p.category}</td>
+						<td style="font-size: 20px">${p.commPrice}</td>
+						<td style="font-size: 20px">${p.commQuantity}</td>
+						<td style="font-size: 20px">
 							<button style="display: inline"
-								class="btn btn-outline-danger btn-sm del" id="${p.commNo}">刪除</button>
+								class="btn pdel" id="${p.commNo}">刪除</button>
 							<a href="/product/productrevise/${p.commNo}"><button
-									style="display: inline" class="btn btn-outline-success btn-sm">修改</button></a>
-							<a href="/product/detail/${p.commNo }"><button
-									style="display: inline"
-									class="btn btn-outline-primary btn-sm det" id="${p.commNo}">詳細</button></a>
+									style="display: inline" class="btn ">修改</button></a>
 						</td>
 				</c:forEach>
 			</tbody>
 		</table>
 	</div>
+	
+	<script>
+
+	 $('.pdel').on("click",function(){
+		 var id= $(this).attr("id")
+		 console.log(id)
+		 swal({
+			  title: "提醒?",
+			  text: "請確認是否下架商品?",
+			  icon: "warning",
+			  buttons: ["取消", "確定"],
+			  dangerMode: true,
+			})
+			.then((willDelete) => {
+			  if (willDelete) {
+			 $.ajax({
+	         		type:"delete",
+	         		url:'/product/productlist/'+id,
+	         		success:function(){	
+	         		}
+	         	})
+	         	console.log($(this).parent().parent().remove())
+	               
+			    swal("已成功下架商品", {
+			      icon: "success",
+			      buttons: false,
+			      timer: 1500
+			    });
+			  }else {
+				  swal({				
+					  text: "商品保留",
+					  icon: "warning",
+					  button: false,
+	                  timer: 1500
+					})
+			  }
+			  
+			});
+
+ 		 })
+ 	
+	</script>
 
 </body>
 </html>

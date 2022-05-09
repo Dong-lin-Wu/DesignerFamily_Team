@@ -15,7 +15,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
-<title>forum_export</title>
+<title>後台管理-討論區</title>
 
 	<!-- Site favicon -->
     <link rel="apple-touch-icon" sizes="180x180" href="/vendors/images/apple-touch-icon.png">
@@ -124,8 +124,6 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 												</form>
 
                                                
-
-                                                
 												<form style="display:inline" action="forum_backend_gotocommentindex.controller" method="post">
 													
 													<input type="hidden" name="forumid" value="${dl.forumid}">
@@ -136,14 +134,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 												<a class="" href="/forum/detail/${dl.forumid}">
 												<button type="button" class="dropdown-item det" id="${dl.forumid}">
 												<i class="dw dw-eye"></i>詳細</button></a>
-												
-													
-													
-													<!--  <button type="button" class="dropdown-item" data-bs-toggle="modal" data-bs-target="#discussDetails${dl.getForumid()}"><i
-                                                            class="dw dw-edit1"></i>詳細</button>-->
-												
-												
-												                                          
+												                                    
                                                 <button type="button" class="dropdown-item delforum"
                                                     id="sa-warning"><i class="dw dw-delete-3"></i>
                                                     刪除</button>
@@ -164,7 +155,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 </div>
 <!-- js -->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
-<script src="/src/plugins/apexcharts/apexcharts.min.js"></script>
+
 <script src="/vendors/scripts/core.js"></script>
 <script src="/vendors/scripts/script.min.js"></script>
 <script src="/vendors/scripts/process.js"></script>
@@ -182,8 +173,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 <script src="/src/plugins/datatables/js/buttons.flash.min.js"></script>
 <script src="/src/plugins/datatables/js/pdfmake.min.js"></script>
 <script src="/src/plugins/datatables/js/vfs_fonts.js"></script>
-<!-- Datatable Setting js -->
-<script src="/vendors/scripts/datatable-setting.js"></script>
+
 <!-- add sweet alert js & css in footer -->
 <script src="/src/plugins/sweetalert2/sweetalert2.all.js"></script>
 <script src="/src/plugins/sweetalert2/sweet-alert.init.js"></script>
@@ -240,5 +230,7 @@ response.setDateHeader ("Expires", -1); // Prevents caching at the proxy server
 
 </script>
 
+<!-- Datatable Setting js -->
+<script src="/vendors/scripts/datatable-setting.js"></script>
 </body>
 </html>

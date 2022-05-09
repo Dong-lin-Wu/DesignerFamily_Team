@@ -5,6 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <link rel="shortcut icon" type="image/x-icon" href="/assets/img/logo/logo2.png">
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
 </head>
 <body>
 <%@ include file="../userheader.jsp"%>
@@ -88,12 +89,12 @@ $('.pay').on('click',function(){
 	
 	if($('#name').text()=="" || $('#phone').text()=="" || $('#address').text()=="" ){
 		
-		Swal.fire({
-            icon: 'error',
-            title: '請完整填寫資料',
-            showConfirmButton: false,
+		swal({
+            icon: 'warning',
+            text: '請完整填寫資料',
+            button: false,
             timer: 1500
-             })	
+             })
 		
 	}else{
 		

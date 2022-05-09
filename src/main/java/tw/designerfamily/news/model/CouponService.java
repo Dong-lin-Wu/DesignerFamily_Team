@@ -30,8 +30,16 @@ public class CouponService {
 	
 	//查詢by id
 	public CouponBean selectById(int id) {
-		Optional<CouponBean> op1 = cRo.findById(id);
+		Optional<CouponBean> op1 = cRo.findById(id);	
 		return op1.get();
+	}
+	
+
+	
+	//查詢by newsId
+	public CouponBean selectByNewsId(int newsId) {
+		CouponBean op1 = cRo.findByNewsId(newsId);
+		return op1;
 	}
 	
 	//修改
@@ -45,6 +53,11 @@ public class CouponService {
 		public void deleteById(int id) {
 			cRo.deleteById(id);		
 		}
+		
+//	查詢by account
+	public List<CouponList> findByCouponOwner(String HolderAccount) {
+		return cRo.findByCouponOwner(HolderAccount);
+	}	
 	
 	
 }

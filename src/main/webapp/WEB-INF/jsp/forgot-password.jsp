@@ -4,12 +4,10 @@
 
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <title>forgot-password</title>
+        <title>Mega|忘記密碼</title>
 
         <!-- Site favicon -->
-        <link rel="apple-touch-icon" sizes="180x180" href="/vendors/images/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/vendors/images/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/vendors/images/favicon-16x16.png">
+      <link rel="shortcut icon" type="image/x-icon" href="/assets/img/logo/logo2.png">
 
         <!-- Mobile Specific Metas -->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -60,7 +58,7 @@
                     <div class="col-md-6">
                         <div class="login-box bg-white box-shadow border-radius-10">
                             <div class="login-title">
-                                <h2 class="text-center" style="color:black">重新設定密碼</h2>
+                                <h2 class="text-center text-primary">重新設定密碼</h2>
                             </div>
                             <form action="/checkforgot-password" method="post" onsubmit="return checkAll()">
                                 <div class="input-group custom">
@@ -89,13 +87,16 @@
                                     </div>
                                     <div class="col-5">
                                         <div class="input-group mb-0">
-                                            <a class="btn btn-primary btn-lg btn-block" href="/login" style="color:black">登入</a>
+                                            <a class="btn btn-primary btn-lg btn-block" href="/login">登入</a>
                                         </div>
                                     </div>
                                 </div>
                             </form>
                             <div style="margin-top: 10px;">
                                 <em style="color:red">${error}</em>
+                            </div>
+                            <div style="margin-top: 30px; text-align: center;">
+                                <button class="btn btn-secondary" type="button" onclick="oneClick()">一鍵輸入</button>
                             </div>
                         </div>
                     </div>
@@ -126,6 +127,16 @@
 
             function checkAll() {
                 return email;
+            }
+
+            function resetAll() {
+                email = true;
+                $(".emailsp").html(``);
+            }
+
+            function oneClick() {
+                $("input").eq(0).val("ispanmega2022@gmail.com");
+                resetAll();
             }
         </script>
     </body>

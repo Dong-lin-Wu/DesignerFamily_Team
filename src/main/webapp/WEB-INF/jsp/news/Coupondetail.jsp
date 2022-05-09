@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,8 +29,16 @@
 			<td>${c.couponCode}</td>
 		</tr>
 		<tr>
-			<td style="vertical-align:text-top;width:150px">使用期間：</td>
-			<td>${c.couponStDate} ~ ${c.couponExpDate}</td>
+			<td style="vertical-align:text-top;width:150px">總張數：</td>
+			<td>${c.couponAmount}</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:text-top;width:150px">剩餘張數：</td>
+			<td>${c.couponRemaining}</td>
+		</tr>
+		<tr>
+			<td style="vertical-align:text-top;width:150px">創建時間：</td>
+			<td><fmt:formatDate value="${c.couponCrDate}" pattern="yyyy-MM-dd  HH:mm:ss" /></td>
 		</tr>
 		<tr>
 			<td style="vertical-align:text-top;width:150px">使用說明：</td>

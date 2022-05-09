@@ -79,14 +79,11 @@
                             <!-- Simple Datatable start -->
                             <div class="card-box mb-30">
                                 <div class="pd-20">
-                                    <h4 class="text-blue h4">優惠券清單</h4>
+                                    <h4 class="text-blue h4">已發放清單</h4>
                                        <div class="col-auto" style="padding: 0px">
-						<a href="/news" style="float:right">
-						<button type="button" class="btn btn-outline-secondary" style="margin:0px 0px 10px 10px">
-						<i class="fa-solid fa-money-check-dollar"></i> 活動清單</button></a>
-						<a href="coupon/couponList" style="float:right">
-						<button type="button" class="btn btn-outline-secondary" style="margin:0px 0px 10px 10px">
-						<i class="fa-solid fa-money-check-dollar"></i> 已發放清單</button></a>
+						<a href="/coupon" style="float:right">
+						<button type="button" class="btn btn-outline-secondary" style="margin-bottom:15px">
+						<i class="fa-solid fa-money-check-dollar"></i> 優惠券清單</button></a>
 					</div>                   
                                 </div>
                                 <div class="pb-20">
@@ -94,41 +91,27 @@
                                         <thead>
                                             <tr>
                                                <th class="table-plus">編號</th>
-                                               <th>優惠券名稱</th>
-						                       <th>使用期間</th>
-						                       <th>剩餘張數</th>					
+                                               <th>優惠券編號</th>
+                                               <th>使用者名稱</th>	
+						                       <th>領取時間</th> 				
 						                       <th>狀態</th> 
-                                               <th class="datatable-nosort">功能</th>
+                                               <th class="datatable-nosort"></th>
                                             </tr>
                                         </thead>
                                         <tbody id="insert">
-                                            <c:forEach var="c1" items="${list}">
+                                            <c:forEach var="c1" items="${couponlist}">
                                                 <tr>
-                                               <td>${c1.couponId}</td>
-							                   <td>${c1.couponName}</td>
-							                   <td>${c1.couponStDate} ~ ${c1.couponExpDate}</td>
-							                   <td>${c1.couponRemaining}</td>
-							                   <td>${c1.couponState}</td>							                   
+                                                <td>${c1.id}</td>
+                                               <td>${c1.couponbean.couponId}</td>
+							                   <td>${c1.holderAccount}</td>
+							                   <td><fmt:formatDate value="${c1.taketime}" pattern="yyyy-MM-dd  HH:mm:ss" /></td>
+							                   <td>${c1.state}</td>							                   
 										             <td>
                                                         <div class="dropdown">
                                                             <a class="btn btn-link font-24 p-0 line-height-1 no-arrow dropdown-toggle"
                                                                 href="#" role="button" data-toggle="dropdown">
                                                                 <i class="dw dw-more"></i>
                                                             </a>
-                                                            <div
-                                                                class="dropdown-menu dropdown-menu-right dropdown-menu-icon-list">
-                                                                <a class="" href="/coupon/detail/${c1.couponId}">
-                                                                 <button type="button" class="dropdown-item  det"
-                                                                        id="${c1.couponId}">
-                                                                <i class="dw dw-eye"></i>詳細</button></a>
-                                                                <a class="" href="/coupon/couponupdate/${c1.couponId}">
-                                                                    <button type="button" class="dropdown-item  upd"
-                                                                        id="${c1.couponId}"><i class="dw dw-edit2"></i>
-                                                                        修改</button></a>
-                                                                    <button type="button" class="dropdown-item  del"
-                                                                        id="${c1.couponId}"><i class="dw dw-delete-3"></i>
-                                                                        刪除</button>                          
-                                                            </div>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -165,68 +148,9 @@
                 <!-- add sweet alert js & css in footer -->
                 <script src="/src/plugins/sweetalert2/sweetalert2.all.js"></script>
                 <script src="/src/plugins/sweetalert2/sweet-alert.init.js"></script>
-
-                <script>
-                    $("#select").attr("action", "/admin/search.members");
-                </script>
-                
-                <script>
- $(document).ready(function() {
-	 
-	 $('.del').on("click",function(){
-		 var id= $(this).attr("id")
-		 console.log(id)
-		
-	 swal({
-             title: '確定刪除?',
-             text: "資料刪除後將無法復原!",
-             type: 'warning',
-             showCancelButton: true,
-             confirmButtonClass: 'btn btn-success',
-             cancelButtonClass: 'btn btn-danger',
-             confirmButtonText: '確定',
-             cancelButtonText: '取消'
-         }).then((result) => {
-             if (result.dismiss !== 'cancel') {
-                 
-            	 $.ajax({
-     				type:"delete",
-     				url:'/coupon/couponlist/'+id,
-     				success:function(){		
-     				}
-     		})	
-         		 var tr=$(this).parent().parent().parent().parent();
-                $('.data-table-export').DataTable().row(tr).remove().draw(false)
-                
-                 swal({
-                     title: '已刪除!',
-                     type: 'success',
-                     confirmButtonText: '確定'
-                 })
-             }
-         })
-
-	 })
- 		
-	 $('.det').on("click",function(e){
-		 e.preventDefault();
-		 var id=$(this).attr("id");	 
-		 console.log(id);
-		 Swal.fire({
-			 html:'<iframe src = /coupon/detail/'+id+' width="650px" height="330px">',
-		      width:"auto"
-			})
-	 })
-	 
-	 
-	 
-});
- 
-	</script>
-                
- 
-            <!-- Datatable Setting js -->
-                <script src="/vendors/scripts/datatable-setting.js"></script>     
+             
+         <!-- Datatable Setting js -->
+         <script src="/vendors/scripts/datatable-setting.js"></script>     
               
         </body>
 

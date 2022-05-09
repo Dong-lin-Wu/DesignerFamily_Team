@@ -5,12 +5,10 @@
 
         <head>
             <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-            <title>registerform</title>
+            <title>Mega|註冊</title>
 
             <!-- Site favicon -->
-            <link rel="apple-touch-icon" sizes="180x180" href="/vendors/images/apple-touch-icon.png">
-            <link rel="icon" type="image/png" sizes="32x32" href="/vendors/images/favicon-32x32.png">
-            <link rel="icon" type="image/png" sizes="16x16" href="/vendors/images/favicon-16x16.png">
+           <link rel="shortcut icon" type="image/x-icon" href="/assets/img/logo/logo2.png">
 
             <!-- Mobile Specific Metas -->
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -34,10 +32,7 @@
                 gtag('js', new Date());
 
                 gtag('config', 'UA-119386393-1');
-            </script>
-            <style>
-
-            </style>
+            </script>     
         </head>
 
         <body class="login-page">
@@ -50,7 +45,7 @@
                     </div>
                     <div class="login-menu">
                         <ul>
-                            <li><a href="/login" style="color:black">登入</a></li>
+                            <li><a href="/index" style="color:black">登入</a></li>
                         </ul>
                     </div>
                 </div>
@@ -59,7 +54,7 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-md-6 col-lg-7">
-                            <img src="/vendors/images/register-page-img.png" alt="">
+                            <img src="/assets/cover.png" alt="">
                         </div>
                         <div class="col-md-6 col-lg-5">
                             <div class="register-box bg-white box-shadow border-radius-10">
@@ -227,6 +222,7 @@
                                 <div style="text-align: center;">
                                     <button class="btn btn-secondary" type="button" onclick="oneClick()">一鍵輸入</button>
                                 </div>
+                                <br/>
                             </div>
                         </div>
                     </div>

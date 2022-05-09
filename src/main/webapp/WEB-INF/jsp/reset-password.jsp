@@ -4,12 +4,10 @@
 
     <head>
         <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-        <title>forgot-password</title>
+        <title>Mega|忘記密碼</title>
 
         <!-- Site favicon -->
-        <link rel="apple-touch-icon" sizes="180x180" href="/vendors/images/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="/vendors/images/favicon-32x32.png">
-        <link rel="icon" type="image/png" sizes="16x16" href="/vendors/images/favicon-16x16.png">
+        <link rel="shortcut icon" type="image/x-icon" href="/assets/img/logo/logo2.png">
 
         <!-- Mobile Specific Metas -->
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -40,7 +38,7 @@
         <div class="login-header box-shadow">
             <div class="container-fluid d-flex justify-content-between align-items-center">
                 <div class="brand-logo">
-                    <a href="/login">
+                    <a href="/index">
                         <img src="/assets/logob.png" alt="">
                     </a>
                 </div>

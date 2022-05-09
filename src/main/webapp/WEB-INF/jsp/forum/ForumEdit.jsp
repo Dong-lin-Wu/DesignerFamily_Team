@@ -64,8 +64,8 @@ span {
 				      <span id="idspd"></span><br/>
 				  </div>				  				  
 			  
-<!-- 				  <input type="hidden" name="nextto" value="ForumEdit"> -->
-<%-- 				  <input type="hidden" name="edit" value="${disList[param.id].forumid}"> --%>
+				  <input type="hidden" name="nextto" value="ForumEdit">
+				  <input type="hidden" name="edit" value="${disList[param.id].forumid}">
 				 
 <!-- 				  <button type="submit" class="btn btn-primary">提交</button> -->
 				  <button type="button" class="btn btn-primary" onclick="forum_submit()">提交</button>
@@ -92,15 +92,15 @@ span {
       let theDescribe= '${disList[param.id].forumDescription}';
       
       $(".note-editable").children().html(theDescribe);
-		$("#Dis_Descri").val(theDescribe);//無法送出！待修改
+		$("#Dis_Descri").val(theDescribe);
          
    function forum_submit(){	   
 	    var theDescri = $('.note-editable').html();
 	    $('#Dis_Descri').val(theDescri);
-	    var boolean_checkrequired = $('#form_forum_addnewpost')[0].reportValidity();
+	    var boolean_checkrequired = $('#form_forum_edit')[0].reportValidity();
 // 	    console.log(theDescri);
 	    if(boolean_checkrequired && theDescri != "<br>"){
-	    	$('#form_forum_addnewpost').submit();
+	    	$('#form_forum_edit').submit();
 // 			console.log("sumbit OK");
 		}
   	  	

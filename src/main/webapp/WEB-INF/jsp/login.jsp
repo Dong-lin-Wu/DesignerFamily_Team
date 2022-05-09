@@ -5,12 +5,10 @@
 
         <head>
             <meta http-equiv="content-type" content="text/html; charset=UTF-8">
-            <title>login</title>
+            <title>Mega|登入</title>
 
             <!-- Site favicon -->
-            <link rel="apple-touch-icon" sizes="180x180" href="/vendors/images/apple-touch-icon.png">
-            <link rel="icon" type="image/png" sizes="32x32" href="/vendors/images/favicon-32x32.png">
-            <link rel="icon" type="image/png" sizes="16x16" href="/vendors/images/favicon-16x16.png">
+           <link rel="shortcut icon" type="image/x-icon" href="/assets/img/logo/logo2.png">
 
             <!-- Mobile Specific Metas -->
             <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -41,7 +39,7 @@
             <div class="login-header box-shadow">
                 <div class="container-fluid d-flex justify-content-between align-items-center">
                     <div class="brand-logo">
-                        <a href="/login">
+                        <a href="/index">
                             <img src="/assets/logob.png" alt="">
                         </a>
                     </div>
@@ -56,12 +54,12 @@
                 <div class="container">
                     <div class="row align-items-center">
                         <div class="col-md-6 col-lg-7">
-                            <img src="/vendors/images/login-page-img.png" alt="">
+                            <img src="/assets/cover.png" alt="">
                         </div>
-                        <div class="col-md-6 col-lg-5">
+                        <div class="col-md-6 col-lg-5" style="padding-top:50px">
                             <div class="login-box bg-white box-shadow border-radius-10">
                                 <div class="login-title">
-                                    <h2 class="text-center">登入Mega</h2>
+                                    <h2 class="text-center" style="color:black">登入Mega</h2>
                                 </div>
                                 <form action="/login" method="post">
                                     <div class="input-group custom">
@@ -100,16 +98,19 @@
                                                 <button class="btn btn-primary btn-lg btn-block"
                                                     type="submit">登入</button>
                                             </div>
-                                            <div class="font-16 weight-600 pt-10 pb-10 text-center"
+                                           <div class="font-16 weight-600 pt-10 pb-10 text-center"
                                                 data-color="#707373">Mega新朋友? <a href="/registerform" style="color:#d9ab48">註冊</a></div>
                                         </div>
-                                    </div>
+                                        </div>
                                 </form>
+                                    </div>
                                 <div style="margin-top: 30px; text-align: center;">
                                     <button class="btn btn-secondary" type="button"
-                                        onclick="oneClick()">一鍵輸入(管理員)</button>
+                                        onclick="oneClick()">管理員</button>
                                     <button class="btn btn-secondary" type="button"
-                                        onclick="twoClick()">一鍵輸入(一般會員)</button>
+                                        onclick="twoClick()">設計師</button>
+                                    <button class="btn btn-secondary" type="button"
+                                        onclick="threeClick()">一般會員</button>
                                 </div>
                             </div>
                         </div>
@@ -133,6 +134,11 @@
                 }
 
                 function twoClick() {
+                    $("input").eq(0).val("吳逸恩");
+                    $("input").eq(1).val("123456");
+                }
+
+                function threeClick() {
                     $("input").eq(0).val("吳東霖");
                     $("input").eq(1).val("123456");
                 }

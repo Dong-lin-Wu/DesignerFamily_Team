@@ -5,6 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+ <link rel="shortcut icon" type="image/x-icon" href="/assets/img/logo/logo2.png">
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -16,26 +17,11 @@
 	crossorigin="anonymous"></script>
 	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
 
-<title>商品更新</title>
+<title>Mega|商品更新</title>
 </head>
 <body>
 	<div class='container'>
-		<form action="/product" method="post" style="margin-top: 1em;">
-			<input type="hidden" name="donext" value="ProductSearch"> <input
-				class="form-control" type="hidden" name="search_keyword"
-				id="search_keyword" style="display: inline" />
-			<button type="submit" class="btn btn-light"
-				style="margin-bottom: 5px; display: flex; align-items: center;">
-				<svg xmlns="http://www.w3.org/2000/svg" width="20" height="20"
-					fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
-  <path fill-rule="evenodd"
-						d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z" />
-  <path fill-rule="evenodd"
-						d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z" />
-</svg>
-				&nbsp;&nbsp;商品清單
-			</button>
-		</form>
+	<a href="/index"><img src="/assets/logob.png" width="30%"></a>
 		<h3 style="margin-top: 20px">商品資料修改</h3>
 		<form action="/product/revisesuccess" method="POST" enctype="multipart/form-data">
 			<div class="mb-3">

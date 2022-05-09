@@ -49,6 +49,7 @@ public class NewsBean implements Serializable{
 	@Column(name = "NEWSNOTE")
 	private String newsNote;
 	
+
 		
 	public NewsBean() {		
 	}
@@ -79,7 +80,8 @@ public class NewsBean implements Serializable{
 		this.newsNote = newsNote;
 	}
 	
-	
+		
+		
 	public int getNewsId() {
 		return newsId;
 	}
@@ -187,8 +189,8 @@ public class NewsBean implements Serializable{
 		this.newsNote = newsNote;
 	}
 	
-		
 	
+			
 }
 
 

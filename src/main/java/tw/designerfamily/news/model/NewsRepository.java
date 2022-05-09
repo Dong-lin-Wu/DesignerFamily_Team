@@ -25,9 +25,6 @@ public interface NewsRepository extends JpaRepository<NewsBean, Integer> {
 
 	@Query(value="select * from News where NewsType = '期間限定'  ", nativeQuery = true)
 	public List<NewsBean> findType3();
-	
-	
-	@Query(value="select * from News where NewsType = '實體活動'  ", nativeQuery = true)
-	public List<NewsBean> findType4();
+
 	
 }

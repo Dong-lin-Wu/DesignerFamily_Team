@@ -2,8 +2,6 @@ package tw.designerfamily.news.controller;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,6 +23,7 @@ public class NewsController {
 	@Autowired
 	private NewsService nService;
 
+	
 	// 顯示全部(首頁)
 	@RequestMapping
 	public String showNewsIndex(Model m) {
@@ -52,6 +51,7 @@ public class NewsController {
 		nService.deleteById(id);
 	}
 
+	
 	// 新增
 	@PostMapping(path = "/newsAdd")
 	public String addNews(@RequestParam("newsType") String type, @RequestParam("newsTitle") String title,
@@ -74,6 +74,7 @@ public class NewsController {
 		m.addAttribute("n", n);
 		return "news/Newsdetail";
 	}
+	
 
 	// 修改
 	@GetMapping(path = "/newsupdate/{id}")
@@ -90,21 +91,19 @@ public class NewsController {
 			@RequestParam("newsStDate") String StDate,
 			@RequestParam("newsExpDate") String ExpDate,
 			@RequestParam("newsContent") String content,
-			@RequestParam(value = "news_PicBase64", required = false) String picbase64,
-			@RequestParam(value = "newsNote", required = false) String note) {
+			@RequestParam("news_PicBase64") String picbase64,
+			@RequestParam("newsNote") String note) {
 
 		nService.update(new NewsBean(id, type, title, subtitle,StDate,ExpDate, content, picbase64, note));
 		return "redirect:/news";
 	}
 
+	
 	// 轉址
 	@GetMapping(path = "/newsadd")
 	public String processActionAdd() {
 		return "news/NewsAddForm";
 	}
 
-	
-
-	
 	
 }

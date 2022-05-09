@@ -54,424 +54,203 @@
               </div>
             </div>
           </div>
-        </div>
-      </div>
+      <h2 style="padding-left:20px">商品推薦</h2>
+         <hr> 
+         <br>
       <!-- Single Product Area End-->
-      <!--? Product Description Area Start-->
-      <section class="product_description_area">
-        <div class="container">
-          <ul class="nav nav-tabs" id="myTab" role="tablist">
-            <li class="nav-item">
-              <a class="nav-link" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home"
-              aria-selected="true">設計理念</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile"
-              aria-selected="false">產品規格</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact"
-              aria-selected="false">問與答</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link active" id="review-tab" data-toggle="tab" href="#review" role="tab" aria-controls="review"
-              aria-selected="false">購買評價</a>
-            </li>
-          </ul>
-          <div class="tab-content" id="myTabContent">
-            <div class="tab-pane fade" id="home" role="tabpanel" aria-labelledby="home-tab">
-              <p>
-                Beryl Cook is one of Britain’s most talented and amusing artists
-                .Beryl’s pictures feature women of all shapes and sizes enjoying
-                themselves .Born between the two world wars, Beryl Cook eventually
-                left Kendrick School in Reading at the age of 15, where she went
-                to secretarial school and then into an insurance office. After
-                moving to London and then Hampton, she eventually married her next
-                door neighbour from Reading, John Cook. He was an officer in the
-                Merchant Navy and after he left the sea in 1956, they bought a pub
-                for a year before John took a job in Southern Rhodesia with a
-                motor company. Beryl bought their young son a box of watercolours,
-                and when showing him how to use it, she decided that she herself
-                quite enjoyed painting. John subsequently bought her a child’s
-                painting set for her birthday and it was with this that she
-                produced her first significant work, a half-length portrait of a
-                dark-skinned lady with a vacant expression and large drooping
-                breasts. It was aptly named ‘Hangover’ by Beryl’s husband and
-              </p>
-              <p>
-                It is often frustrating to attempt to plan meals that are designed
-                for one. Despite this fact, we are seeing more and more recipe
-                books and Internet websites that are dedicated to the act of
-                cooking for one. Divorce and the death of spouses or grown
-                children leaving for college are all reasons that someone
-                accustomed to cooking for more than one would suddenly need to
-                learn how to adjust all the cooking practices utilized before into
-                a streamlined plan of cooking that is more efficient for one
-                person creating less
-              </p>
+      <!-- Product Description Area Start-->
+      <div class="container">
+			  <div class="sliderTwo">
+			    	<!--cate1 part1 -->
+				    <div>
+				      <div class="d-flex text-center">
+				        <c:forEach var="o" items="${cate1}" end="3">
+                          <c:if test="${o.category==comm.category}">
+				          <div class="col-sm">
+				          <a href="/product/${o.commNo}">
+				            <img src="${o.commImg}" style="display:block; margin:auto; width:80%"></a>
+				            <br>
+				            <h3>${o.commTitle}</h3>
+				            <h3 style="color: #670000">NT$ ${o.commPrice}</h3>
+				          </div>
+				          </c:if>
+				         </c:forEach> 
+				         
+				         <c:forEach var="o" items="${cate2}" end="3">
+                          <c:if test="${o.category==comm.category}">
+				          <div class="col-sm">
+				          <a href="/product/${o.commNo}">
+				            <img src="${o.commImg}" style="display:block; margin:auto; width:80%"></a>
+				            <br>
+				            <h3>${o.commTitle}</h3>
+				            <h3 style="color: #670000">NT$ ${o.commPrice}</h3>
+				          </div>
+				          </c:if>
+				         </c:forEach> 
+				         
+				         <c:forEach var="o" items="${cate3}" end="3">
+                          <c:if test="${o.category==comm.category}">
+				          <div class="col-sm">
+				          <a href="/product/${o.commNo}">
+				            <img src="${o.commImg}" style="display:block; margin:auto; width:80%"></a>
+				            <br>
+				            <h3>${o.commTitle}</h3>
+				            <h3 style="color: #670000">NT$ ${o.commPrice}</h3>
+				          </div>
+				          </c:if>
+				         </c:forEach>
+				         
+				         <c:forEach var="o" items="${cate4}" end="3">
+                          <c:if test="${o.category==comm.category}">
+				          <div class="col-sm">
+				          <a href="/product/${o.commNo}">
+				            <img src="${o.commImg}" style="display:block; margin:auto; width:80%"></a>
+				            <br>
+				            <h3>${o.commTitle}</h3>
+				            <h3 style="color: #670000">NT$ ${o.commPrice}</h3>
+				          </div>
+				          </c:if>
+				         </c:forEach>
+				         
+				         <c:forEach var="o" items="${cate5}" end="3">
+                          <c:if test="${o.category==comm.category}">
+				          <div class="col-sm">
+				          <a href="/product/${o.commNo}">
+				            <img src="${o.commImg}" style="display:block; margin:auto; width:80%"></a>
+				            <br>
+				            <h3>${o.commTitle}</h3>
+				            <h3 style="color: #670000">NT$ ${o.commPrice}</h3>
+				          </div>
+				          </c:if>
+				         </c:forEach>
+				         
+				         <c:forEach var="o" items="${cate6}" end="3">
+                          <c:if test="${o.category==comm.category}">
+				          <div class="col-sm">
+				          <a href="/product/${o.commNo}">
+				            <img src="${o.commImg}" style="display:block; margin:auto; width:80%"></a>
+				            <br>
+				            <h3>${o.commTitle}</h3>
+				            <h3 style="color: #670000">NT$ ${o.commPrice}</h3>
+				          </div>
+				          </c:if>
+				         </c:forEach>
+				          <c:forEach var="o" items="${cate7}" end="3">
+                          <c:if test="${o.category==comm.category}">
+				          <div class="col-sm">
+				          <a href="/product/${o.commNo}">
+				            <img src="${o.commImg}" style="display:block; margin:auto; width:80%"></a>
+				            <br>
+				            <h3>${o.commTitle}</h3>
+				            <h3 style="color: #670000">NT$ ${o.commPrice}</h3>
+				          </div>
+				          </c:if>
+				         </c:forEach>     
+				       </div>
+			      	</div>
+			        <!--cate1 part2 -->
+			         <div>
+				      <div class="d-flex text-center">
+				        <c:forEach var="o" items="${cate1}" begin="4" end="7">
+                             <c:if test="${o.category==comm.category}">
+				          <div class="col-sm">
+				          <a href="/product/${o.commNo}">
+				            <img src="${o.commImg}" style="display:block; margin:auto; width:80%"></a>
+				            <br>
+				            <h3>${o.commTitle}</h3>
+				            <h3 style="color: #670000">NT$ ${o.commPrice}</h3>
+				          </div>
+				          </c:if>
+				         </c:forEach>
+				         
+				          <c:forEach var="o" items="${cate2}" begin="4" end="7">
+                             <c:if test="${o.category==comm.category}">
+				          <div class="col-sm">
+				          <a href="/product/${o.commNo}">
+				            <img src="${o.commImg}" style="display:block; margin:auto; width:80%"></a>
+				            <br>
+				            <h3>${o.commTitle}</h3>
+				            <h3 style="color: #670000">NT$ ${o.commPrice}</h3>
+				          </div>
+				          </c:if>
+				         </c:forEach>
+				         
+				         <c:forEach var="o" items="${cate3}" begin="4" end="7">
+                             <c:if test="${o.category==comm.category}">
+				          <div class="col-sm">
+				          <a href="/product/${o.commNo}">
+				            <img src="${o.commImg}" style="display:block; margin:auto; width:80%"></a>
+				            <br>
+				            <h3>${o.commTitle}</h3>
+				            <h3 style="color: #670000">NT$ ${o.commPrice}</h3>
+				          </div>
+				          </c:if>
+				         </c:forEach>  
+				         
+				         <c:forEach var="o" items="${cate4}" begin="4" end="7">
+                             <c:if test="${o.category==comm.category}">
+				          <div class="col-sm">
+				          <a href="/product/${o.commNo}">
+				            <img src="${o.commImg}" style="display:block; margin:auto; width:80%"></a>
+				            <br>
+				            <h3>${o.commTitle}</h3>
+				            <h3 style="color: #670000">NT$ ${o.commPrice}</h3>
+				          </div>
+				          </c:if>
+				         </c:forEach>  
+				         
+				         <c:forEach var="o" items="${cate5}" begin="4" end="7">
+                             <c:if test="${o.category==comm.category}">
+				          <div class="col-sm">
+				          <a href="/product/${o.commNo}">
+				            <img src="${o.commImg}" style="display:block; margin:auto; width:80%"></a>
+				            <br>
+				            <h3>${o.commTitle}</h3>
+				            <h3 style="color: #670000">NT$ ${o.commPrice}</h3>
+				          </div>
+				          </c:if>
+				         </c:forEach>   
+				         
+				         <c:forEach var="o" items="${cate6}" begin="4" end="7">
+                             <c:if test="${o.category==comm.category}">
+				          <div class="col-sm">
+				          <a href="/product/${o.commNo}">
+				            <img src="${o.commImg}" style="display:block; margin:auto; width:80%"></a>
+				            <br>
+				            <h3>${o.commTitle}</h3>
+				            <h3 style="color: #670000">NT$ ${o.commPrice}</h3>
+				          </div>
+				          </c:if>
+				         </c:forEach> 
+				         
+				         <c:forEach var="o" items="${cate7}" begin="4" end="7">
+                             <c:if test="${o.category==comm.category}">
+				          <div class="col-sm">
+				          <a href="/product/${o.commNo}">
+				            <img src="${o.commImg}" style="display:block; margin:auto; width:80%"></a>
+				            <br>
+				            <h3>${o.commTitle}</h3>
+				            <h3 style="color: #670000">NT$ ${o.commPrice}</h3>
+				          </div>
+				          </c:if>
+				         </c:forEach>                       
+				       </div>
+			      	</div>
+			  </div>
             </div>
-            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
-              <div class="table-responsive">
-                <table class="table">
-                  <tbody>
-                    <tr>
-                      <td>
-                        <h5>Width</h5>
-                      </td>
-                      <td>
-                        <h5>128mm</h5>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <h5>Height</h5>
-                      </td>
-                      <td>
-                        <h5>508mm</h5>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <h5>Depth</h5>
-                      </td>
-                      <td>
-                        <h5>85mm</h5>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <h5>Weight</h5>
-                      </td>
-                      <td>
-                        <h5>52gm</h5>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <h5>Quality checking</h5>
-                      </td>
-                      <td>
-                        <h5>yes</h5>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <h5>Freshness Duration</h5>
-                      </td>
-                      <td>
-                        <h5>03days</h5>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <h5>When packeting</h5>
-                      </td>
-                      <td>
-                        <h5>Without touch of hand</h5>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td>
-                        <h5>Each Box contains</h5>
-                      </td>
-                      <td>
-                        <h5>60pcs</h5>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
-              <div class="row">
-                <div class="col-lg-6">
-                  <div class="comment_list">
-                    <div class="review_item">
-                      <div class="media">
-                        <div class="d-flex">
-                          <img src="/assets/img/gallery/review-1.png" alt="" />
-                        </div>
-                        <div class="media-body">
-                          <h4>Blake Ruiz</h4>
-                          <h5>12th Feb, 2017 at 05:56 pm</h5>
-                          <a class="reply_btn" href="#">Reply</a>
-                        </div>
-                      </div>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna
-                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                        ullamco laboris nisi ut aliquip ex ea commodo
-                      </p>
-                    </div>
-                    <div class="review_item reply">
-                      <div class="media">
-                        <div class="d-flex">
-                          <img src="/assets/img/gallery/review-2.png" alt="" />
-                        </div>
-                        <div class="media-body">
-                          <h4>Blake Ruiz</h4>
-                          <h5>12th Feb, 2017 at 05:56 pm</h5>
-                          <a class="reply_btn" href="#">Reply</a>
-                        </div>
-                      </div>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna
-                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                        ullamco laboris nisi ut aliquip ex ea commodo
-                      </p>
-                    </div>
-                    <div class="review_item">
-                      <div class="media">
-                        <div class="d-flex">
-                          <img src="/assets/img/gallery/review-3.png" alt="" />
-                        </div>
-                        <div class="media-body">
-                          <h4>Blake Ruiz</h4>
-                          <h5>12th Feb, 2017 at 05:56 pm</h5>
-                          <a class="reply_btn" href="#">Reply</a>
-                        </div>
-                      </div>
-                      <p>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                        sed do eiusmod tempor incididunt ut labore et dolore magna
-                        aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                        ullamco laboris nisi ut aliquip ex ea commodo
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="col-lg-6">
-                  <div class="review_box">
-                    <h4>Post a comment</h4>
-                    <form class="row contact_form" action="contact_process.php" method="post" id="contactForm"
-                    novalidate="novalidate">
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Your Full name" />
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Email Address" />
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <input type="text" class="form-control" id="number" name="number" placeholder="Phone Number" />
-                      </div>
-                    </div>
-                    <div class="col-md-12">
-                      <div class="form-group">
-                        <textarea class="form-control" name="message" id="message" rows="1"
-                        placeholder="Message"></textarea>
-                      </div>
-                    </div>
-                    <div class="col-md-12 text-right">
-                      <button type="submit" value="submit" class="btn">
-                        Submit Now
-                      </button>
-                    </div>
-                  </form>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="tab-pane fade show active" id="review" role="tabpanel" aria-labelledby="review-tab">
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="row total_rate">
-                  <div class="col-6">
-                    <div class="box_total">
-                      <h5>Overall</h5>
-                      <h4>4.0</h4>
-                      <h6>(03 Reviews)</h6>
-                    </div>
-                  </div>
-                  <div class="col-6">
-                    <div class="rating_list">
-                      <h3>Based on 3 Reviews</h3>
-                      <ul class="list">
-                        <li>
-                          <a href="#">5 Star
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i>
-                            <i class="fa fa-star"></i> 01</a>
-                          </li>
-                          <li>
-                            <a href="#">4 Star
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i>
-                              <i class="fa fa-star"></i> 01</a>
-                            </li>
-                            <li>
-                              <a href="#">3 Star
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i>
-                                <i class="fa fa-star"></i> 01</a>
-                              </li>
-                              <li>
-                                <a href="#">2 Star
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i> 01</a>
-                                </li>
-                                <li>
-                                  <a href="#">1 Star
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i>
-                                    <i class="fa fa-star"></i> 01</a>
-                                  </li>
-                                </ul>
-                              </div>
-                            </div>
-                          </div>
-                          <div class="review_list">
-                            <div class="review_item">
-                              <div class="media">
-                                <div class="d-flex">
-                                  <img src="/assets/img/gallery/review-1.png" alt="" />
-                                </div>
-                                <div class="media-body">
-                                  <h4>Blake Ruiz</h4>
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i>
-                                </div>
-                              </div>
-                              <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                sed do eiusmod tempor incididunt ut labore et dolore magna
-                                aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                ullamco laboris nisi ut aliquip ex ea commodo
-                              </p>
-                            </div>
-                            <div class="review_item">
-                              <div class="media">
-                                <div class="d-flex">
-                                  <img src="/assets/img/gallery/review-2.png" alt="" />
-                                </div>
-                                <div class="media-body">
-                                  <h4>Blake Ruiz</h4>
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i>
-                                </div>
-                              </div>
-                              <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                sed do eiusmod tempor incididunt ut labore et dolore magna
-                                aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                ullamco laboris nisi ut aliquip ex ea commodo
-                              </p>
-                            </div>
-                            <div class="review_item">
-                              <div class="media">
-                                <div class="d-flex">
-                                  <img src="/assets/img/gallery/review-3.png" alt="" />
-                                </div>
-                                <div class="media-body">
-                                  <h4>Blake Ruiz</h4>
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i>
-                                  <i class="fa fa-star"></i>
-                                </div>
-                              </div>
-                              <p>
-                                Lorem ipsum dolor sit amet, consectetur adipisicing elit,
-                                sed do eiusmod tempor incididunt ut labore et dolore magna
-                                aliqua. Ut enim ad minim veniam, quis nostrud exercitation
-                                ullamco laboris nisi ut aliquip ex ea commodo
-                              </p>
-                            </div>
-                          </div>
-                        </div>
-                        <div class="col-lg-6">
-                          <div class="review_box">
-                            <h4>Add a Review</h4>
-                            <p>Your Rating:</p>
-                            <ul class="list">
-                              <li>
-                                <a href="#">
-                                  <i class="fa fa-star"></i>
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#">
-                                  <i class="fa fa-star"></i>
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#">
-                                  <i class="fa fa-star"></i>
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#">
-                                  <i class="fa fa-star"></i>
-                                </a>
-                              </li>
-                              <li>
-                                <a href="#">
-                                  <i class="fa fa-star"></i>
-                                </a>
-                              </li>
-                            </ul>
-                            <p>Outstanding</p>
-                            <form class="row contact_form" action="contact_process.php" method="post" novalidate="novalidate">
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <input type="text" class="form-control" name="name" placeholder="Your Full name" />
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <input type="email" class="form-control" name="email" placeholder="Email Address" />
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <input type="text" class="form-control" name="number" placeholder="Phone Number" />
-                                </div>
-                              </div>
-                              <div class="col-md-12">
-                                <div class="form-group">
-                                  <textarea class="form-control" name="message" rows="1" placeholder="Review"></textarea>
-                                </div>
-                              </div>
-                              <div class="col-md-12 text-right">
-                                <button type="submit" value="submit" class="btn">
-                                  Submit Now
-                                </button>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </section>
-              </main>  
+  
+</main>  
             <%@ include file="../userfooter.jsp"%>   
             <script>
+            $(document).ready(function(){
+            	  $(".sliderTwo").slick({
+            	    rows: 1,
+            	    infinite: true,
+            	    slidesToShow: 1,
+            	    slidesToScroll: 1,
+            	    dots: true, 
+            	  });
+            	  });  
             
             $('#value').change(function(){
             	var count=Number($('#value').attr('max'));
@@ -486,39 +265,20 @@
             	}
             })
             
-            
-            $('.add').on('click',function(e){                 
-            	var id=$(this).attr("id");
-            	e.preventDefault();
-            	var a = Number($("#qty").text());
-            	var b = Number(1);
-            	a+=b
-            	$("#qty").text(a)
-            	
-            	if(${login.account == comm.designer}){
-            		Swal.fire({
-                        icon: 'warning',
-                        title: '不能購買自己的商品',
-                        showConfirmButton: false,
-                        timer: 1500
-                         })   
-        		}else{
-        			Swal.fire({
-                        icon: 'success',
-                        title: '商品已加入購物車',
-                        showConfirmButton: false,
-                        timer: 1500
-                         })   
-        			
-        		}
-       	
-            	})
+                   
             	
             	$(function(){
             	var num=Number(0);
             	var cart = Number($('#cartval').text());
             	console.log(cart)
-            	$('.add').click(function(){
+            	var id=$(this).attr("id");            	
+            	var a = Number($("#qty").text());
+            	var b = Number(1);
+            	a+=b
+            	var max=Number($('#value').attr('max'));
+            	$("#qty").text(a)
+            	$('.add').click(function(e){
+            		e.preventDefault();
             		num++
             		console.log(num)
             		if(num<=1 & ${login.account != comm.designer}){
@@ -526,20 +286,30 @@
             		}
             		
             		if(${login.account == comm.designer}){
-            			Swal.fire({
+            			swal({
                             icon: 'warning',
-                            title: '不能購買自己的商品',
-                            showConfirmButton: false,
+                            text: '不能購買自己的商品',
+                            button: false,
                             timer: 1500
                              })   
             		}else{
+            			
+            			swal({
+            				  text: "商品已加入購物車",
+            				  icon: "success",
+            				  button: false,
+            				  timer: 1500
+            				});
             			
             			$.ajax({
                     		type:'post',
                     		url:'/order/mycart',
                     		dataType:"json",
               	            data:{"qty":$("#value").val(), "id":$(this).attr("id"), "val":$("#qty").text(),"count":$('#cartval').text(),    	   
-              	            },      				           		
+              	            },
+              	            success:function(data){
+   	            		 	
+              	            }
                     	})
             			
             		}
@@ -573,10 +343,10 @@
             		$('#value').val(max); 
             	}
             	if(a==max){
-            		Swal.fire({
+            		swal({
                         icon: 'error',
-                        title: '已達購買最大數量',
-                        showConfirmButton: false,
+                        text: '已達購買最大數量',
+                        button: false,
                         timer: 1500
                          })
             	}

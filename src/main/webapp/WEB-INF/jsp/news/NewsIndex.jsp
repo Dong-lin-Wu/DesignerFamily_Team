@@ -92,9 +92,9 @@
                                             <tr>
                                                 <th class="table-plus">編號</th>
                                                 <th>活動類型</th>
-						                        <th>活動標題</th>
-						                        <th>創建時間</th>
-						                        <th>活動照片</th> 
+						                        <th class="datatable-nosort">活動標題</th>
+						                        <th>活動期間</th>
+						                        <th class="datatable-nosort">活動照片</th> 
                                                 <th class="datatable-nosort">功能</th>
                                             </tr>
                                         </thead>
@@ -104,7 +104,7 @@
                                                <td>${n1.newsId}</td>
 							                   <td>${n1.newsType}</td>
 							                   <td>${n1.newsTitle}</td>
-							                   <td><fmt:formatDate value="${n1.newsCrDate}" pattern="yyyy-MM-dd  HH:mm:ss" /></td>
+							                   <td>${n1.newsStDate} ~ ${n1.newsExpDate}</td>
 							                   <td><img style="width:100px" src="${n1.getNewsPicBase64()}"></td>
 										             <td>
                                                         <div class="dropdown">
@@ -210,8 +210,8 @@
 		 var id=$(this).attr("id");	 
 		 console.log(id);
 		 Swal.fire({
-		      html:'<iframe src = /news/detail/'+id+' width="800px" height="500px">',
-		      width:"1030px"
+		      html:'<iframe src = /news/detail/'+id+' width="900px" height="500px">',
+		      width:"1100px"
 			})
 	 })
 	 

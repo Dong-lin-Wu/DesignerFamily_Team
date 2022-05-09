@@ -120,9 +120,13 @@ public class OrderController {
 			Iterator<CartItem> it = list.iterator();//歷遍整個CartItem
 			while(!found && it.hasNext()) {
 				CartItem aod = it.next();
-				if(aod.getProduct().getCommNo()==od.getProduct().getCommNo()) {
+				if(aod.getProduct().getCommNo()==od.getProduct().getCommNo() &&  (aod.getQty()+od.getQty())< od.getProduct().getCommQuantity()) {
 					aod.setQty(aod.getQty()+od.getQty());
 					aod.setTotalprice(aod.getTotalprice()+od.getQty()*od.getProduct().getCommPrice());
+					found = true;
+				}else if(aod.getProduct().getCommNo()==od.getProduct().getCommNo() && (aod.getQty()+od.getQty())>=od.getProduct().getCommQuantity()) {				
+					aod.setQty(od.getProduct().getCommQuantity());
+					aod.setTotalprice((od.getProduct().getCommQuantity())*od.getProduct().getCommPrice());					
 					found = true;
 				}
 			}
@@ -251,7 +255,7 @@ public class OrderController {
 			}
 			obj.setItemName(temp);
 			obj.setReturnURL("http://211.23.128.214:5000");
-			obj.setOrderResultURL("http://localhost:8082/order/PaySuccess");//使用者付費完希望他看到的畫面
+			obj.setOrderResultURL("http://localhost:8080/order/PaySuccess");//使用者付費完希望他看到的畫面
 			obj.setNeedExtraPaidInfo("N");
 			obj.setRedeem("Y");
 			AllInOne all = new AllInOne("");
@@ -360,7 +364,7 @@ public class OrderController {
 		obj.setTradeDesc("Mega");		
 		obj.setItemName("Mega募資商品--"+title);
 		obj.setReturnURL("http://211.23.128.214:5000");
-		obj.setOrderResultURL("http://localhost:8082/order/PaySuccess");//使用者付費完希望他看到的畫面
+		obj.setOrderResultURL("http://localhost:808/order/PaySuccess");//使用者付費完希望他看到的畫面
 		obj.setNeedExtraPaidInfo("N");
 		obj.setRedeem("Y");
 		AllInOne all = new AllInOne("");

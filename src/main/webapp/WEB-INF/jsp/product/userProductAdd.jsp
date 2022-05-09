@@ -12,65 +12,88 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 <html>
 <head>
 <meta charset="UTF-8">
+  <link rel="shortcut icon" type="image/x-icon" href="/assets/img/logo/logo2.png">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+	integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+	crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
 
-<title>商品新增</title>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
+<title>Mega|商品上架</title>
 </head>
 <body>
-<%@ include file="../userheader.jsp" %>
-	<div class="container" style="align:center;width:500px">
+	<div class='container'>
+		<a href="/index"><img src="/assets/logob.png" width="30%"></a>
+		<h3 style="margin-top:20px">商品上架</h3>
 		<form name="form1" action="/product/userAddProduct" method="POST" enctype="multipart/form-data" >
-			<div style="width:500px">
-				<label for="commDES" class="form-label">設計師:</label> <input style="margin-bottom:15px"
+		
+		<div class="mb-3">
+				<label for="commDES" class="form-label" style="font-size:22px">設計師</label> <input
 					type="text" class="form-control" id="designer" name="designer"
-					aria-describedby="DESInfo" required="required" value="yao yao" readonly="readonly">
+					aria-describedby="DESInfo" required="required" value="${login.account}" readonly style="font-size:20px">
 			</div>
-		    <div style="width:500px">
-		        <label for="commTitle" class="form-label">商品標題:</label> <input type="text" class="form-control" id="commTitle"
-		            name="commTitle" required="required" style="margin-bottom:15px" placeholder="請輸入商品標題">
-		    </div>
-		    <div style="width:500px">
-		        <label for="commDES" class="form-label">商品描述:</label>
-		        <textarea style="height:100px" class="form-control" id="commDES" name="commDES" aria-describedby="DESInfo"
-		            required="required" style="margin-bottom:15px" placeholder="請輸入商品描述"></textarea>
-		    </div>
-		    <div style="width:500px">
-		        <label for="commDES" class="form-label">商品規格:</label> <input type="text" class="form-control" id="commSPE"
-		            name="commSPE" aria-describedby="DESInfo" style="margin-bottom:15px" placeholder="請輸入規格">
-		    </div>
-		    <div style="width:500px">
-		        <label for="category" class="form-label">商品類別:</label> <select id="category" name="category" class="form-select"
-		            aria-label="Default select example" aria-describedby="CategoryInfo" style="margin-bottom:15px">
-		            <option value="配件飾品">配件飾品</option>
-		            <option value="文具">文具</option>
-		            <option value="包包提袋">包包提袋</option>
-		            <option value="衣著">衣著</option>
-		            <option value="居家生活">居家生活</option>
-		            <option value="創意科技">創意科技</option>
-		            <option value="其他">其他</option>
-		        </select>
-		    </div>
-		    <div style="width:500px">
-		        <label for="commDES" class="form-label">價格:</label> <input type="text" class="form-control" id="commPrice"
-		            name="commPrice" aria-describedby="DESInfo" required="required" style="margin-bottom:15px"
-		            placeholder="請輸入價格">
-		    </div>
-		    <div style="width:500px">
-		        <label for="commDES" class="form-label">數量:</label> <input type="text" class="form-control" id="commQuantity"
-		            name="commQuantity" aria-describedby="DESInfo" required="required" style="margin-bottom:15px"
-		            placeholder="請輸入數量">
-		    </div>
-		    <div>
-		        <label for="commDES" class="form-label">圖片</label> <input class="form-control uploadImages" style="width:250px"
-		            type="file" id="commImg" name="commImg" aria-describedby="DESInfo" required="required">
-		        <input type="hidden" id="product_PicBase64" name="product_PicBase64" value="">
-		    </div>
-		    <div id="previewPicDiv"></div><br/>
-			<button type="submit" class="btn btn-primary send" name="upload" style="margin-bottom:30px">新增</button>
-			<button type="button" class="btn btn-primary" onclick="sendvalue()" style="margin-bottom:30px">一鍵輸入</button>
+			
+			<div class="mb-3">
+				<label for="commTitle" class="form-label" style="font-size:22px">商品標題</label> <input
+					type="text" class="form-control" id="commTitle" name="commTitle"
+					required="required" style="font-size:20px">
+			</div>
+			<div class="mb-3">
+				<label for="commDES" class="form-label" style="font-size:22px">商品描述</label>
+				<textarea class="form-control" id="commDES" name="commDES"
+					aria-describedby="DESInfo" required="required" style="font-size:20px"></textarea>
+				<div id="DESInfo" class="form-text">請新增商品描述。</div>
+			</div>
+			<div class="mb-3">
+				<label for="commDES" class="form-label" style="font-size:22px">商品規格</label> <input
+					type="text" class="form-control" id="commSPE" name="commSPE"
+					aria-describedby="DESInfo" style="font-size:20px">
+				<div id="DESInfo" class="form-text">請新增商品規格。</div>
+			</div>
+			<div class="mb-3">
+				<label for="category" class="form-label" style="font-size:22px">商品類別</label> <select
+					id="category" name="category" class="form-select"
+					aria-label="Default select example" aria-describedby="CategoryInfo" style="font-size:20px">
+					<option value="配件飾品">配件飾品</option>
+					<option value="文具">文具</option>
+					<option value="包包提袋">包包提袋</option>
+					<option value="衣著">衣著</option>
+					<option value="居家生活">居家生活</option>
+					<option value="創意科技">創意科技</option>
+					<option value="其他">其他</option>
+				</select>
+				<div id="CategoryInfo" class="form-text">請選擇商品類別。</div>
+			</div>
+			<div class="mb-3">
+				<label for="commDES" class="form-label" style="font-size:22px">價格</label> <input
+					type="text" class="form-control" id="commPrice" name="commPrice"
+					aria-describedby="DESInfo" required="required" style="font-size:20px">
+				<div id="DESInfo" class="form-text" >請輸入商品價格。</div>
+			</div>
+			<div class="mb-3">
+				<label for="commDES" class="form-label" style="font-size:22px">數量</label> <input
+					type="text" class="form-control" id="commQuantity"
+					name="commQuantity" aria-describedby="DESInfo" required="required" style="font-size:20px">
+				<div id="DESInfo" class="form-text">請輸入商品數量。</div>
+			</div>
+			
+			<div class="mb-3">
+				<label for="commDES" class="form-label" style="font-size:22px">圖片</label> <input
+					class="form-control uploadImages" style="width:250px" type="file" id="commImg" name="commImg"  aria-describedby="DESInfo" required="required">
+						<input type="hidden" id="product_PicBase64" name="product_PicBase64" value="">
+			</div>
+			<div class="mb-3" id="previewPicDiv"></div>
+				<br/>
+			<button type="submit" class="btn btn-primary send" name="upload">送出</button>
+			<button type="button" class="btn btn-primary" onclick="sendvalue()">一鍵輸入</button>
 		</form>
 	</div>
-	<%@ include file="../userfooter.jsp" %>
+	
 	<script
 	    src="https://code.jquery.com/jquery-3.6.0.js"
 	    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
@@ -148,7 +171,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			  cancelButtonText: '取消',
 			  reverseButtons: true
 			}).then((result) => {
-			  if ($("#commTitle").val()!="" & $("#commDES").val()!=""&$("#commSPE").val()!=""&$("#category").val()!=""&$("#commPrice").val()!=""&$("#commQuantity").val()!=""&$("#commImg").val()!="") {
+			  if ($("#commTitle").val()!="" & $("#commDES").val()!=""&$("#commSPE").val()!=""&$("#category").val()!=""&$("#designer").val()!=""&$("#commPrice").val()!=""&$("#commQuantity").val()!=""&$("#commImg").val()!="") {
 				  Swal.fire({
 					  position: 'center',
 					  icon: 'success',

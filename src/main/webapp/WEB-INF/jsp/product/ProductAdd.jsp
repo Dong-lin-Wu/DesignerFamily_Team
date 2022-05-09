@@ -101,7 +101,7 @@ response.setDateHeader("Expires", -1); // Prevents caching at the proxy server
 			<div class="mb-3" id="previewPicDiv"></div>
 				<br/>
 			<button type="submit" class="btn btn-primary send" name="upload">送出</button>
-			<button type="button" class="btn btn-primary send" onclick="sendvalue()">一鍵輸入</button>
+			<button type="button" class="btn btn-primary" onclick="sendvalue()">一鍵輸入</button>
 		</form>
 	</div>
 	

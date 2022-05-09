@@ -69,8 +69,5 @@ public class NewsService  {
 		return nRo.findType3();
 	}
 	
-	//實體活動
-	public List<NewsBean> findType4(){
-		return nRo.findType4();
-	}
+	
 }

@@ -19,5 +19,9 @@ public interface ForumRepository extends JpaRepository<ForumBean, Integer> {//co
 	
 	@Query(value = "from ForumBean Order By forumid DESC")
 	public List<ForumBean> selectAll();
+	
+	@Query(value = "from ForumBean where forumAccount=?1 Order By forumid DESC")
+	public List<ForumBean> searchByName(String name);
+
 
 }

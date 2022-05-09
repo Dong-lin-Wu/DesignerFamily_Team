@@ -115,54 +115,42 @@ $('.can').on('click',function(){
 	var status=$(this).parent().find("p").text();
 	var newsta = "訂單狀態:取消待確認"
 	var id =  $(this).parent().attr("id")
-	console.log(newsta)
+	console.log(newsta);
 	
-	const swalWithBootstrapButtons = Swal.mixin({
-		 customClass: {
-		   confirmButton: 'btn btn-success',
-		   cancelButton: 'btn btn-danger'
-		 },
-		 buttonsStyling: false
+	swal({
+		  title: "提醒?",
+		  text: "請確認是否取消訂單?",
+		  icon: "warning",
+		  buttons: ["取消", "確定"],
+		  dangerMode: true,
 		})
-	
-	swalWithBootstrapButtons.fire({
-		 title: '提醒',
-		 text: "請確認是否取消訂單",
-	 icon: 'warning',
-	 showCancelButton: true,
-	 confirmButtonText: '確認',
-	 cancelButtonText: '取消',
-	 reverseButtons: true
-	}).then((result) => {
-	 if (result.isConfirmed) {
+		.then((willDelete) => {
+		  if (willDelete) {
 		 $.ajax({
-				type:"put",
-				url:'/order/myorder/'+id,
-				success:function(){					
-				}
-		 
-			})
+			type:"put",
+			url:'/order/myorder/'+id,
+			success:function(){
+				
+			}
+		})
 			$(this).parent().find("p").text(newsta)
 			if($(this).parent().find("p").text()=="訂單狀態:取消待確認"){
-				$(this).remove()
-			}
-		 
-	   swalWithBootstrapButtons.fire(
-	     '提醒',
-	     '已提出取消申請',
-	     'success'
-	   )
-	 } else if (
-	   /* Read more about handling dismissals below */
-	   result.dismiss === Swal.DismissReason.cancel
-	 ) {
-	   swalWithBootstrapButtons.fire(
-	     '提醒',
-	     '訂單保留',
-	     'error'
-	   )
-	 }
-	})
+			$(this).remove()
+		}
+		    swal("已提出取消申請", {
+		      icon: "success",
+		      buttons: false,
+		      timer: 1500
+		    });
+		  } else {
+			  swal({				
+				  text: "訂單已保留",
+				  icon: "warning",
+				  button: false,
+                  timer: 1500
+				})
+		  }
+		});
 })
 </script>
  <footer style="padding-top:235px">

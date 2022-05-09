@@ -10,12 +10,13 @@
 <link rel="shortcut icon" type="image/x-icon" href="/assets/img/logo/logo2.ico">
 <link rel="stylesheet"
 	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+
 <style>
 
 .wrapper {
 	position: relative;
-	width: 1100px;
-	height: 350px;
+	width: 1000px;
+ 	height: 380px;
 	overflow: hidden;
 	margin: 0 auto;
 	
@@ -27,21 +28,21 @@ ul#o {
 	position: absolute;
 }
 
-li#l {
+li.l {
 	margin: 0;
 	padding: 0;
 	list-style: none;
 }
 
 ul.slides {
-	width: 9900px;
+	width: 9000px;
 	left: 0px;
 	transition: all .5s;
 }
 
 ul.slides li {
-	width: 1100px;
-	height: 350px;
+	width: 1000px;
+	height: 380px;
 	overflow: hidden;
 	/*            left:500px; */
 	/*            top:350px; */
@@ -50,8 +51,10 @@ ul.slides li {
 
 ul.slides li img {
 	width: 100%;
-	height: 310px;
+	height: 100%;
+/* 	height: 310px; */
 	/*            object-fit: fill; */
+	object-fit:contain;
 }
 
 .slide_btn {
@@ -94,10 +97,9 @@ ul.slides li img {
 			<div class="wrapper">
 				<ul class="slides" id="o">
 					<c:forEach var="n1" items="${newsinfo}">
-						<li id="l"><figure>
-							<figcaption style="color: black; text-align: center; object-fit: contain"><p style="font-size:20px">${n1.newsTitle}</p></figcaption>
+						<li class="l">
 							<a href="/campaign/newsdetail/${n1.newsId}" class="det"> <img src="${n1.newsPicBase64 }" title="${n1.newsTitle}"></a>
-						</figure></li>
+						</li>
 					</c:forEach>
 				</ul>
 				<div id="prevSlide" class="slide_btn">
@@ -120,7 +122,6 @@ ul.slides li img {
                               	<a class="nav-item nav-link" id="NEWS" data-toggle="tab" href="#news" role="tab" aria-controls="news" aria-selected="false" style="font-size:20px">熱門活動</a>
                            		<a class="nav-item nav-link" id="COUPON" data-toggle="tab" href="#coupon" role="tab" aria-controls="coupon" aria-selected="false" style="font-size:20px">領取優惠</a>
                            		<a class="nav-item nav-link" id="PERIOD" data-toggle="tab" href="#period" role="tab" aria-controls="period" aria-selected="false" style="font-size:20px">期間限定</a>
-                           		<a class="nav-item nav-link" id="EVENT" data-toggle="tab" href="#event" role="tab" aria-controls="event" aria-selected="false" style="font-size:20px">實體活動</a>
                               </div>
                            </nav>
                             <!--End Nav Button  -->
@@ -203,24 +204,7 @@ ul.slides li img {
                                </div> 
                                </c:forEach>                                                                                                                                                   
                            </div>
-                       </div>
-                       <div class="tab-pane fade" id="event" role="tabpanel" aria-labelledby="EVENT">
-                           <div class="row">
-                           <c:forEach var="t4" items="${type4}">
-                               <div class="col-lg-4 col-md-6 col-sm-6">
-                                   <div class="single-new-arrival mb-50 text-center">
-                                       <div>
-                                       <a href="/campaign/newsdetail/${t4.newsId}"><img src="${t4.newsPicBase64}" alt="${t4.newsTitle}" title="${t4.newsTitle}" width="70%"></a>
-                                       </div>
-                                       <div class="popular-caption">
-                                           <h2><a href="/campaign/newsdetail/${t4.newsId}">${t4.newsTitle}</a></h2>
-                                           <span>活動期間:${t4.newsStDate} ~ ${t4.newsExpDate}</span>
-                                       </div>
-                                   </div>
-                               </div> 
-                               </c:forEach>                                                                                                                                                   
-                           </div>
-                       </div> 		
+                       </div>                     
 				</div>
 			</div>
 			</div>
@@ -245,7 +229,7 @@ ul.slides li img {
 			$(".dot li").eq(slideNum).css("background-color", "#fff")
 					.siblings().css("background-color", "transparent");
 
-			let slidemove = 0 - 1100 * slideNum;
+			let slidemove = 0 - 1000 * slideNum;
 			$("ul.slides").css("left", slidemove);
 		}
 
@@ -283,5 +267,14 @@ ul.slides li img {
 //        $("#select").attr("action", "/news/newsmain/query");
 		
 	</script>
+	
+<!-- 	重整我的優惠券頁面:即時更新 -->
+	<script type="text/javascript">
+	$.ajax({
+		url: "/campaign",
+		async:false
+	});
+	</script>
+	
 </body>
 </html>

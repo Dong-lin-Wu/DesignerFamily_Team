@@ -63,6 +63,10 @@ public class ForumService {
 		return forumRepo.findAll(pageable);
 	}
 	
+	public List<ForumBean> selectByName(String name){
+		return forumRepo.searchByName(name);
+	}
+	
 	//留言串
 	public List<CommentBean> selectCommAll(){
 		return commentRepo.selectCommAll();
@@ -77,6 +81,12 @@ public class ForumService {
 	public void deleteCommById(Integer id) {
 		commentRepo.deleteById(id);
 	}
+	
+	public CommentBean insertcomment(CommentBean cBean) {
+		return commentRepo.save(cBean);		
+	} 
+	
+	
 	
 	
 	

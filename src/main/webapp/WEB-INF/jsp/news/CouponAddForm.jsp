@@ -30,12 +30,12 @@
 </style>
 </head>
 <body>
-	<div class='container' style="width: auto">
+	<div class='container' style="width: 800px">
 
 		<h2 style="margin: 20px 0px; text-align: center"><b>新增優惠券</b></h2>
 					
 		<form action="/coupon" method="get" style="display: inline; float: right">
-			<button type="submit" class="btn btn-outline-success" style="margin-bottom:10px;border-radius:15px" ><i class="fa-solid fa-house-chimney"></i> 優惠券清單</button>
+			<button type="submit" class="btn btn-primary" style="margin-bottom:10px;border-radius:15px" ><i class="fa-solid fa-house-chimney"></i> 優惠券清單</button>
 		</form>
 			
 		
@@ -46,20 +46,24 @@
 			</div>
 			<div class="mb-3">
 				<label for="couponName" class="form-label"><b>優惠券名稱</b>&emsp;<span style="color:red"></span></label> <em id="nameError" class="red"></em>
-				<input type="text" class="form-control nBlank" id="couponName" name="couponName" style="border-radius:20px"/>					
+				<input type="text" class="form-control nBlank" id="couponName" name="couponName" style="border-radius:20px" required="required"/>					
 			</div>
 			<div class="mb-3">
 				<label for="couponCode" class="form-label"><b>優惠券號碼</b>&emsp;<span style="color:red"></span></label> <em id="codeError" class="red"></em>
-				<input type="text" class="form-control nBlank" id="couponCode" name="couponCode" style="border-radius:20px"/>
+				<input type="text" class="form-control nBlank" id="couponCode" name="couponCode" style="border-radius:20px" required="required"/>
+			</div>
+			<div class="mb-3">
+				<label for="couponAmount" class="form-label"><b>發放張數</b>&emsp;<span style="color:red"></span></label> <em id="amountError" class="red"></em>
+				<input type="text" class="form-control nBlank" id="couponAmount" name="couponAmount" style="border-radius:20px" required="required"/>
 			</div>
 			<div class="mb-3">
 				<label for="couponStDate" class="form-label"><b>使用期限</b></label><br>
 	            <label for="couponStDate" class="form-label"><b>開始日</b></label><br>
-	            <input type="date" id="couponStDate" name="couponStDate" style="border-radius:15px;width:140px">      
+	            <input type="date" id="couponStDate" name="couponStDate" style="border-radius:15px;width:140px;text-align:center">      
 	        </div>
 			<div class="mb-3">
 	            <label for="couponExpDate" class="form-label"><b>到期日</b></label><br>
-	            <input type="date" id="couponExpDate" name="couponExpDate" style="border-radius:15px;width:140px">      
+	            <input type="date" id="couponExpDate" name="couponExpDate" style="border-radius:15px;width:140px;text-align:center">      
 	        </div>
 	        <div class="mb-3">
 	            <label for="couponState" class="form-label"><b>狀態</b></label>
@@ -71,7 +75,7 @@
 	        </div>
 			<div class="mb-3">
 				<label for="couponContent" class="form-label"><b>使用說明</b>&emsp;<span style="color:red"></span></label><em id="contentError" class="red"></em>
-				<textarea class="form-control nBlank" id="couponContent" rows="12" style="resize:none ;border-radius:25px" name="couponContent"></textarea>						
+				<textarea class="form-control nBlank" id="couponContent" rows="12" style="resize:none ;border-radius:25px" name="couponContent" required="required"></textarea>						
 			</div>
 	        
 	        	
@@ -91,17 +95,18 @@
 		<script>
 		<%-- 一鍵輸入 --%>
 		function oneClick() {
-			$("#newsId").attr("value","106");
+			$("#newsId").attr("value","109");
           	$("#couponName").attr("value","臺灣綠工藝入選作品結帳金額滿5,000元現抵500元");                	
           	$("#couponCode").attr("value","@Green5000dollar500");
           	$("#couponStDate").attr("value","2022-05-01");
           	$("#couponExpDate").attr("value","2022-05-31");
+          	$("#couponAmount").attr("value","100");
           	$("#couponContent").html("適用範圍：臺灣綠工藝入選作品(依商品頁顯示為主)");
            }
 
 		<%--必填欄位提醒--%>
 		$(".nBlank").blur(function(event){					
-			$("#nameError,#codeError,#contentError").text("");
+			$("#nameError,#codeError,#contentError,#amountError").text("");
 			let theSpan = $(this).closest("div.mb-3").children("label").children("span");
 			if($(this).val().length == 0){
 				theSpan.text("必填");
@@ -128,7 +133,7 @@
 		  reverseButtons: true,
 		  showCancelButton: true
 		}).then((result) => {
-		  if ($("#couponName").val()!=""& $("#couponCode").val()!=""& $("#couponContent").val()!="" & result.isConfirmed!=false) {
+		  if ($("#couponName").val()!=""& $("#couponCode").val()!=""& $("#couponContent").val()!="" & $("#couponAmount").val()!=""  & result.isConfirmed!=false) {
 			  Swal.fire({
 				  position: 'center',
 				  icon: 'success',

@@ -234,10 +234,10 @@ $('.add').on('click',function(e){
 		})
 	}
 	if(a==b){
-		Swal.fire({
+		swal({
             icon: 'error',
-            title: '已達購買最大數量',
-            showConfirmButton: false,
+            text: '已達購買最大數量',
+            button: false,
             timer: 1500
              })
 	}

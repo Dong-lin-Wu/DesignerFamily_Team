@@ -22,12 +22,12 @@
 </style>
 </head>
 <body>     
-	<div class='container' style="width: auto">
+	<div class='container' style="width: 800px">
 
 		<h2 style="margin: 20px 0px; text-align: center"><b>修改優惠券</b></h2>
 				 
 		<form action="/coupon" method="get" style="display: inline; float: right">
-			<button type="submit" class="btn btn-outline-success" style="margin-bottom:10px;border-radius:15px"><i class="fa-solid fa-house-chimney"></i> 優惠券清單</button>
+			<button type="submit" class="btn btn-primary" style="margin-bottom:10px;border-radius:15px"><i class="fa-solid fa-house-chimney"></i> 優惠券清單</button>
 		</form>
 				 						  
 		<form action="/coupon/updateSucess" method="post" enctype="multipart/form-data">
@@ -47,12 +47,20 @@
 				<input type="text" class="form-control" id="couponCode" value="${couponList.couponCode}" name="couponCode" style="border-radius:20px"/>
 			</div>
 			<div class="mb-3">
+				<label for="couponAmount" class="form-label"><b>發放張數</b>&emsp;<span style="color:red"></span></label> <em id="amountError" class="red"></em>
+				<input type="text" class="form-control nBlank" id="couponAmount" value="${couponList.couponAmount}" name="couponAmount" style="border-radius:20px" >
+			</div>
+			<div class="mb-3">
+				<label for="couponRemaining" class="form-label"><b>剩餘張數</b>&emsp;<span style="color:red"></span></label> <em id="remainingError" class="red"></em>
+				<input type="text" class="form-control nBlank nNumber" id="couponRemaining" value="${couponList.couponRemaining}" name="couponRemaining" style="border-radius:20px"/>
+			</div>
+			<div class="mb-3">
 	            <label for="couponStDate" class="form-label"><b>開始日</b></label><br>
-	            <input type="date" id="couponStDate" value="${couponList.couponStDate}" name="couponStDate" style="border-radius:15px;width:140px">      
+	            <input type="date" id="couponStDate" value="${couponList.couponStDate}" name="couponStDate" style="border-radius:15px;width:140px;text-align:center">      
 	        </div>
 			<div class="mb-3">
 	            <label for="couponExpDate" class="form-label"><b>到期日</b></label><br>
-	            <input type="date" id="couponExpDate" value="${couponList.couponExpDate}" name="couponExpDate" style="border-radius:15px;width:140px">      
+	            <input type="date" id="couponExpDate" value="${couponList.couponExpDate}" name="couponExpDate" style="border-radius:15px;width:140px;text-align:center">      
 	        </div>
 	        <div class="mb-3">
 	            <label for="couponState" class="form-label"><b>狀態</b></label>
@@ -85,16 +93,29 @@
 		<script>
 		<%--必填欄位提醒--%>
 		$(".nBlank").blur(function(event){
-			<%--console.log(this);--%>
-			$("#idError,#nameError,#codeError,#contentError").text("");
+			$("#idError,#nameError,#codeError,#contentError,#remainingError,#amountError").text("");
 			let theSpan = $(this).closest("div.mb-3").children("label").children("span");
 			if($(this).val().length == 0){
 				theSpan.text("必填");
 			}else{
 				theSpan.text("");
-			}
+			}		
 		})
-						
+		
+// 		已發張數不可大於總張數
+		$(".nNumber").blur(function(event){
+			$("#remainingError").text("");
+			let theSpan = $(this).closest("div.mb-3").children("label").children("span");
+			let amount=parseInt($("#couponAmount").val());
+			let remaning=parseInt($(this).val());
+			console.log($(this).val())
+			if(remaning>amount){
+				theSpan.text("數量不可大於發放張數");
+			}else{
+				theSpan.text("");
+			}	
+		
+		})				
 		
 		$(".send").on("click",function(e){
 		e.preventDefault();

@@ -55,10 +55,12 @@
                                                             role="tab" aria-selected="true"
                                                             style="color: black;">我的帳戶</a>
                                                     </li>
+                                                    <c:if test="${sessionScope.login.status.statusId == '1' || sessionScope.login.status.statusId == '9'}">
                                                     <li class="nav-item" style="margin-bottom: 15px;font-size:20px">
                                                         <a class="nav-link" data-toggle="tab" href="#product" role="tab"
                                                             aria-selected="false" style="color: black;">我的商品</a>
                                                     </li>
+                                                    </c:if>
                                                     
                                                     <c:if test="${sessionScope.login.status.statusId == '1'}">
                                                     <li class="nav-item" style="margin-bottom: 15px;font-size:20px">
@@ -70,6 +72,11 @@
                                                     <li class="nav-item" style="margin-bottom: 15px;font-size:20px">
                                                         <a class="nav-link" data-toggle="tab" href="#order" role="tab"
                                                             aria-selected="false" style="color: black;">我的訂單</a>
+                                                    </li>
+                                                    
+                                                    <li class="nav-item" style="margin-bottom: 15px;font-size:20px">
+                                                        <a class="nav-link" data-toggle="tab" href="#coupon" role="tab"
+                                                            aria-selected="false" style="color: black;">我的優惠券</a>
                                                     </li>
                                                   
                                                     <li class="nav-item" style="margin-bottom: 15px;font-size:20px">
@@ -243,9 +250,16 @@
                                                             <%@ include file="../order/foruser.jsp" %>
                                                         </div>
                                                     </div>
+                                                    
+                                                    <div class="tab-pane fade" id="coupon" role="tabpanel">
+                                                        <div class="pd-20">
+                                                            <%@ include file="../news/mycoupon.jsp" %>
+                                                        </div>
+                                                    </div>
+                                                    
                                                     <div class="tab-pane fade" id="forum" role="tabpanel">
                                                         <div class="pd-20">
-
+                                                         <%@ include file="../forum/userMyForum.jsp" %>
                                                         </div>
                                                     </div>
                                                     <div class="tab-pane fade" id="raise" role="tabpanel">

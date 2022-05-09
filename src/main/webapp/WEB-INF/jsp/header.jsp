@@ -197,7 +197,7 @@
 
             <div class="left-side-bar">
                 <div class="brand-logo">
-                    <a href="/admin">
+                    <a href="/index">
                         <img src="/assets/logow.png" alt="" class="">
                      
                     </a>

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,8 +25,8 @@
 			<td>${n.newsSubtitle}</td>
 		</tr>
 		<tr>
-			<td style="vertical-align:text-top;width:150px">活動期間：</td>
-			<td>${n.newsStDate} ~ ${n.newsExpDate}</td>
+			<td style="vertical-align:text-top;width:150px">創建時間：</td>
+			<td><fmt:formatDate value="${n.newsCrDate}" pattern="yyyy-MM-dd  HH:mm:ss" /></td>
 		</tr>
 		<tr>
 			<td style="vertical-align:text-top;width:150px">內文：</td>

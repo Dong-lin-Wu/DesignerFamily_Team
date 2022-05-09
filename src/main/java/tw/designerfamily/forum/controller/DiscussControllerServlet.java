@@ -21,6 +21,7 @@ import tw.designerfamily.forum.model.CommentBean;
 import tw.designerfamily.forum.model.ForumBean;
 import tw.designerfamily.forum.model.ForumService;
 import tw.designerfamily.member.model.Member;
+import tw.designerfamily.product.model.ProductBean;
 import tw.designerfamily.raise.model.RaiseBean;
 
 @Controller
@@ -243,6 +244,39 @@ public class DiscussControllerServlet {
 			m.addAttribute("forumBean", fBean);
 			return fBean;
 		}
+		//查詢某會員
+				@GetMapping("/forumbyname.checklogin")
+				@ResponseBody
+				public List<ForumBean> processSelectByName0(@RequestParam("forumAccount") String name) {
+					List<ForumBean> flist = fService.selectByName(name);
+					return flist;
+				}
+		
+		
+//	-------------------------------------------以下為留言--------------------------------------------------
+				
+//				//新增留言
+//				@GetMapping("/new_comment")
+//				@ResponseBody
+//				public String processnewcomment(@RequestParam("forumid") int forumid,Model m) {
+//					fService.insertcomment(forumid);
+//					m.addAttribute("forumBean", fBean);
+//					return fBean;
+//				}
+				//新增留言
+				@PostMapping(path ="/new_comment")
+				@ResponseBody
+				public void processnewcomment(@RequestParam("commentAccount")String commentAccount,@RequestParam("commentDescription") String commentDescription
+						,@RequestParam("forumid") int forumid) {
+					CommentBean cBean = new CommentBean(commentAccount, commentDescription);
+					ForumBean fBean = fService.findById(forumid);
+					cBean.setForumBean(fBean);
+					fBean.getCommentBean().add(cBean);
+					
+					fService.update(fBean);
+					
+					//return "product";
+				}
 		
 }      
 	      

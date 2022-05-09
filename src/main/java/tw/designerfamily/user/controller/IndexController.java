@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import tw.designerfamily.forum.model.ForumService;
 import tw.designerfamily.member.model.Member;
 import tw.designerfamily.member.model.MemberService;
+import tw.designerfamily.news.model.CouponList;
+import tw.designerfamily.news.model.CouponListService;
 import tw.designerfamily.news.model.NewsBean;
 import tw.designerfamily.news.model.NewsService;
 import tw.designerfamily.order.model.CartItem;
@@ -25,7 +27,7 @@ import tw.designerfamily.product.model.ProductService;
 import tw.designerfamily.raise.model.RaiseService;
 
 @Controller
-@SessionAttributes(names = {"detail","cartcount","pdetail","shiporder"})
+@SessionAttributes(names = {"detail","cartcount","pdetail","shiporder","coupon"})
 public class IndexController {
 	@Autowired
 	private OrderService oService;
@@ -45,6 +47,9 @@ public class IndexController {
 	@Autowired
 	private ForumService fservice;
 	
+	@Autowired
+	private CouponListService cservice;
+	
 	//帶出主頁所有商品
 	@GetMapping("/index")
 	public String processShow(Model m,HttpServletRequest request) {
@@ -56,6 +61,8 @@ public class IndexController {
 			List<Order> orderdetail = oService.findByOrderOwner(m1.getAccount());
 			List<ProductBean> productdetail = pService.findDesigner(m1.getAccount());
 			List<Order> shiporder = oService.selectAll();
+			List<CouponList> mycoupon = cservice.findybyowner(m1.getAccount());
+			m.addAttribute("coupon", mycoupon);
 			m.addAttribute("shiporder", shiporder);
 			m.addAttribute("detail", orderdetail);
 			m.addAttribute("pdetail", productdetail);

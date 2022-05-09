@@ -8,8 +8,8 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="shortcut icon" type="image/x-icon" href="/assets/img/logo/logo2.png">
-        
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.4.8/dist/sweetalert2.all.min.js"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+   
         <!-- CSS here -->
         <link rel="stylesheet" href="/assets/css/bootstrap.min.css">
         <link rel="stylesheet" href="/assets/css/owl.carousel.min.css">
@@ -27,9 +27,28 @@
         <link rel="stylesheet" href="/assets/css/slick.css">
         <link rel="stylesheet" href="/assets/css/nice-select.css">
         <link rel="stylesheet" href="/assets/css/style.css">
-        <link rel="stylesheet" href="/roll/css/all.css">
+        <link rel="stylesheet" href="/roll/css/all.css">        
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick-theme.css">
     </head>
+    <style>
+    
+.slick-prev:before {
+ 		content: "◀";
+		color: black; 
+ 		font-size: 25px; 
+}
+
+.slick-next:before {
+		content: "▶";
+		color: black;
+		font-size: 25px;
+}
+    
+</style>
+
     <body>
+    
         <!-- header Start -->
         <header>
             <div class="header-area">
@@ -51,9 +70,11 @@
                                         <ul id="navigation">
                                             <li><a href="/index" style="font-size:22px">首頁</a></li> 
                                             <li><a href="/index" style="font-size:22px">商品</a>
+                                                 <c:if test="${sessionScope.login.status.statusId == '1' || sessionScope.login.status.statusId == '9'}">
                                                 <ul class="submenu">
-                                                    <li><a href="product/catagory">商品上架</a></li>
+                                                    <li><a href="/product/userAddProduct">商品上架</a></li>
                                                 </ul>
+                                                </c:if>
                                             </li>
                                             <li><a href="/campaign/index" style="font-size:22px">最新活動</a></li>
                                             <li><a href="/forum/forum_user_index" style="font-size:22px">討論區</a>
@@ -93,7 +114,6 @@
                                                 <ul class="submenu">
                                                     <li><a href="/user">會員中心</a></li>
                                                     <li><a href="/order/myorder">我的訂單</a></li>
-                                                    <li><a href="/product/catagory">優惠券</a></li>
                                                     <li><a href="/user/change-password">更改密碼</a></li>   
                                                     <li><a href="/logout">登出</a></li>                                               
                                                 </ul>
@@ -103,7 +123,8 @@
                                 </div> 
 											</c:when>
 											 <c:otherwise>
-									    <a href="/login" class="account-btn" target="_blank" style="font-size:22px">登入|註冊</a>
+											 <!-- target="_blank" 開新分頁 -->
+									    <a href="/login" class="account-btn" style="font-size:22px">登入|註冊</a>
 											 </c:otherwise>
 									    </c:choose>                                  
                                         <li>                                 

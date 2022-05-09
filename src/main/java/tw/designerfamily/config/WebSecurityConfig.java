@@ -1,15 +1,23 @@
 package tw.designerfamily.config;
 
+import java.util.concurrent.ConcurrentHashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.session.SessionRegistry;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.session.MapSessionRepository;
+import org.springframework.session.config.annotation.web.http.EnableSpringHttpSession;
 
 import tw.designerfamily.member.model.AuthUserDetailsService;
+
 
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
@@ -46,6 +54,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		  .antMatchers(HttpMethod.GET, "/raiseindex.controller").hasAuthority("管理員")
 		  .antMatchers(HttpMethod.GET, "/user/**").authenticated()
 		  .antMatchers(HttpMethod.GET,"/*.checklogin").authenticated()
+		  .antMatchers(HttpMethod.GET,"/forum/new_post").authenticated()
 		  .antMatchers(HttpMethod.GET).permitAll()
 		  .antMatchers(HttpMethod.POST, "/admin/**").hasAuthority("管理員")
 		  .antMatchers(HttpMethod.POST, "/member/**").hasAuthority("管理員")

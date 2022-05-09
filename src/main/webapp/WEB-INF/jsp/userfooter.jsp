@@ -117,5 +117,7 @@
 <script src="/assets/js/plugins.js"></script>
 <script src="/assets/js/main.js"></script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.js"></script>
+
 </body>
 </html>
